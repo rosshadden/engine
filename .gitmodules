@@ -1,0 +1,6 @@
+[submodule "engine-client"]
+	path = engine-client
+	url = git@github.com:rosshadden/engine-client.git
+[submodule "engine-server"]
+	path = engine-server
+	url = git@github.com:rosshadden/engine-server.git
