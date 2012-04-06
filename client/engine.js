@@ -16,8 +16,15 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 			//	I think I should make each module take initialization variables
 			//		before becoming modules.
 			//world.maps.setCurrent('map1');
-			draw.setDimensions(600, 400, world.cell);
-			viewport.setDimensions(600, 400);
+			draw.setDimensions({
+				width:	600,
+				height:	400
+			}, world.cell);
+			
+			viewport.setDimensions({
+				width:	600,
+				height:	400
+			});
 			
 			if($('#engine-cache').length === 0){
 				$('<div>',{
@@ -35,7 +42,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 		paint = function(){
 			var map = world.maps.get(world.maps.getCurrent());
 			
-			draw.backdrop(viewport.getDimensions().width, viewport.getDimensions().height);
+			draw.backdrop(viewport.getDimensions());
 			
 			draw.cells();
 			

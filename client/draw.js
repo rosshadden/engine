@@ -32,19 +32,17 @@ define(function(){
 		}
 	},
 	
-	setDimensions = function(width, height, cells){
-		easel.element.screen.width = width;
-		easel.element.screen.height = height;
+	setDimensions = function(dim, cells){
+		easel.element.screen.width = dimensions.width = dim.width;
+		easel.element.screen.height = dimensions.height = dim.height;
 		
-		dimensions.width = width;
-		dimensions.height = height;
 		cell = cells;
 	},
 	
-	backdrop = function(width, height){
+	backdrop = function(dim){
 		easel.screen.fillStyle = 'rgba(200, 200, 200, 1)';
-		//easel.screen.clearRect(0,0,width,height);
-		easel.screen.fillRect(0, 0, width, height);
+		
+		easel.screen.fillRect(0, 0, dim.width, dim.height);
 	},
 	
 	path = function(x, y, x2, y2, options){
@@ -76,10 +74,12 @@ define(function(){
 		
 		ctx.drawImage(
 			properties.src,
+			
 			properties.source.position.x,
 			properties.source.position.y,
 			properties.source.dimensions.w,
 			properties.source.dimensions.h,
+			
 			properties.destination.position.x,
 			properties.destination.position.y,
 			properties.destination.dimensions.w,
@@ -92,10 +92,12 @@ define(function(){
 		
 		ctx.drawImage(
 			properties.src,
+			
 			properties.sprite.x,
 			properties.sprite.y,
 			properties.sprite.w,
 			properties.sprite.h,
+			
 			properties.position && properties.position.x || 0,
 			properties.position && properties.position.y || 0,
 			properties.width,
@@ -108,10 +110,12 @@ define(function(){
 		
 		ctx.drawImage(
 			source,
+			
 			0,
 			0,
 			dimensions.width,
 			dimensions.height,
+			
 			0,// - viewport.getPosition().x,
 			0,// - viewport.getPosition().y,
 			dimensions.width,
@@ -120,16 +124,18 @@ define(function(){
 	},
 	
 	cells = function(){
-		var x, y;
+		var x, y,
+			width = dimensions.width,
+			height = dimensions.height;
 		
-		for(x = cell.width; x < dimensions.width; x += cell.width){
-			path(x, 0, x, dimensions.height, {
+		for(x = cell.width; x < width; x += cell.width){
+			path(x, 0, x, height, {
 				color:	'rgba(0, 0, 0, .2)'
 			});
 		}
 		
-		for(y = cell.height; y < dimensions.height; y += cell.height){
-			path(0, y, dimensions.width, y, {
+		for(y = cell.height; y < height; y += cell.height){
+			path(0, y, width, y, {
 				color:	'rgba(0, 0, 0, .2)'
 			});
 		}

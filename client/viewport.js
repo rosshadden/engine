@@ -3,20 +3,20 @@ define(function(){
 	
 		x = 0,
 		y = 0,
-		dim = {
+		dimensions = {
 			width:	0,
 			height:	0
 		},
 	
-	setDimensions = function(width, height){
-		dim.width = width;
-		dim.height = height;
+	setDimensions = function(dim){
+		dimensions.width = dim.width;
+		dimensions.height = dim.height;
 	},
 	
 	getDimensions = function(){
 		return {
-			width:	dim.width,
-			height:	dim.height
+			width:	dimensions.width,
+			height:	dimensions.height
 		};
 	},
 	
@@ -43,19 +43,19 @@ define(function(){
 		
 		if(point === 'center'){
 			move(
-				~~(x - viewport.getDimensions().width / 2),
-				~~(y - viewport.getDimensions().height / 2)
+				~~(x - dimensions.width / 2),
+				~~(y - dimensions.height / 2)
 			);
 		}else if(point && point.x && point.y){
 			move(
-				~~(point.x - viewport.getDimensions().width / 2),
-				~~(point.y - viewport.getDimensions().height / 2)
+				~~(point.x - dimensions.width / 2),
+				~~(point.y - dimensions.height / 2)
 			);
 		}
 		
 		return {
-			x:	~~(viewport.getDimensions().width / 2),
-			y:	~~(viewport.getDimensions().height / 2)
+			x:	~~(dimensions.width / 2),
+			y:	~~(dimensions.height / 2)
 		};
 	};
 	
