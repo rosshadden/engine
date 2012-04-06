@@ -67,7 +67,9 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 		};
 		
 		return {
-			start:	start
+			world:		world,
+			utilities:	utilities,
+			start:		start
 		};
 	};
 	
