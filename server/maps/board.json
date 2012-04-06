@@ -1,0 +1,14 @@
+{
+	"properties": {
+		"name":	"empty",
+		"description":	"LONLINESS",
+		"dimensions": {
+			"width":	24,
+			"height":	16
+		}
+	},
+	"background": {
+		"color":	"#996633"
+	},
+	"tiles":	[]
+}
