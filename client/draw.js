@@ -32,13 +32,6 @@ define(function(){
 		}
 	},
 	
-	getDimensions = function(){
-		return {
-			width:	dimensions.width,
-			height:	dimensions.height
-		};
-	},
-	
 	setDimensions = function(width, height, cells){
 		easel.element.screen.width = width;
 		easel.element.screen.height = height;
@@ -119,8 +112,8 @@ define(function(){
 			0,
 			dimensions.width,
 			dimensions.height,
-			0 - viewport.getPosition().x,
-			0 - viewport.getPosition().y,
+			0,// - viewport.getPosition().x,
+			0,// - viewport.getPosition().y,
 			dimensions.width,
 			dimensions.height
 		);
@@ -134,6 +127,7 @@ define(function(){
 				color:	'rgba(0, 0, 0, .2)'
 			});
 		}
+		
 		for(y = cell.height; y < dimensions.height; y += cell.height){
 			path(0, y, dimensions.width, y, {
 				color:	'rgba(0, 0, 0, .2)'
@@ -144,7 +138,6 @@ define(function(){
 	return {
 		Sprite:			Sprite,
 		easel:			easel,
-		getDimensions:	getDimensions,
 		setDimensions:	setDimensions,
 		backdrop:		backdrop,
 		path:			path,

@@ -1,4 +1,4 @@
-define(['engine/world', 'engine/draw', 'engine/utilities'], function(world, draw, utilities){
+define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], function(world, draw, viewport, utilities){
 	var Engine = function(options){
 		var self = this,
 	    
@@ -17,6 +17,7 @@ define(['engine/world', 'engine/draw', 'engine/utilities'], function(world, draw
 			//		before becoming modules.
 			//world.maps.setCurrent('map1');
 			draw.setDimensions(600, 400, world.cell);
+			viewport.setDimensions(600, 400);
 			
 			if($('#engine-cache').length === 0){
 				$('<div>',{
@@ -34,7 +35,7 @@ define(['engine/world', 'engine/draw', 'engine/utilities'], function(world, draw
 		paint = function(){
 			var map = world.maps.get(world.maps.getCurrent());
 			
-			draw.backdrop(draw.getDimensions().width, draw.getDimensions().height);
+			draw.backdrop(viewport.getDimensions().width, viewport.getDimensions().height);
 			
 			draw.cells();
 			
