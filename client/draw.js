@@ -49,7 +49,7 @@ define(function(){
 	},
 	
 	backdrop = function(width, height){
-		easel.screen.fillStyle = 'rgba(200,200,200,1)';
+		easel.screen.fillStyle = 'rgba(200, 200, 200, 1)';
 		//easel.screen.clearRect(0,0,width,height);
 		easel.screen.fillRect(0, 0, width, height);
 	},
@@ -59,7 +59,7 @@ define(function(){
 			defaults = {
 				canvas:		easel.screen,
 				width:		1,
-				color:		'rgba(0,0,0,1)',
+				color:		'rgba(0, 0, 0, 1)',
 				lineCap:	'round',
 				lineJoin:	'round'
 			};
@@ -131,20 +131,26 @@ define(function(){
 		
 		for(x = cell.width; x < dimensions.width; x += cell.width){
 			path(x, 0, x, dimensions.height, {
-				color:	'rgba(0,0,0,.2)'
+				color:	'rgba(0, 0, 0, .2)'
 			});
 		}
 		for(y = cell.height; y < dimensions.height; y += cell.height){
 			path(0, y, dimensions.width, y, {
-				color:	'rgba(0,0,0,.2)'
+				color:	'rgba(0, 0, 0, .2)'
 			});
 		}
 	};
 	
 	return {
+		Sprite:			Sprite,
+		easel:			easel,
 		getDimensions:	getDimensions,
 		setDimensions:	setDimensions,
 		backdrop:		backdrop,
+		path:			path,
+		image:			image,
+		sprite:			sprite,
+		layer:			layer,
 		cells:			cells
 	};
 });
