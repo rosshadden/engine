@@ -1,4 +1,4 @@
-define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], function(world, draw, viewport, utilities){
+define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 'engine/utilities'], function(world, draw, viewport, input, utilities){
 	var Engine = function(options){
 		var self = this,
 	    
@@ -27,7 +27,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 			});
 			
 			if($('#engine-cache').length === 0){
-				$('<div>',{
+				$('<div>', {
 					id:	'engine-cache'
 				}).appendTo('body');
 			}
@@ -68,8 +68,14 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 		
 		return {
 			world:		world,
+			input:		input,
 			utilities:	utilities,
-			start:		start
+			start:		start,
+			bind: {
+				'event':utilities.listen(self),
+				key:	input.keyboard.bind.key,
+				axis:	input.keyboard.bind.axis
+			}
 		};
 	};
 	

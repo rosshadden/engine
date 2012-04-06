@@ -155,7 +155,7 @@ define(function(){
 		return self.methods;
 	};
 	
-	self.methods = {
+	return self.methods = {
 		Sprite:			Sprite,
 		easel:			easel,
 		setDimensions:	setDimensions,
@@ -166,6 +166,4 @@ define(function(){
 		layer:			layer,
 		cells:			cells
 	};
-	
-	return self.methods;
 });
