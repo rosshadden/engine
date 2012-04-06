@@ -10,6 +10,13 @@ define(function(){
 		width:	0,
 		height:	0
 	},
+	
+	easel = {
+		screen:		$('#screen')[0].getContext('2d'),
+		element: {
+			screen:		$('#screen')[0]
+		}
+	},
 		
 	Sprite = function(properties){
 		var sprite = {
@@ -25,24 +32,21 @@ define(function(){
 		return sprite;
 	},
 	
-	easel = {
-		screen:		$('#screen')[0].getContext('2d'),
-		element: {
-			screen:		$('#screen')[0]
-		}
-	},
-	
 	setDimensions = function(dim, cells){
 		easel.element.screen.width = dimensions.width = dim.width;
 		easel.element.screen.height = dimensions.height = dim.height;
 		
 		cell = cells;
+		
+		return self.methods;
 	},
 	
 	backdrop = function(dim){
 		easel.screen.fillStyle = 'rgba(200, 200, 200, 1)';
 		
 		easel.screen.fillRect(0, 0, dim.width, dim.height);
+		
+		return self.methods;
 	},
 	
 	path = function(x, y, x2, y2, options){
@@ -67,6 +71,8 @@ define(function(){
 		canvas.lineJoin = options.lineJoin;
 		canvas.lineCap = options.lineCap;
 		canvas.stroke();
+		
+		return self.methods;
 	},
 	
 	image = function(properties, ctx){
@@ -85,6 +91,8 @@ define(function(){
 			properties.destination.dimensions.w,
 			properties.destination.dimensions.h
 		);
+		
+		return self.methods;
 	},
 	
 	sprite = function(properties, ctx){
@@ -103,6 +111,8 @@ define(function(){
 			properties.width,
 			properties.height
 		);
+		
+		return self.methods;
 	},
 	
 	layer = function(source, dimensions, ctx){
@@ -121,6 +131,8 @@ define(function(){
 			dimensions.width,
 			dimensions.height
 		);
+		
+		return self.methods;
 	},
 	
 	cells = function(){
@@ -139,9 +151,11 @@ define(function(){
 				color:	'rgba(0, 0, 0, .2)'
 			});
 		}
+		
+		return self.methods;
 	};
 	
-	return {
+	self.methods = {
 		Sprite:			Sprite,
 		easel:			easel,
 		setDimensions:	setDimensions,
@@ -152,4 +166,6 @@ define(function(){
 		layer:			layer,
 		cells:			cells
 	};
+	
+	return self.methods;
 });

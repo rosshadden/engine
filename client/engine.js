@@ -42,11 +42,10 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/utilities'], f
 		paint = function(){
 			var map = world.maps.get(world.maps.getCurrent());
 			
-			draw.backdrop(viewport.getDimensions());
-			
-			draw.cells();
-			
-			draw.layer(map.element, world.toXY(map.properties.dimensions));
+			draw
+			.backdrop(viewport.getDimensions())
+			.cells()
+			.layer(map.element, world.toXY(map.properties.dimensions));
             
 			for(var entity in world.entities){
 				world.entities[entity].draw();
