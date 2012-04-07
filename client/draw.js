@@ -75,6 +75,19 @@ define(function(){
 		return self.methods;
 	},
 	
+	text = function(properties, ctx){
+		ctx = ctx || easel.screen;
+		
+		ctx.fillStyle =  properties.color || 'rgba(0, 0, 0, 1)';
+		ctx.textBaseline =  properties.baseline || 'top';
+		ctx.textAlign = properties.align || 'left';
+		ctx.font =  properties.font || '25px Arial';
+		
+		ctx.fillText(properties.text, properties.x, properties.y);
+		
+		return self.methods;
+	},
+	
 	image = function(properties, ctx){
 		ctx = ctx || easel.screen;
 		
@@ -161,6 +174,7 @@ define(function(){
 		setDimensions:	setDimensions,
 		backdrop:		backdrop,
 		path:			path,
+		text:			text,
 		image:			image,
 		sprite:			sprite,
 		layer:			layer,
