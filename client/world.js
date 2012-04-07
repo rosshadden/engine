@@ -129,9 +129,9 @@ define(['engine/draw'], function(draw){
 		};
 	})(),
 	
-	createEntity = function(type, properties){
+	createEntity = function(Type, properties){
 		_numEntities++;
-		entities[properties.name] = new type(properties);
+		entities[properties.name] = new Type(properties);
 	},
 	
 	toGrid = function(x, y){
