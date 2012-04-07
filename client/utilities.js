@@ -11,6 +11,18 @@ define(function(){
 	})();
 	
 	return {
+		log:	(function(){
+			return {
+				add:	function(text){
+					$('#log').prepend('<li>' + text + '</li>');
+				},
+				
+				clear:	function(){
+					$('#log').html('');
+				}
+			};
+		})(),
+		
         inherit:	(function(){
             var Temp = function(){};
             
