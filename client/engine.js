@@ -31,6 +31,16 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 					id:	'engine-cache'
 				}).appendTo('body');
 			}
+            
+			//	convenient shortcuts
+			self.world = world;
+			self.input = input;
+			self.utilities = utilities;
+            self.bind = {
+				'event':utilities.listen(self),
+				key:	input.keyboard.bind.key,
+				axis:	input.keyboard.bind.axis
+			};
 			
 			execute('init');
 		})(),
@@ -67,15 +77,11 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 		};
 		
 		return {
-			world:		world,
-			input:		input,
-			utilities:	utilities,
-			start:		start,
-			bind: {
-				'event':utilities.listen(self),
-				key:	input.keyboard.bind.key,
-				axis:	input.keyboard.bind.axis
-			}
+			world:		self.world,
+			input:		self.input,
+			utilities:	self.utilities,
+			bind:		self.bind,
+			start:		start
 		};
 	};
 	
