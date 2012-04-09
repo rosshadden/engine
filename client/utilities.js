@@ -50,12 +50,6 @@ define(function(){
 			object.parent = source;
 			
 			return object;
-		},
-			
-		listen:	function(context){
-			return function(){
-				$(context).on.apply($(context), arguments);
-			};
 		}
 	};
 });
