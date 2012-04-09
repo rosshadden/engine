@@ -43,7 +43,7 @@ define(['engine/world', 'engine/utilities'], function(world, utilities){
 			return true;
 		}
 		
-		if((which === 'right' || which === 'any') && entity.position.x >= map.element.width){
+		if((which === 'right' || which === 'any') && entity.position.x + entity.dim.width >= map.element.width){
 			return true;
 		}
 		
@@ -51,7 +51,7 @@ define(['engine/world', 'engine/utilities'], function(world, utilities){
 			return true;
 		}
 		
-		if((which === 'bottom' || which === 'any') && entity.position.y >= map.element.height){
+		if((which === 'bottom' || which === 'any') && entity.position.y + entity.dim.height >= map.element.height){
 			return true;
 		}
 		
