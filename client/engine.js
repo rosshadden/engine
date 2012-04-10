@@ -65,15 +65,29 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 		},
 		
 		main = function(){
-			requestAnimFrame(main);
+			if(self.running){
+				requestAnimFrame(main);
 			
-			update();
-			paint();
+				update();
+				paint();
+			}
 		},
 		
 		start = function(){
+			self.running = true;
+			
 			world.maps.load(options.map || 'empty')
 			.done(main);
+		},
+		
+		end = function(){
+			var def = new $.Deferred;
+			
+			self.running = false;
+			
+			def.resolve();
+			
+			return def.promise();
 		};
 		
 		return {
@@ -82,7 +96,8 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 			events:		self.events,
 			utilities:	self.utilities,
 			bind:		self.bind,
-			start:		start
+			start:		start,
+			end:		end
 		};
 	};
 	
