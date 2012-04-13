@@ -1,4 +1,4 @@
-define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 'engine/events', 'engine/utilities'], function(world, draw, viewport, input, events, utilities){
+define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 'engine/events', 'engine/audio', 'engine/utilities'], function(world, draw, viewport, input, events, audio, utilities){
 	var Engine = function(options){
 		var self = this,
 	    
@@ -36,6 +36,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 			self.world = world;
 			self.input = input;
 			self.events = events;
+			self.audio = audio;
 			self.utilities = utilities;
             self.bind = {
 				key:	input.keyboard.bind.key,
@@ -94,6 +95,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 			world:		self.world,
 			input:		self.input,
 			events:		self.events,
+			audio:		self.audio,
 			utilities:	self.utilities,
 			bind:		self.bind,
 			start:		start,
