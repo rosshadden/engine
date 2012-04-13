@@ -1,4 +1,4 @@
-define(['engine/lib/sound'], function(Sound){
+define(['engine/resources'], function(resources){
 	var self = this;
 
 	var buffer,
