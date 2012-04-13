@@ -30,7 +30,6 @@ define(['engine/resources'], function(resources){
 	return {
 		context:	context,
 		load:		load,
-		play:		play,
-		Sound:		Sound
+		play:		play
 	};
 });
