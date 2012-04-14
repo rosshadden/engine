@@ -5,7 +5,7 @@ define(function(){
 	events = {},
 	$events = $(events),
 	
-	listen = function(){
+	on = function(){
 		$events.on.apply($events, arguments);
 	},
 	
@@ -14,7 +14,7 @@ define(function(){
 	};
 	
 	return {
-		listen:	listen,
+		on:		on,
 		emit:	emit
 	};
 });
