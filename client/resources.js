@@ -51,6 +51,12 @@ define(['engine/audio'], function(audio){
 	},
 	
 	get = function(name, type){
+		if(typeof type === 'undefined' && name.indexOf('/') >= 0){
+			var path = name.split('/'),
+				type = path[0];
+				name = path[1];
+		}
+		
 		return resources[type][name];
 	};
 	
