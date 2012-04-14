@@ -1,10 +1,11 @@
-define(function(){
+define(['engine/resources'], function(resources){
 	var self = this;
 
 	var context = new webkitAudioContext(),
 	
 	get = function(name){
-//		return resources.get(name, 'sound');
+		//TODO:	Circular depencancy === fail.
+		//return resources.get(name, 'sound');
 	},
 	
 	Sound = function(buffer){
