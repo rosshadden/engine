@@ -1,4 +1,4 @@
-define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 'engine/events', 'engine/audio', 'engine/utilities'], function(world, draw, viewport, input, events, audio, utilities){
+define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'engine/input/input', 'engine/events', 'engine/audio', 'engine/utilities'], function(world, draw, viewport, resources, input, events, audio, utilities){
 	var Engine = function(options){
 		var self = this,
 	    
@@ -34,6 +34,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
             
 			//	convenient shortcuts
 			self.world = world;
+			self.resources = resources;
 			self.input = input;
 			self.events = events;
 			self.audio = audio;
@@ -93,6 +94,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/input/input', 
 		
 		return {
 			world:		self.world,
+			resources:	self.resources,
 			input:		self.input,
 			events:		self.events,
 			audio:		self.audio,

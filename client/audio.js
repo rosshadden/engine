@@ -1,39 +1,27 @@
-define(['engine/resources'], function(resources){
+define(function(){
 	var self = this;
 
-	var buffers = {},
-		context = new webkitAudioContext();
-
-	var load = function(name, url){
-		var def = new $.Deferred,
-			request = new XMLHttpRequest();
-
-		request.open('GET', url, true);
-		request.responseType = 'arraybuffer';
-
-		request.onload = function(){
-			context.decodeAudioData(request.response, function(soundBuffer){
-				buffers[name] = soundBuffer;
-			});
-			
-			def.resolve(buffers[name]);
-		};
-
-		request.send();
+	var context = new webkitAudioContext(),
+	
+	get = function(name){
+//		return resources.get(name, 'sound');
+	},
+	
+	Sound = function(buffer){
+		var self = this;
 		
-		return def.promise();
-	};
-
-	var play = function(name){
-		var source = context.createBufferSource();
-
-		source.buffer = buffers[name];
-		source.connect(context.destination);
-		source.noteOn(0);
+		self.play = function(t){
+			//	Why do the next three lines have to be called every time?
+			self.source = context.createBufferSource();
+			self.source.buffer = buffer;
+			self.source.connect(context.destination);
+			self.source.noteOn(t || 0);
+		};
 	};
 	
 	return {
-		load:		load,
-		play:		play
+		context:	context,
+		get:		get,
+		Sound:		Sound
 	};
 });
