@@ -46,17 +46,15 @@ define(['engine/draw'], function(draw){
 		render = function(mapPath){
 			var def = new $.Deferred,
 				map = maps[mapPath],
+				tileList = [],
 				
-				isLoaded = (function(){
-					var list = [];
-					return function(which){
-						list.push(which);
-						
-						if(list.length === map.tiles.length){
-							def.resolve();
-						}
-					};
-				})();
+				isLoaded = function(which){
+					tileList.push(which);
+					
+					if(tileList.length === map.tiles.length){
+						def.resolve();
+					}
+				};
 			
 			if(!map.element){
 				map.element = document.createElement('canvas');
@@ -81,6 +79,7 @@ define(['engine/draw'], function(draw){
 							dimensions:	tile.destination.dimensions
 						}
 					}, map.ctx);
+					
 					isLoaded(t);
 				};
 			});
