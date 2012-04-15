@@ -20,13 +20,10 @@ module.exports = {
 		try{
 			var map = require('../resources/maps/' + request.params.path + '.json');
 			
-			response.contentType('application/json');
-			
 			response.json(map);
 		}catch(e){
-			response.statusCode = 404;
-			
-			response.end('The map you seek does not exist.');
+			console.log('Error:', 'A client tried to access map "' + request.params.path + '".');
+			response.send('The map you seek does not exist.', 404);
 		}
 	}
 };
