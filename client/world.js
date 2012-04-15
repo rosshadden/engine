@@ -32,6 +32,8 @@ define(['engine/draw'], function(draw){
 			$.getJSON('/maps/' + mapPath, function(map){
 				maps[mapPath] = map;
 				def.resolve(mapPath);
+			}).fail(function(){
+				alert('The requested map could not be found.');
 			});
 			
 			return def.promise();
