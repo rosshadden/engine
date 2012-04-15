@@ -98,19 +98,11 @@ define(['engine/draw'], function(draw){
 		load = function(mapPath){
 			var def = new $.Deferred;
 			
-			$.when(fetch(mapPath))
-			//	There HAS to be a more clean way to chain these deferreds.
-			//	$.Deferred.pipe comes close, but not quite.
-			//	Chaining $.Deferred.done's would work,
-			//		except maps.fetch would have to return currentMap?
+			fetch(mapPath)
+			.done(render)
+			.done(setCurrent)
 			.done(function(){
-				//	render() is async because of Image.onload.
-				$.when(render(mapPath))
-				.done(function(){
-					setCurrent(mapPath);
-					
-					def.resolve();
-				});
+				def.resolve();
 			});
 			
 			return def.promise();
