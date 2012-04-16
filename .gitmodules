@@ -1,3 +1,0 @@
-[submodule "engine-server"]
-	path = engine-server
-	url = git@github.com:rosshadden/engine-server.git
