@@ -1,5 +1,5 @@
 define(['engine/resources'], function(resources){
-	var self = this;
+	var audio = {};
 
 	var context = new webkitAudioContext(),
 	

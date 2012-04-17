@@ -1,5 +1,5 @@
 define(function(){
-	var self = this,
+	var self = {},
 	
 	dimensions = {
 		width:	0,

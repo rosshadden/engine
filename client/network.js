@@ -1,12 +1,12 @@
 define(function(){
 	var network = (function(){
-		var self = this,
+		var self = {},
 			socket,
 
 		connect = function(){
 			socket = io.connect('http://localhost');
 		
-			return self.methodss;
+			return self.methods;
 		},
 
 		on = function(){
@@ -14,7 +14,7 @@ define(function(){
 		
 			socket.on.apply(socket, args);
 		
-			return self.methodss;
+			return self.methods;
 		},
 
 		emit = function(){
@@ -22,16 +22,14 @@ define(function(){
 		
 			socket.emit.apply(socket, args);
 		
-			return self.methodss;
+			return self.methods;
 		};
 		
-		self.methodss = {
+		return self.methods = {
 			connect:connect,
 			on:		on,
 			emit:	emit
 		};
-	
-		return self.methodss;
 	})();
 	
 	return network;
