@@ -4,6 +4,8 @@ var network = function(app){
 	players = {},
 	numPlayers = 0;
 	
+	io.set('log level', 1);
+	
 	io.sockets.on('connection', function(socket){
 		players[socket.id] = {
 			socket:	socket
