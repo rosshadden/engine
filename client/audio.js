@@ -12,11 +12,31 @@ define(['engine/resources'], function(resources){
 		var self = this;
 		
 		self.play = function(t){
-			//	Why do the next three lines have to be called every time?
+			//	Why do the main three lines have to be called every time?
 			self.source = context.createBufferSource();
+			
+			self.gainNode = context.createGainNode();
+			
 			self.source.buffer = buffer;
-			self.source.connect(context.destination);
+			
+			self.source.connect(self.gainNode);
+			self.gainNode.connect(context.destination);
+			
 			self.source.noteOn(t || 0);
+			
+			return self;
+		};
+		
+		self.stop = function(t){
+			self.source.noteOff(t || 0);
+			
+			return self;
+		};
+		
+		self.setVolume = function(level){
+			self.gainNode.gain.value = level;
+			
+			return self;
 		};
 	};
 	
