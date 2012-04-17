@@ -36,6 +36,9 @@ define(['engine/audio'], function(audio){
 					audio.context.decodeAudioData(request.response, function(buffer){
 						item = new audio.Sound(buffer);
 						
+						//	Muffle annoying sounds for development.
+						item.setVolume(0.2);
+						
 						def.resolve(item);
 					});
 				};

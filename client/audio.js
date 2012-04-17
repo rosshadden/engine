@@ -11,12 +11,10 @@ define(['engine/resources'], function(resources){
 	Sound = function(buffer){
 		var self = this;
 		
+		self.source = context.createBufferSource();
+		self.gainNode = context.createGainNode();
+		
 		self.play = function(t){
-			//	Why do the main three lines have to be called every time?
-			self.source = context.createBufferSource();
-			
-			self.gainNode = context.createGainNode();
-			
 			self.source.buffer = buffer;
 			
 			self.source.connect(self.gainNode);
