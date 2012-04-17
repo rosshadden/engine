@@ -1,4 +1,8 @@
 module.exports = {
+	'/engine/*':	function(request, response, next){
+		next();
+	},
+	
 	'/GET':	function(request, response){
 		var data = '',
 			url = parseURL(request.url, true);
@@ -18,7 +22,7 @@ module.exports = {
 	
 	'/maps/:path':	function(request, response){
 		try{
-			var map = require('../resources/maps/' + request.params.path + '.json');
+			var map = require('../../resources/maps/' + request.params.path + '.json');
 			
 			response.json(map);
 		}catch(e){
