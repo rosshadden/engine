@@ -6,18 +6,25 @@ var network = function(app){
 	
 	io.set('log level', 1);
 	
-	io.sockets.on('connection', function(socket){
-		players[socket.id] = {
-			socket:	socket
-		};
-		
-		console.log('Player #%d connected.', ++numPlayers);
-	});
+	var start = function(handler){
+		io.sockets.on('connection', function(socket){
+			players[socket.id] = {
+				socket:	socket
+			};
+			
+			console.log('Player #%d connected.', ++numPlayers);
+			
+			if(typeof handler === 'function'){
+				handler.call(this, socket);
+			}
+		});
+	};
 	
 	return {
 		io:			io,
 		players:	players,
-		numPlayers:	numPlayers
+		numPlayers:	numPlayers,
+		start:		start
 	};
 };
 
