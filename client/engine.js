@@ -1,6 +1,8 @@
 define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'engine/input/input', 'engine/events', 'engine/audio', 'engine/network', 'engine/utilities'], function(world, draw, viewport, resources, input, events, audio, network, utilities){
 	var Engine = function(options){
 		var self = this,
+			
+		deferred = new $.Deferred,
 	    
         //  Need to pass this to the drawing library.
 		screen = options.screen || $('canvas')[0],
@@ -11,7 +13,7 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'e
 			}
 		},
 		
-		init = (function(){
+		init = function(){
 			//	main.js needs to be able to configure these.
 			//	I think I should make each module take initialization variables
 			//		before becoming modules.
@@ -46,7 +48,9 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'e
 			};
 			
 			execute('init');
-		})(),
+			
+			deferred.resolve(self.methods);
+		},
 		
 		update = function(){
 			execute('update');
@@ -79,6 +83,8 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'e
 		start = function(){
 			self.running = true;
 			
+			init();
+			
 			world.maps.load(options.map || 'empty')
 			.done(main);
 		},
@@ -93,17 +99,21 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'e
 			return def.promise();
 		};
 		
-		return {
-			world:		self.world,
-			resources:	self.resources,
-			input:		self.input,
-			events:		self.events,
-			audio:		self.audio,
-			network:	self.network,
-			utilities:	self.utilities,
-			bind:		self.bind,
+		return self.methods = {
+			world:		world,
+			resources:	resources,
+			input:		input,
+			events:		events,
+			audio:		audio,
+			network:	network,
+			utilities:	utilities,
+			bind: {
+				key:	input.keyboard.bind.key,
+				axis:	input.keyboard.bind.axis
+			},
 			start:		start,
-			end:		end
+			end:		end,
+			deferred:	deferred.promise()
 		};
 	};
 	
