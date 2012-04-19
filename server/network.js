@@ -1,18 +1,20 @@
 var network = function(app){
-	var	io = require('socket.io').listen(app),
+	app.io = app.io || require('socket.io').listen(app),
 	
 	players = {},
 	numPlayers = 0;
 	
-	io.set('log level', 1);
-	
 	var start = function(handler){
-		io.sockets.on('connection', function(socket){
-			players[socket.id] = {
-				socket:	socket
-			};
-			
-			console.log('Player #%d connected.', ++numPlayers);
+		app.io.sockets.on('connection', function(socket){
+			console.log(socket.id, players);
+			if(!(socket.id in players)){
+				players[socket.id] = {
+					id:		socket.id,
+					socket:	socket
+				};
+				
+				console.log('Player #%d connected.', ++numPlayers);
+			}
 			
 			if(typeof handler === 'function'){
 				handler.call(this, socket);
@@ -21,7 +23,7 @@ var network = function(app){
 	};
 	
 	return {
-		io:			io,
+		io:			app.io,
 		players:	players,
 		numPlayers:	numPlayers,
 		start:		start
