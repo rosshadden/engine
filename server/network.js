@@ -53,7 +53,7 @@ var network = function(app){
 				//	emit the event for them,
 				//	destroy the listener,
 				//	and destroy the timeout.
-			}
+			});
 
 			timeout = setTimeout(function(){
 				//	After ten (or so) seconds, remove the event.
