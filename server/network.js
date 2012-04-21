@@ -1,7 +1,7 @@
 var network = function(app){
 	app.io = app.io || require('socket.io').listen(app),
 	emitter = new (require('events').EventEmitter),
-	q = require('q'),
+	parseCookie = require('connect').utils.parseCookie,
 
 	//TODO:	Break events out into their own module.
 	events = {},
@@ -9,16 +9,30 @@ var network = function(app){
 	//TODO:	Break players out into their own module.
 	players = {},
 	numPlayers = 0;
+
+	app.io.set('authorization', function(data, accept){
+		if(data.headers.cookie){
+		    data.cookie = parseCookie(data.headers.cookie);
+
+		    data.sessionID = data.cookie['connect.sid'];
+		}else{
+		   return accept('No cookie transmitted.', false);
+		}
+		
+		accept(null, true);
+	});
 	
 	app.io.sockets.on('connection', function(socket){
-		/*if(!(socket.id in players)){
-			players[socket.id] = {
-				id:		socket.id,
+		var id = socket.handshake.sessionID;
+		
+		if(!(id in players)){
+			players[id] = {
+				id:		id,
 				socket:	socket
 			};
 			
 			console.log('Player #%d connected.', ++numPlayers);
-		}*/
+		}
 		
 		emitter.on('bind', function(event, handler){
 			socket.on(event, handler);
