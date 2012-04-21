@@ -2,8 +2,11 @@ var network = function(app){
 	app.io = app.io || require('socket.io').listen(app),
 	emitter = new (require('events').EventEmitter),
 	q = require('q'),
-	
+
+	//TODO:	Break events out into their own module.
 	events = {},
+
+	//TODO:	Break players out into their own module.
 	players = {},
 	numPlayers = 0;
 	
@@ -39,7 +42,27 @@ var network = function(app){
 		emitter.emit('bind', event, handler);
 	},
 	
-	emit = function(event, data){
+	emit = function(user, event, data){
+		var timeout;
+		
+		if(players[user] && players[user].isOnline){
+			players[user].socket.emit(event, data);
+		}else{
+			emitter.on('login', function(socket){
+				//	If userThatJustLoggedIn === user,
+				//	emit the event for them,
+				//	destroy the listener,
+				//	and destroy the timeout.
+			}
+
+			timeout = setTimeout(function(){
+				//	After ten (or so) seconds, remove the event.
+				//	Clearly the user isn't logging in any time soon.
+			}, 1e10);
+		}
+	},
+
+	emitAll = function(event, data){
 		emitter.emit('trigger', event, data);
 	};
 	
@@ -47,7 +70,8 @@ var network = function(app){
 		players:	players,
 		numPlayers:	numPlayers,
 		on:			on,
-		emit:		emit
+		emit:		emit,
+		emitAll:	emitAll
 	};
 };
 
