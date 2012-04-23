@@ -5,11 +5,7 @@ var network = function(engine){
 		Session = require('connect').middleware.session.Session,
 	
 		emitter = engine.events.emitter,
-		handlers = engine.events.handlers,
-
-		//TODO:	Break players out into their own module.
-		players = {},
-		numPlayers = 0;
+		handlers = engine.events.handlers;
 
 	engine.app.io.set('authorization', function(data, accept){
 		if(data.headers.cookie){
@@ -34,13 +30,13 @@ var network = function(engine){
 	engine.app.io.sockets.on('connection', function(socket){
 		var id = socket.handshake.sessionID;
 		
-		if(!(id in players)){
-			players[id] = {
+		if(!(id in engine.players.players)){
+			engine.players.players[id] = {
 				id:		id,
 				socket:	socket
 			};
 			
-			console.log('Player #%d connected.', ++numPlayers);
+			console.log('Player #%d connected.', ++engine.players.count);
 		}
 		
 		emitter.on('bind', function(event, handler){
@@ -68,8 +64,8 @@ var network = function(engine){
 	emit = function(user, event, data){
 		var timeout;
 		
-		if(players[user] && players[user].isOnline){
-			players[user].socket.emit(event, data);
+		if(engine.players.players[user] && engine.players.players[user].isOnline){
+			engine.players.players[user].socket.emit(event, data);
 		}else{
 			emitter.on('login', function(socket){
 				//	If userThatJustLoggedIn === user,
@@ -90,8 +86,6 @@ var network = function(engine){
 	};
 	
 	return {
-		players:	players,
-		numPlayers:	numPlayers,
 		on:			on,
 		emit:		emit,
 		emitAll:	emitAll

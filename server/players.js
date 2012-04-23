@@ -1,4 +1,4 @@
-var players = function(engine){
+module.exports = (function(engine){
 	var players = {},
 		count = 0;
 
@@ -11,6 +11,4 @@ var players = function(engine){
 		count:	count,
 		get:	get
 	};
-};
-
-module.exports = players;
+})();
