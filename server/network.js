@@ -1,24 +1,24 @@
-var network = function(app){
-	app.io = app.io || require('socket.io').listen(app),
-	parseCookie = require('connect').utils.parseCookie,
-	Session = require('connect').middleware.session.Session,
+var network = function(engine){
+	engine.app.io = engine.app.io || require('socket.io').listen(app);
 	
-	events = require('./events'),
-	emitter = events.emitter,
-	handlers = events.handlers,
+	var parseCookie = require('connect').utils.parseCookie,
+		Session = require('connect').middleware.session.Session,
+	
+		emitter = engine.events.emitter,
+		handlers = engine.events.handlers,
 
-	//TODO:	Break players out into their own module.
-	players = {},
-	numPlayers = 0;
+		//TODO:	Break players out into their own module.
+		players = {},
+		numPlayers = 0;
 
-	app.io.set('authorization', function(data, accept){
+	engine.app.io.set('authorization', function(data, accept){
 		if(data.headers.cookie){
 		    data.cookie = parseCookie(data.headers.cookie);
 		    
 		    data.sessionID = data.cookie.engine.split('.')[0];
 
-			data.sessionStore = app.session;
-			app.session.load(data.sessionID, function(err, session){
+			data.sessionStore = engine.app.session;
+			engine.app.session.load(data.sessionID, function(err, session){
 				if(err || !session){
 					accept('Error', false);
 				}else{
@@ -31,7 +31,7 @@ var network = function(app){
 		}
 	});
 	
-	app.io.sockets.on('connection', function(socket){
+	engine.app.io.sockets.on('connection', function(socket){
 		var id = socket.handshake.sessionID;
 		
 		if(!(id in players)){

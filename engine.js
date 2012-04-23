@@ -1,6 +1,8 @@
 var engine = function(app){
 	var router = require('./server/router'),
-		network = require('./server/network')(app);
+		events = require('./server/events'),
+		network = require('./server/network'),
+		players = require('./server/players');
 	
 	// for(var route in router){
 		// console.log('router: [%s]', route);
@@ -8,7 +10,16 @@ var engine = function(app){
 	// }
 	
 	return {
-		network:	network
+		router:		router,
+		events:		events,
+		network:	network({
+			app:	app,
+			events:	events
+		}),
+		players:	players({
+			events:	events,
+			network:network
+		})
 	};
 };
 
