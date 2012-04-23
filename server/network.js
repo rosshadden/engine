@@ -1,11 +1,11 @@
 var network = function(app){
 	app.io = app.io || require('socket.io').listen(app),
-	emitter = new (require('events').EventEmitter),
 	parseCookie = require('connect').utils.parseCookie,
 	Session = require('connect').middleware.session.Session,
-
-	//TODO:	Break events out into their own module.
-	events = {},
+	
+	events = require('./events'),
+	emitter = events.emitter,
+	handlers = events.handlers,
 
 	//TODO:	Break players out into their own module.
 	players = {},
@@ -51,8 +51,8 @@ var network = function(app){
 			socket.emit(event, data);
 		});
 		
-		for(var event in events){
-			socket.on(event, events[event]);
+		for(var event in handlers){
+			socket.on(event, handlers[event]);
 		}
 	});
 	
@@ -61,7 +61,7 @@ var network = function(app){
 			throw new Error("The event '" + event + "' is reserved by the engine.network module.");
 		}
 		
-		events[event] = handler;
+		handlers[event] = handler;
 		emitter.emit('bind', event, handler);
 	},
 	
