@@ -2,6 +2,7 @@ var network = function(app){
 	app.io = app.io || require('socket.io').listen(app),
 	emitter = new (require('events').EventEmitter),
 	parseCookie = require('connect').utils.parseCookie,
+	Session = require('connect').middleware.session.Session,
 
 	//TODO:	Break events out into their own module.
 	events = {},
@@ -13,13 +14,21 @@ var network = function(app){
 	app.io.set('authorization', function(data, accept){
 		if(data.headers.cookie){
 		    data.cookie = parseCookie(data.headers.cookie);
+		    
+		    data.sessionID = data.cookie.engine.split('.')[0];
 
-		    data.sessionID = data.cookie['connect.sid'];
+			data.sessionStore = app.session;
+			app.session.load(data.sessionID, function(err, session){
+				if(err || !session){
+					accept('Error', false);
+				}else{
+					data.session = new Session(data, session);
+					accept(null, true);
+				}
+			});
 		}else{
-		   return accept('No cookie transmitted.', false);
+			return accept('No cookie transmitted.', false);
 		}
-		
-		accept(null, true);
 	});
 	
 	app.io.sockets.on('connection', function(socket){
