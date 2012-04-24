@@ -115,14 +115,29 @@ var network = function(engine){
 			},
 
 			leave:	function(room){
-				var index = user.rooms.indexOf(room);
-				
-				if('/' + room in engine.app.io.sockets.manager.roomClients[user.socket.id]){
-					user.socket.leave(room);
-				}
-				
-				if(index > -1){
-					user.rooms.splice(index, 1);
+				//	I'll combine these two cases eventually.
+				if(room instanceof RegExp){
+					user.rooms = user.rooms.filter(function(channel, c){
+						if(room.test(channel)){
+							if('/' + channel in engine.app.io.sockets.manager.roomClients[user.socket.id]){
+								user.socket.leave(channel);
+							}
+							
+							return false;
+						}
+						
+						return true;
+					});
+				}else{
+					var index = user.rooms.indexOf(room);
+					
+					if(index > -1){
+						user.rooms.splice(index, 1);
+					}
+					
+					if('/' + room in engine.app.io.sockets.manager.roomClients[user.socket.id]){
+						user.socket.leave(room);
+					}
 				}
 				
 				return methods;
