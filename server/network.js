@@ -38,6 +38,8 @@ var network = function(engine){
 				socket:	socket
 			});
 			
+			emitter.emit('created ' + id);
+			
 			console.log('Player #%d connected.', ++engine.players.count);
 		}else{
 			engine.players.get(id).socket = socket;
