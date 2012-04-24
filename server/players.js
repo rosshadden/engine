@@ -12,7 +12,7 @@ module.exports = (function(engine){
 			socket:	data.socket,
 			rooms:	data.rooms || []
 		};
-	};;
+	};
 
 	return {
 		players:players,
