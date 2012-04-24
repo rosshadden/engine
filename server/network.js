@@ -44,8 +44,6 @@ var network = function(engine){
 			engine.players.get(id).rooms.forEach(function(room, r){
 				socket.join(room);
 			});
-			
-			console.log(id, 'rejoined rooms:', engine.players.get(id).rooms);
 		}
 		
 		emitter.on('scope', function(f){
