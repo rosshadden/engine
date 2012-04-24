@@ -34,12 +34,18 @@ var network = function(engine){
 			id = socket.handshake.sessionID;
 
 		if(!(id in engine.players.players)){
-			engine.players.players[id] = {
-				id:		id,
+			engine.players.add(id, {
 				socket:	socket
-			};
+			});
 			
 			console.log('Player #%d connected.', ++engine.players.count);
+		}else{
+			engine.players.get(id).socket = socket;
+			engine.players.get(id).rooms.forEach(function(room, r){
+				socket.join(room);
+			});
+			
+			console.log(id, 'rejoined rooms:', engine.players.get(id).rooms);
 		}
 		
 		emitter.on('scope', function(f){
@@ -63,19 +69,18 @@ var network = function(engine){
 	},
 	
 	emit = function(event, data){
-		io.sockets.emit(event, data);
+		engine.app.io.sockets.emit(event, data);
 	},
 	
 	inRoom = function(room){
-		return {
+		var methods = {
 			emit:	function(event, data){
 				engine.app.io.sockets.in(room).emit(event, data);
-			},
-			
-			broadcast:	function(event, data){
-				//	socket.broadcast.to(room).emit(event, data);
+				return methods;
 			}
 		};
+		
+		return methods;
 	},
 	
 	withPlayer = function(user){
@@ -83,19 +88,48 @@ var network = function(engine){
 			user = engine.players.get(user);
 		}
 		
-		return {
+		var methods = {
 			emit:	function(event, data){
 				user.socket.emit(event, data);
+				return methods;
 			},
 			
 			broadcast:	function(event, data){
 				user.socket.broadcast.emit(event, data);
+				return methods;
 			},
 			
 			broadcastTo:	function(room, event, data){
 				user.socket.broadcast.to(room).emit(event, data);
+				return methods;
+			},
+
+			join:	function(room){
+				user.socket.join(room);
+				
+				if(user.rooms.indexOf(room) === -1){
+					user.rooms.push(room);
+				}
+				
+				return methods;
+			},
+
+			leave:	function(room){
+				var index = user.rooms.indexOf(room);
+				
+				if('/' + room in engine.app.io.sockets.manager.roomClients[user.socket.id]){
+					user.socket.leave(room);
+				}
+				
+				if(index > -1){
+					user.rooms.splice(index, 1);
+				}
+				
+				return methods;
 			}
 		};
+
+		return methods;
 	};
 	
 	return {

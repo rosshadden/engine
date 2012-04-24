@@ -4,7 +4,7 @@ define(function(){
 			socket,
 
 		connect = function(path){
-			socket = io.connect(path);
+			socket = io.connect(path).emit('connected');
 		
 			return self.methods;
 		},
