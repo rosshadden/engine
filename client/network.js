@@ -3,8 +3,8 @@ define(function(){
 		var self = {},
 			socket,
 
-		connect = function(){
-			socket = io.connect('http://localhost');
+		connect = function(path){
+			socket = io.connect(path);
 		
 			return self.methods;
 		},

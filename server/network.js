@@ -6,30 +6,33 @@ var network = function(engine){
 	
 		emitter = engine.events.emitter,
 		handlers = engine.events.handlers;
+	
+	engine.app.io.configure(function(){
+		engine.app.io.set('authorization', function(data, accept){
+			if(data.headers.cookie){
+				data.cookie = parseCookie(data.headers.cookie);
+				
+				data.sessionID = data.cookie.engine.split('.')[0];
 
-	engine.app.io.set('authorization', function(data, accept){
-		if(data.headers.cookie){
-		    data.cookie = parseCookie(data.headers.cookie);
-		    
-		    data.sessionID = data.cookie.engine.split('.')[0];
-
-			data.sessionStore = engine.app.session;
-			engine.app.session.load(data.sessionID, function(err, session){
-				if(err || !session){
-					accept('Error', false);
-				}else{
-					data.session = new Session(data, session);
-					accept(null, true);
-				}
-			});
-		}else{
-			return accept('No cookie transmitted.', false);
-		}
+				data.sessionStore = engine.app.session;
+				engine.app.session.load(data.sessionID, function(err, session){
+					if(err || !session){
+						accept('Error', false);
+					}else{
+						data.session = new Session(data, session);
+						accept(null, true);
+					}
+				});
+			}else{
+				return accept('No cookie transmitted.', false);
+			}
+		});
 	});
 	
 	engine.app.io.sockets.on('connection', function(socket){
-		var id = socket.handshake.sessionID;
-		
+		var self = this,
+			id = socket.handshake.sessionID;
+
 		if(!(id in engine.players.players)){
 			engine.players.players[id] = {
 				id:		id,
@@ -39,12 +42,8 @@ var network = function(engine){
 			console.log('Player #%d connected.', ++engine.players.count);
 		}
 		
-		emitter.on('bind', function(event, handler){
-			socket.on(event, handler);
-		});
-		
-		emitter.on('trigger', function(event, data){
-			socket.emit(event, data);
+		emitter.on('scope', function(f){
+			f.call(self, socket);
 		});
 		
 		for(var event in handlers){
@@ -53,42 +52,57 @@ var network = function(engine){
 	});
 	
 	var on = function(event, handler){
-		if(['bind', 'trigger'].indexOf(event) > -1){
+		if(['scope'].indexOf(event) > -1){
 			throw new Error("The event '" + event + "' is reserved by the engine.network module.");
 		}
 		
 		handlers[event] = handler;
-		emitter.emit('bind', event, handler);
+		emitter.emit('scope', function(socket){
+			socket.on(event, handler);
+		});
 	},
 	
-	emit = function(user, event, data){
-		var timeout;
-		
-		if(engine.players.players[user] && engine.players.players[user].isOnline){
-			engine.players.players[user].socket.emit(event, data);
-		}else{
-			emitter.on('login', function(socket){
-				//	If userThatJustLoggedIn === user,
-				//	emit the event for them,
-				//	destroy the listener,
-				//	and destroy the timeout.
-			});
-
-			timeout = setTimeout(function(){
-				//	After ten (or so) seconds, remove the event.
-				//	Clearly the user isn't logging in any time soon.
-			}, 1e10);
-		}
+	emit = function(event, data){
+		io.sockets.emit(event, data);
 	},
-
-	emitAll = function(event, data){
-		emitter.emit('trigger', event, data);
+	
+	inRoom = function(room){
+		return {
+			emit:	function(event, data){
+				engine.app.io.sockets.in(room).emit(event, data);
+			},
+			
+			broadcast:	function(event, data){
+				//	socket.broadcast.to(room).emit(event, data);
+			}
+		};
+	},
+	
+	withPlayer = function(user){
+		if(typeof user === 'string'){
+			user = engine.players.get(user);
+		}
+		
+		return {
+			emit:	function(event, data){
+				user.socket.emit(event, data);
+			},
+			
+			broadcast:	function(event, data){
+				user.socket.broadcast.emit(event, data);
+			},
+			
+			broadcastTo:	function(room, event, data){
+				user.socket.broadcast.to(room).emit(event, data);
+			}
+		};
 	};
 	
 	return {
-		on:			on,
-		emit:		emit,
-		emitAll:	emitAll
+		on:		on,
+		emit:	emit,
+		'in':	inRoom,
+		'with':	withPlayer
 	};
 };
 
