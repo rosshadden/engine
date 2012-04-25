@@ -31,22 +31,27 @@ var network = function(engine){
 	
 	engine.app.io.sockets.on('connection', function(socket){
 		var self = this,
-			id = socket.handshake.sessionID;
+			id = socket.handshake.sessionID,
+			player = engine.players.get(id);
 
-		if(!(id in engine.players.players)){
+		if(!player){
 			engine.players.add(id, {
 				socket:	socket
 			});
 			
+			player = engine.players.get(id);
+
 			emitter.emit('created ' + id);
 			
-			console.log('Player #%d connected.', ++engine.players.count);
+			console.log('Player #%d connected:  %s.', ++engine.players.count, id);
 		}else{
-			engine.players.get(id).socket = socket;
-			engine.players.get(id).rooms.forEach(function(room, r){
+			player.socket = socket;
+			player.rooms.forEach(function(room, r){
 				socket.join(room);
 			});
 		}
+			
+		player.events.emit('load');
 		
 		emitter.on('scope', function(f){
 			f.call(self, socket);
@@ -55,6 +60,10 @@ var network = function(engine){
 		for(var event in handlers){
 			socket.on(event, handlers[event]);
 		}
+		
+		socket.on('disconnect', function(){
+			player.events.emit('unload');
+		});
 	});
 	
 	var on = function(event, handler){

@@ -1,6 +1,7 @@
 module.exports = (function(engine){
 	var players = {},
-		count = 0,
+		count = 0
+		Emitter = require('events').EventEmitter,
 
 	get = function(id){
 		return players[id];
@@ -10,9 +11,14 @@ module.exports = (function(engine){
 		players[id] = {
 			id:		id,
 			socket:	data.socket,
-			rooms:	data.rooms || []
+			rooms:	data.rooms || [],
+			events:	new Emitter
 		};
 	};
+	
+	//	Currently mapping directly,
+	//	but these should be wrapped and return methods
+	//	to maintain the (currently nonexistent) chain.
 
 	return {
 		players:players,
