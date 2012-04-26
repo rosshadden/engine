@@ -6,11 +6,22 @@ define(function(){
 	$events = $(events),
 	
 	on = function(){
-		$events.on.apply($events, arguments);
+		var args = Array.prototype.slice.call(arguments);
+		
+		switch(args[0]){
+			case 'click':
+				var $asdf = $(document);
+				$asdf.on.apply($asdf, args);
+				break;
+			
+			default:
+				$events.on.apply($events, args);
+		}
 	},
 	
 	emit = function(){
-		$events.trigger.apply($events, arguments);
+		var args = Array.prototype.slice.call(arguments);
+		$events.trigger.apply($events, args);
 	};
 	
 	return {

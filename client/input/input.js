@@ -1,6 +1,6 @@
-define(['engine/input/keyboard'],function(keyboard){
+define(['engine/input/keyboard', 'engine/input/mouse'], function(keyboard, mouse){
 	return {
 		keyboard:	keyboard,
-		mouse:		{}
+		mouse:		mouse
 	};
 });

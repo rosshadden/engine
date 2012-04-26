@@ -20,6 +20,11 @@ define(function(){
 		};
 	},
 	
+	setPosition = function(position){
+		x = position.x;
+		y = position.y;
+	},
+	
 	getPosition = function(){
 		return {
 			x:	x,
@@ -62,6 +67,7 @@ define(function(){
 	return {
 		setDimensions:	setDimensions,
 		getDimensions:	getDimensions,
+		setPosition:	setPosition,
 		getPosition:	getPosition,
 		move:			move,
 		moveBy:			moveBy,

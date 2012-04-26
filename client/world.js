@@ -1,7 +1,8 @@
 define(['engine/draw'], function(draw){
     var	_numEntities = 0,
 		entities = {},
-		
+	
+	//TODO:	Make this configurable.
 	cell = {
 		width:	25,
 		height:	25

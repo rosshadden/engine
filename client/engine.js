@@ -113,7 +113,8 @@ define(['engine/world', 'engine/draw', 'engine/viewport', 'engine/resources', 'e
 			},
 			start:		start,
 			end:		end,
-			deferred:	deferred.promise()
+			deferred:	deferred.promise(),
+			viewport:	viewport
 		};
 	};
 	
