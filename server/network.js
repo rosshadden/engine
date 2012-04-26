@@ -1,7 +1,8 @@
 var network = function(engine){
 	engine.app.io = engine.app.io || require('socket.io').listen(app);
 	
-	var parseCookie = require('connect').utils.parseCookie,
+	var self = this,
+		parseCookie = require('connect').utils.parseCookie,
 		Session = require('connect').middleware.session.Session,
 	
 		emitter = engine.events.emitter,
@@ -75,10 +76,14 @@ var network = function(engine){
 		emitter.emit('scope', function(socket){
 			socket.on(event, handler);
 		});
+		
+		return self.methods;
 	},
 	
 	emit = function(event, data){
 		engine.app.io.sockets.emit(event, data);
+		
+		return self.methods;
 	},
 	
 	inRoom = function(room){
@@ -156,12 +161,14 @@ var network = function(engine){
 		return methods;
 	};
 	
-	return {
+	self.methods = {
 		on:		on,
 		emit:	emit,
 		'in':	inRoom,
 		'with':	withPlayer
 	};
+	
+	return self.methods;
 };
 
 module.exports = network;
