@@ -1,5 +1,5 @@
 var network = function(engine){
-	engine.app.io = engine.app.io || require('socket.io').listen(app);
+	engine.app.io = engine.app.io || require('socket.io').listen(engine.app);
 	
 	var self = this,
 		parseCookie = require('connect').utils.parseCookie,
