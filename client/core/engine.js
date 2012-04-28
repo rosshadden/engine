@@ -11,7 +11,7 @@ define(['./query'], function(query){
 	engine._modules = {};
 	
 	engine.ready = function(handler){
-		engine.listener('load', hanlder);
+		engine.listener('load', handler);
 	};
 	
 	engine.listener = function(event, handler, context){
