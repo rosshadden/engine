@@ -1,14 +1,16 @@
-define(['./query'], function(query){
+define(['./query', './component', './entity'], function(query, component, entity){
 	var engine = function(selector){
 		return new engine.query(selector);
 	};
 	
 	engine.query = query(engine);
+	component(engine);
+	entity(engine);
 	
 	engine.version = '0.0.1';
 	
-	engine._entities = [];
-	engine._modules = {};
+	engine._e = [];
+	engine._c = {};
 	
 	engine.ready = function(handler){
 		engine.listener('load', handler);

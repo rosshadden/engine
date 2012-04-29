@@ -12,7 +12,7 @@ define(function(){
 			//convert to object
 			var temp = search.split(' '),
 				id = '',
-				components = [],
+				comps = [],
 				events = [],
 				minus = [];
 			
@@ -29,13 +29,13 @@ define(function(){
 				}else if(fl === '#'){
 			 		id = value;
 				}else{
-			 		components.push(temp[j]);
+			 		comps.push(temp[j]);
 				}
 			}
 			
 			return query.c[search] = {
 				id:		id,
-				comp:	components,
+				comp:	comps,
 				on:		events,
 				not:	minus
 			};
@@ -48,13 +48,13 @@ define(function(){
 		methods.query = function(select){
 			select = select || '';
 			
-			var length = engine._entities.length, i = -1, entity;
+			var length = engine._e.length, i = -1, entity;
 			
 			if(engine.is(select, 'string')){
 				
 				if(select == '*'){
 			 		
-			 		this.push.apply(this, engine._entities.slice());
+			 		this.push.apply(this, engine._e.slice());
 			 		
 			 		return this;
 				}
@@ -62,12 +62,12 @@ define(function(){
 				//optimize search and cache
 				var obj = query._toObj(select);
 				
-				while(++i < length && (entity = engine._entities[i])){
+				while(++i < length && (entity = engine._e[i])){
 			 		if(entity.has(obj)) this.push(entity);
 				}
 				
 			}else if(engine.is(select, 'function')){
-				while(++i < length && (entity = engine._entities[i])){
+				while(++i < length && (entity = engine._e[i])){
 			 	  if(select.call(entity, i, length)) this.push(entity);
 				}
 			}else if(engine.is(select, 'array')){
@@ -93,11 +93,11 @@ define(function(){
 		  return this;
 		};
 		
-		methods.components = function(){
+		methods.comps = function(){
 			var list = [];
 			
 			this.each(function(entity){
-				var k = entity.components();
+				var k = entity.comps();
 				for(var i=0; i<k.length; i++){
 					if(list.indexOf(k[i]) == -1){
 						list.push(k[i])
