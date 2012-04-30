@@ -1,11 +1,7 @@
-define(['./query', './component', './entity'], function(query, component, entity){
+define(['./query', './component', './entity', './load', './system'], function(query, component, entity, load, system){
 	var engine = function(selector){
 		return new engine.query(selector);
 	};
-	
-	engine.query = query(engine);
-	component(engine);
-	entity(engine);
 	
 	engine.version = '0.0.1';
 	
@@ -29,6 +25,12 @@ define(['./query', './component', './entity'], function(query, component, entity
 		
 		return typeof object === type || type === Object.prototype.toString.call(object).slice(8, -1).toLowerCase();
 	};
+	
+	engine.query = query(engine);
+	component(engine);
+	entity(engine);
+	system(engine);
+	load(engine);
 
 	return engine;
 });
