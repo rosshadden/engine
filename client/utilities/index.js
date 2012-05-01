@@ -1,7 +1,8 @@
 define(['./log', './scene', './sheet', './support', './polyfill'], function(log, scene, sheet, support, polyfill){
 	return function(engine){
-		scene(engine);
 		polyfill(engine);
+		
+		engine.scene = scene(engine);
 	
 		return {
 			log:	log,
