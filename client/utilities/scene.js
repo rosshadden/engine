@@ -44,7 +44,7 @@ define(function(){
 
 		engine.c('scene')
 		.statics({
-			_scenes:{}
+			_scenes:	{}
 		})
 		.init(function(c, title){
 			c._scenes[title] = this;
@@ -55,16 +55,18 @@ define(function(){
 		})
 		.defines({
 			enter:	function(title){
+				var args = Array.prototype.slice.call(arguments);
+				
 				if(!engine.is(title, 'function')){
 					if(engine.scene.current){
 						engine.scene().exit();
 					}
 
 					//set current scene
-					engine.scene.current = this.sceneName
+					engine.scene.current = this.sceneName;
 
 					if(this.scene_enter){
-						this.scene_enter.apply(this, arguments);
+						this.scene_enter.apply(this, args);
 					}
 				}else{
 					//set new enter method
@@ -75,11 +77,13 @@ define(function(){
 			},
 
 			exit:	function(m){
+				var args = Array.prototype.slice.call(arguments);
+				
 				if(!engine.is(m, 'function')){
 					engine.scene.current = '';
 
 					if(this.scene_exit){
-						this.scene_exit.apply(this, arguments);
+						this.scene_exit.apply(this, args);
 					}
 				}else{
 					this.scene_exit = m;
