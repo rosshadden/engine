@@ -8,16 +8,14 @@ define(function(){
 			//	create scene
 			scene('game')
 			.enter(function(data){
-				
 				//	remove all 2d elements
 				engine('2d').dispose();
 				
 				loadLevel(data.level);
-				
 			});
 
 			//	go to scene
-			scene('game').enter({tiles:[]} );
+			scene('game').enter({tiles:[]});
 
 			*warning- bad idea passing in functions as the first argument
 

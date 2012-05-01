@@ -243,7 +243,8 @@ define(function(){
 			return this;
 		};
 		
-		engine.load = b;
-		engine.load.init = l;
+		b.init = l;
+		
+		return b;
 	};
 });

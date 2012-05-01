@@ -28,9 +28,9 @@ define(['./query', './component', './entity', './load', './system'], function(qu
 	
 	engine.query = query(engine);
 	component(engine);
-	entity(engine);
+	engine.entity = engine.e = entity(engine);
 	system(engine);
-	load(engine);
+	engine.load = load(engine);
 
 	return engine;
 });

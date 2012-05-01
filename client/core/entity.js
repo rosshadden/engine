@@ -501,8 +501,8 @@ define(function(){
 		    return this;
 		}
 		
-		engine.entity = engine.e = q;
-		engine.entity.init = e;
+		q.init = e;
 		
+		return q;
 	};
 });
