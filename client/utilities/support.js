@@ -1,5 +1,4 @@
 define(function(){
-	return function(engine){
 		/*
 			The support component contains information about supported 
 			functionality of the browser.
@@ -33,7 +32,7 @@ define(function(){
 			worker
 			webgl
 		*/
-		var support = engine.support = function(s){
+		var support = function(s){
 			var args = Array.prototype.slice.call(arguments);
 			
 			if(args.length > 1){
@@ -42,7 +41,7 @@ define(function(){
 				for(var i = 0; i < args.length; i++){
 					d = args[i];
 					
-					if(engine.support(d)){
+					if(support(d)){
 						return d;
 					}
 				}
@@ -56,7 +55,7 @@ define(function(){
 
 			//	check multiple supports
 			for(var j in k){
-				stat = stat && !!engine.support[k[j]];
+				stat = stat && !!support[k[j]];
 			}
 
 			return stat;
@@ -101,5 +100,6 @@ define(function(){
 		support.webgl = !!window.WebGLRenderingContext;
 
 		support.touch = 'ontouchstart' in window;
-	};
+	
+	return support;
 });
