@@ -4,15 +4,15 @@ define(function(){
 			The support component contains information about supported 
 			functionality of the browser.
 
-			//returns true if canvas AND text is supported
+			//	returns true if canvas AND text is supported
 			if(engine.support('canvas text')){
-				//supports
+				//	supports
 			}
 
-			//checks all arguments and returns first thing thats supported
+			//	checks all arguments and returns first thing thats supported
 			engine.support('ogg', 'aac', 'mp3', 'wav');
 
-			//find first supported storage storage
+			//	find first supported storage storage
 			engine.support('database', 'localstorage');
 
 			this is helpful to find a supported codec or a storage component
@@ -37,7 +37,7 @@ define(function(){
 			var args = Array.prototype.slice.call(arguments);
 			
 			if(args.length > 1){
-				//find first supported arg and return
+				//	find first supported arg and return
 				var d;
 				for(var i = 0; i < args.length; i++){
 					d = args[i];
@@ -50,11 +50,11 @@ define(function(){
 				return false;
 			}
 
-			//find if supported
+			//	find if supported
 			var k = s.split(' '),
 				stat = true;
 
-			//check multiple supports
+			//	check multiple supports
 			for(var j in k){
 				stat = stat && !!engine.support[k[j]];
 			}
@@ -62,13 +62,13 @@ define(function(){
 			return stat;
 		};
 
-		//check canvas support
+		//	check canvas support
 		support.canvas = !!document.createElement('canvas').getContext;
 
-		//check for text support
+		//	check for text support
 		support.text = !!(support.canvas && typeof document.createElement('canvas').getContext('2d').fillText === 'function');
 
-		//check audio support
+		//	check audio support
 		var element = document.createElement('audio');
 
 		try{
@@ -78,7 +78,7 @@ define(function(){
 				support.wav = element.canPlayType('audio/wav; codecs="1"');
 				support.aac = element.canPlayType('audio/x-m4a;') || element.canPlayType('audio/aac;');
 
-				//switch unsupported codecs to false
+				//	switch unsupported codecs to false
 				for(var i in support){
 					if(support[i] === 'no' || support[i] === ''){
 						support[i] = false;
@@ -87,17 +87,17 @@ define(function(){
 			}
 		}catch(e){}
 
-		//check local storage
+		//	check local storage
 		try{
 			support.localstorage = !!localStorage.getItem;
 		}catch(e){
 			support.localstorage = false;
 		}
 
-		//check web worker
+		//	check web worker
 		support.worker = !!window.Worker;
 
-		//check webgl
+		//	check webgl
 		support.webgl = !!window.WebGLRenderingContext;
 
 		support.touch = 'ontouchstart' in window;

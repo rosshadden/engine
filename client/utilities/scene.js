@@ -5,23 +5,23 @@ define(function(){
 
 			Scenes are a helpful way to organize stages of a game.
 
-			//create scene
+			//	create scene
 			engine.scene('game')
 			.enter(function(data){
 				
-				//remove all 2d elements
+				//	remove all 2d elements
 				engine('2d').dispose();
 				
 				loadLevel(data.level);
 				
 			});
 
-			//go to scene
+			//	go to scene
 			engine.scene('game').enter({tiles:[]} );
 
 			*warning- bad idea passing in functions as the first argument
 
-			//create manually
+			//	create manually
 			engine.e('scene:game')
 			.enter(function(){
 			  
@@ -35,7 +35,7 @@ define(function(){
 			}
 
 			if(!s._scenes[title]){
-				//add scene
+				//	add scene
 				engine.e('scene:'+title);
 			}
 
@@ -62,14 +62,14 @@ define(function(){
 						engine.scene().exit();
 					}
 
-					//set current scene
+					//	set current scene
 					engine.scene.current = this.sceneName;
 
 					if(this.scene_enter){
 						this.scene_enter.apply(this, args);
 					}
 				}else{
-					//set new enter method
+					//	set new enter method
 					this.scene_enter = title;
 				}
 

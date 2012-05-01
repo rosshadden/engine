@@ -8,7 +8,7 @@ define(function(){
 			}
 		})
 		.run(function(){
-			//setup requestanimationframe on support
+			//	setup requestanimationframe on support
 			window.requestAnimFrame = 
 				window.requestAnimationFrame
 			||	window.webkitRequestAnimationFrame
