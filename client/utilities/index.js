@@ -1,6 +1,7 @@
-define(['./log', './scene'], function(log, scene){
+define(['./log', './scene', './polyfill'], function(log, scene, polyfill){
 	return function(engine){
 		scene(engine);
+		polyfill(engine);
 	
 		return {
 			log:	log

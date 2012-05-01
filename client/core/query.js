@@ -51,9 +51,7 @@ define(function(){
 			var length = engine._e.length, i = -1, entity;
 			
 			if(engine.is(select, 'string')){
-				
 				if(select == '*'){
-			 		
 			 		this.push.apply(this, engine._e.slice());
 			 		
 			 		return this;
@@ -65,13 +63,12 @@ define(function(){
 				while(++i < length && (entity = engine._e[i])){
 			 		if(entity.has(obj)) this.push(entity);
 				}
-				
 			}else if(engine.is(select, 'function')){
 				while(++i < length && (entity = engine._e[i])){
-			 	  if(select.call(entity, i, length)) this.push(entity);
+					if(select.call(entity, i, length)) this.push(entity);
 				}
 			}else if(engine.is(select, 'array')){
-			  this.push.apply(this, select);
+				this.push.apply(this, select);
 			}
 			
 			return this;
@@ -79,6 +76,7 @@ define(function(){
 		
 		methods.invoke = function(m){
 			var args = Array.prototype.slice.call(arguments, 1);
+			
 			return this.each(function(entity){
 				entity[m].apply(entity, args);
 			});
