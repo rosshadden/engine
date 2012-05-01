@@ -1,7 +1,7 @@
 define(function(){
 	return function(engine){
 		//	The sheet component converts a each frame of a sprite sheet into their own components.
-		engine.sheet = function(map, components, sizeX, sizeY){
+		return function(map, components, sizeX, sizeY){
 			var frameWidth = sizeX || engine.tile.sizeX,
 				frameHeight = sizeY || engine.tile.sizeY;
 			
