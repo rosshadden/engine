@@ -48,10 +48,12 @@ define(function(){
 		methods.query = function(select){
 			select = select || '';
 			
-			var length = engine._e.length, i = -1, entity;
+			var entity,
+				i = -1,
+				length = engine._e.length;
 			
 			if(engine.is(select, 'string')){
-				if(select == '*'){
+				if(select === '*'){
 			 		this.push.apply(this, engine._e.slice());
 			 		
 			 		return this;
@@ -61,11 +63,15 @@ define(function(){
 				var obj = query._toObj(select);
 				
 				while(++i < length && (entity = engine._e[i])){
-			 		if(entity.has(obj)) this.push(entity);
+			 		if(entity.has(obj)){
+						this.push(entity);
+					}
 				}
 			}else if(engine.is(select, 'function')){
 				while(++i < length && (entity = engine._e[i])){
-					if(select.call(entity, i, length)) this.push(entity);
+					if(select.call(entity, i, length)){
+						this.push(entity);
+					}
 				}
 			}else if(engine.is(select, 'array')){
 				this.push.apply(this, select);
@@ -96,8 +102,8 @@ define(function(){
 			
 			this.each(function(entity){
 				var k = entity.comps();
-				for(var i=0; i<k.length; i++){
-					if(list.indexOf(k[i]) == -1){
+				for(var i = 0; i < k.length; i++){
+					if(!~list.indexOf(k[i])){
 						list.push(k[i])
 					}
 				}
@@ -107,21 +113,19 @@ define(function(){
 		};
 		
 		methods.attr = function(obj, value){
-		  return this.invoke('attr', obj, value);
-			
+			return this.invoke('attr', obj, value);
 		}
 		
 		methods.def = function(obj, value){
-		  return this.invoke('def', obj, value);
+			return this.invoke('def', obj, value);
 		}
 		
 		methods.comp = function(c){
-		  return this.invoke('comp', c);
-			
+			return this.invoke('comp', c);
 		}
 		
 		methods.removeComp = function(c){
-		  return this.invoke('removeComp', c);
+			return this.invoke('removeComp', c);
 		};
 		
 		methods.on = function(event, method){
@@ -129,26 +133,31 @@ define(function(){
 		};
 		
 		methods.off = function(event, method){
-		  return this.invoke('off', event, method);
+			return this.invoke('off', event, method);
 		};
 		
 		methods.trigger = function(){
 			var args = Array.prototype.slice.call(arguments);
+			
 			return this.each(function(entity){
 				entity.trigger.apply(entity, args);
 			});
 		};
 		
 		methods.has = function(component){
-		  //return false if empty
-		  if(!this.length) return false;
+			//	return false if empty
+			if(!this.length){
+				return false;
+			}
+			
 			return this.every(function(entity){
-			  return entity.has(component);
+				return entity.has(component);
 			});
 		};
 		
 		methods.entity = function(components, count){
 			var entity = engine.entity(components, count);
+			
 			if(count){
 				for(var i in entity){
 					this.push(entity[i]);
@@ -158,7 +167,7 @@ define(function(){
 			}
 
 			return this;
-		}
+		};
 		
 		return query;
 	};
