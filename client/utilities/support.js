@@ -4,21 +4,21 @@ define(function(){
 		functionality of the browser.
 
 		//	returns true if canvas AND text is supported
-		if(engine.support('canvas text')){
+		if(rage.support('canvas text')){
 			//	supports
 		}
 
 		//	checks all arguments and returns first thing thats supported
-		engine.support('ogg', 'aac', 'mp3', 'wav');
+		rage.support('ogg', 'aac', 'mp3', 'wav');
 
 		//	find first supported storage storage
-		engine.support('database', 'localstorage');
+		rage.support('database', 'localstorage');
 
 		this is helpful to find a supported codec or a storage component
 
 		or add to entity
 
-		engine.e('support').support('canvas');
+		rage.e('support').support('canvas');
 
 		---- possible support checks
 		canvas

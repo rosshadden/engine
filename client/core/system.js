@@ -1,7 +1,7 @@
 define(function(){
-	return function(engine){
+	return function(rage){
 		/*
-			The system component contains all information and references to the entity js engine.
+			The system component contains all information and references to the entity js rage.
 			Such as the canvas context, fps, start, stop, canvas.
 
 			You can add the component to entities for quick reference to variables.
@@ -10,7 +10,7 @@ define(function(){
 			-add entity definess to allow local usage.
 			-perhaps allow users to override the system class for their own custom usage. (new arrays of entities and components)
 		*/
-		engine.c('system')
+		rage.c('system')
 		.defaults({
 			clearColor:	'#f9f9f9',
 		
@@ -68,28 +68,28 @@ define(function(){
 				this.comp('polyfill tick timestep');
 				
 				//	setup canvas
-				if(engine.is(canvasId, 'htmlcanvaselement')){
+				if(rage.is(canvasId, 'htmlcanvaselement')){
 					this.canvas = canvasId;
 				}else{
-					this.canvas = engine.$(canvasId);
+					this.canvas = rage.$(canvasId);
 				}
 				
 				this.context = this.canvas.getContext(contextType || '2d');
 				
-				var s = engine.screen = engine.e('screen');
+				var s = rage.screen = rage.e('screen');
 				
 				this.sizeX = s.sizeX = this.canvas.width;
 				this.sizeY = s.sizeY = this.canvas.height;
 				
 				//	init listeners
-				if(engine._c.keyboard){
-					engine._c.keyboard.i();
+				if(rage._c.keyboard){
+					rage._c.keyboard.i();
 				}
-				if(engine._c.mouse){
-					engine._c.mouse.i();
+				if(rage._c.mouse){
+					rage._c.mouse.i();
 				}
-				if(engine._c.touch){
-					engine._c.touch.i();
+				if(rage._c.touch){
+					rage._c.touch.i();
 				}
 				this.system_loop = this.defaultLoop;
 				this.second = this.stepSize * 30;
@@ -110,17 +110,17 @@ define(function(){
 			},
 		
 			update:function(){
-				engine._c.update.update(this.stepSize);
+				rage._c.update.update(this.stepSize);
 			},
 		
 			draw:function(){
 				//	renders default drawlist
-				engine.drawlist().drawlist(this.context);
+				rage.drawlist().drawlist(this.context);
 			}
 		})
 		.run(function(){
 			//	create default system
-			engine.system = engine.sys = engine.e('system');
+			rage.system = rage.sys = rage.e('system');
 		});
 	};
 });

@@ -1,17 +1,17 @@
 define(['./log', './scene', './sheet', './support', './polyfill'], function(log, scene, sheet, support, polyfill){
-	return function(engine){
+	return function(rage){
 		//	These just need to be run.
-		polyfill(engine);
+		polyfill(rage);
 		
-		//	These need to be mapped to engine.
+		//	These need to be mapped to rage.
 		//	I like the responsibility being here,
 		//	rather than inside the individual modules.
-		engine.scene = scene(engine);
+		rage.scene = scene(rage);
 		
-		//	These will be accessible under engine.utilities.
+		//	These will be accessible under rage.utilities.
 		return {
 			log:	log,
-			sheet:	sheet(engine),
+			sheet:	sheet(rage),
 			support:support
 		};
 	};
