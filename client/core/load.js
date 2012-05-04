@@ -1,7 +1,7 @@
 define(function(){
-	return function(rage){
+	return function(engine){
 		var b = function(assets){
-			return new rage.load.init(assets);	
+			return new engine.load.init(assets);	
 		};
 		
 		b.path = "";
@@ -17,17 +17,17 @@ define(function(){
 			All loaded assets will be put into a component with a ref to the asset.
 		
 			//	example of loading assets
-			rage.load('tiles.png add.js attack.mp3')
+			engine.load('tiles.png add.js attack.mp3')
 			.complete(function(arrayOfAssets){
 				//	create new bitmap of tiles.png
-				rage.e('bitmap tiles.png');
+				engine.e('bitmap tiles.png');
 				
 				//	new sound
-				rage.e('sound attack.mp3');
+				engine.e('sound attack.mp3');
 				
 				//	access image staticaly or localy
-				rage.comp('tiles.png').image;
-				rage.entity('tiles.png').image;
+				engine.comp('tiles.png').image;
+				engine.entity('tiles.png').image;
 			})
 			.error(function(assetThatCausedError){
 				//	error
@@ -40,18 +40,18 @@ define(function(){
 		
 			//	load sound
 		
-			//	rage.support will return the supported codec
-			rage.load('run.' + rage.support('ogg', 'aac'));
+			//	engine.support will return the supported codec
+			engine.load('run.' + engine.support('ogg', 'aac'));
 		
 			FUTURE remove directories from calls
 		*/
 		var l = function(assets){
-			if(rage.is(assets,'string')){
+			if(engine.is(assets,'string')){
 				this.assets = assets.split(' ');
-			}else if(rage.is(assets,'object')){
+			}else if(engine.is(assets,'object')){
 				this.assets = [];
 				for(var i in assets){
-					if(rage.is(assets[i], 'array')){
+					if(engine.is(assets[i], 'array')){
 						this.assets = this.assets.concat(assets[i]);
 					}
 				}
@@ -81,13 +81,13 @@ define(function(){
 			    //	find name
 			    var n = a.substr(0, j);
 			    
-			    if(rage.load.images.indexOf(ext) != -1){ //	make sure image is allowed
+			    if(engine.load.images.indexOf(ext) != -1){ //	make sure image is allowed
 					this._loadImg(s, a, n);
-				}else if(rage.load.sounds.indexOf(ext) != -1){ //	make sure sound is allowed
+				}else if(engine.load.sounds.indexOf(ext) != -1){ //	make sure sound is allowed
 					//	soundmanager only supports mp3, so use it if the sound is mp3
-					if(window['soundManager'] && ext == 'mp3' || rage.support(ext)){
+					if(window['soundManager'] && ext == 'mp3' || engine.support(ext)){
 						//	don't load the same sound twice
-						if(rage._c[n + rage.load.soundExt]){ 
+						if(engine._c[n + engine.load.soundExt]){ 
 						//	remove from array
 							this.total--;
 							continue;
@@ -115,8 +115,8 @@ define(function(){
 			var img = new Image();
 			
 			//	create new image component
-			rage.c(a)
-			.alias(n + rage.load.imageExt)
+			engine.c(a)
+			.alias(n + engine.load.imageExt)
 			.statics({
 			    image:img
 			})
@@ -126,7 +126,7 @@ define(function(){
 			});
 			
 			img.onload = function(){
-				rage.c(a).defines({
+				engine.c(a).defines({
 					sizeX:img.width,
 					sizeY:img.height,
 					bisect:img.width
@@ -142,7 +142,7 @@ define(function(){
 			    }
 			};
 			
-			img.src = rage.load.path + src;
+			img.src = engine.load.path + src;
 			
 			return this;
 		};
@@ -175,7 +175,7 @@ define(function(){
 				soundManager.onready(function(){
 					s = soundManager.createSound({
 						id:			a,
-						url:		rage.load.path + src,
+						url:		engine.load.path + src,
 						autoLoad:	true,
 						onload:		function(){
 							that._loaded();
@@ -185,8 +185,8 @@ define(function(){
 					that._def_sfx(s, a, n);
 				});
 			}else{
-				s = new Audio(rage.load.path + src);
-				s.src = rage.load.path + src;
+				s = new Audio(engine.load.path + src);
+				s.src = engine.load.path + src;
 				s.preload = "auto";
 				s.load();
 
@@ -210,9 +210,9 @@ define(function(){
 		};
 		
 		p._def_sfx = function(s, a, n){
-			rage.c(a)
+			engine.c(a)
 			//	create statics codec for easy use
-			.alias(n + rage.load.soundExt)
+			.alias(n + engine.load.soundExt)
 			.statics({
 				sound:	s
 			})

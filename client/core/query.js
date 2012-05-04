@@ -1,5 +1,5 @@
 define(function(){
-	return function(rage){
+	return function(engine){
 		var query = function(selector){
 			this.query(selector);
 		}
@@ -48,11 +48,11 @@ define(function(){
 		methods.query = function(select){
 			select = select || '';
 			
-			var length = rage._e.length, i = -1, entity;
+			var length = engine._e.length, i = -1, entity;
 			
-			if(rage.is(select, 'string')){
+			if(engine.is(select, 'string')){
 				if(select == '*'){
-			 		this.push.apply(this, rage._e.slice());
+			 		this.push.apply(this, engine._e.slice());
 			 		
 			 		return this;
 				}
@@ -60,14 +60,14 @@ define(function(){
 				//optimize search and cache
 				var obj = query._toObj(select);
 				
-				while(++i < length && (entity = rage._e[i])){
+				while(++i < length && (entity = engine._e[i])){
 			 		if(entity.has(obj)) this.push(entity);
 				}
-			}else if(rage.is(select, 'function')){
-				while(++i < length && (entity = rage._e[i])){
+			}else if(engine.is(select, 'function')){
+				while(++i < length && (entity = engine._e[i])){
 					if(select.call(entity, i, length)) this.push(entity);
 				}
-			}else if(rage.is(select, 'array')){
+			}else if(engine.is(select, 'array')){
 				this.push.apply(this, select);
 			}
 			
@@ -148,7 +148,7 @@ define(function(){
 		};
 		
 		methods.entity = function(components, count){
-			var entity = rage.entity(components, count);
+			var entity = engine.entity(components, count);
 			if(count){
 				for(var i in entity){
 					this.push(entity[i]);

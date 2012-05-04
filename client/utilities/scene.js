@@ -1,5 +1,5 @@
 define(function(){
-	return function(rage){
+	return function(engine){
 		/*
 			Goes to an other scene in the game. This calls the scene method with a possible object argument.
 
@@ -9,7 +9,7 @@ define(function(){
 			scene('game')
 			.enter(function(data){
 				//	remove all 2d elements
-				rage('2d').dispose();
+				engine('2d').dispose();
 				
 				loadLevel(data.level);
 			});
@@ -20,27 +20,27 @@ define(function(){
 			*warning- bad idea passing in functions as the first argument
 
 			//	create manually
-			rage.e('scene:game')
+			engine.e('scene:game')
 			.enter(function(){
 			  
 			})
 		*/
 		var scene = function(title){
-			var s = rage.c('scene');
+			var s = engine.c('scene');
 
-			if(!rage.is(title)){
+			if(!engine.is(title)){
 				return s._scenes[scene.current];
 			}
 
 			if(!s._scenes[title]){
 				//	add scene
-				rage.e('scene:'+title);
+				engine.e('scene:'+title);
 			}
 
 			return s._scenes[title];
 		};
 
-		rage.c('scene')
+		engine.c('scene')
 		.statics({
 			_scenes:	{}
 		})
@@ -55,7 +55,7 @@ define(function(){
 			enter:	function(title){
 				var args = Array.prototype.slice.call(arguments);
 				
-				if(!rage.is(title, 'function')){
+				if(!engine.is(title, 'function')){
 					if(scene.current){
 						scene().exit();
 					}
@@ -77,7 +77,7 @@ define(function(){
 			exit:	function(m){
 				var args = Array.prototype.slice.call(arguments);
 				
-				if(!rage.is(m, 'function')){
+				if(!engine.is(m, 'function')){
 					scene.current = '';
 
 					if(this.scene_exit){

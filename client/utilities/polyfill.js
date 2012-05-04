@@ -1,7 +1,7 @@
 define(function(){
-	return function(rage){
+	return function(engine){
 		//	The polyfill component polyfills unsupported HTML5 functions when possible.
-		rage.c('polyfill')
+		engine.c('polyfill')
 		.defines({
 			requestAnimationFrame:	function(callback, canvas){
 				return requestAnimFrame(callback, canvas);

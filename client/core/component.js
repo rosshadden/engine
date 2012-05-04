@@ -1,5 +1,5 @@
 define(function(){
-	return function(rage){
+	return function(engine){
 		//	Quick way to convert sentences to arrays.
 		var __toArray = function(n, r){
 			this._checkFinal();
@@ -8,7 +8,7 @@ define(function(){
 			    this[n] = [];
 			}
 			
-			if(rage.is(r, 'string')){
+			if(engine.is(r, 'string')){
 			    this[n] = this[n].concat(r.split(' '));
 			}else{
 			    this[n] = this[n].concat(r);
@@ -17,15 +17,15 @@ define(function(){
 			return this;
 		};
 	
-		rage.comp = rage.c = function(title){
-			if(!rage._c[title]){
-			    rage._c[title] = new rage.c.init(title);
+		engine.comp = engine.c = function(title){
+			if(!engine._c[title]){
+			    engine._c[title] = new engine.c.init(title);
 			}
 			
-			return rage._c[title];
+			return engine._c[title];
 		};
 	
-		rage.c.init = function(name){
+		engine.c.init = function(name){
 			this.name = name;
 			this._re_signals = {};
 			this._re_inherits = {};
@@ -34,7 +34,7 @@ define(function(){
 			this._re_final = false;
 		};
 	
-		rage.c.init.prototype = {
+		engine.c.init.prototype = {
 			_checkFinal:function(){
 				if(this._re_final){
 				    throw this.name+' is final.';
@@ -44,7 +44,7 @@ define(function(){
 			statics:function(obj, value){
 				this._checkFinal();
 				
-				if(!rage.is(value)){
+				if(!engine.is(value)){
 				    for(var type in obj){
 				        this[type] = obj[type];    
 				    }
@@ -58,7 +58,7 @@ define(function(){
 			events:function(obj, value){
 			  this._checkFinal();
 			  
-			  if(!rage.is(value)){
+			  if(!engine.is(value)){
 				  for(var type in obj){
 				      this._re_events[type] = obj[type];    
 				  }
@@ -92,7 +92,7 @@ define(function(){
 			runtime errors and save time.
 		
 			//reccommended to put an i infront to represent an interface
-			rage.c('ienemy')
+			engine.c('ienemy')
 			//create an enemy interface
 			.interface('moveTo spawn attack runAway');
 		
@@ -105,18 +105,18 @@ define(function(){
 			Creates new names for a component.
 		
 			//create a new alias of draw
-			rage.c('draw')
+			engine.c('draw')
 			.alias('bob');
 		
 			//remove alias
-			rage.c('draw')
+			engine.c('draw')
 			.alias('-bob');
 		
 			//aliases can even delete components itself
-			rage.c('draw').alias('-draw');
+			engine.c('draw').alias('-draw');
 		
 			//add two aliases
-			rage.c('draw').alias('dr bob');
+			engine.c('draw').alias('dr bob');
 		
 			*/
 			alias:function(s){
@@ -134,11 +134,11 @@ define(function(){
 				
 				if(s.charAt(0) == '-'){
 				    //only remove if its a reference
-				    if(rage._c[s.substr(1)] == this){
-				        delete rage._c[s.substr(1)];
+				    if(engine._c[s.substr(1)] == this){
+				        delete engine._c[s.substr(1)];
 				    }
 				}else{
-				    rage._c[s] = this;
+				    engine._c[s] = this;
 				}
 				
 				return this;
@@ -155,15 +155,15 @@ define(function(){
 		
 			*/
 			on:function(){
-				return rage.e.init.prototype.on.apply(this, arguments);
+				return engine.e.init.prototype.on.apply(this, arguments);
 			},
 		
 			off:function(){
-				return rage.e.init.prototype.off.apply(this, arguments);
+				return engine.e.init.prototype.off.apply(this, arguments);
 			},
 		
 			trigger:function(){
-			  return rage.e.init.prototype.trigger.apply(this, arguments);
+			  return engine.e.init.prototype.trigger.apply(this, arguments);
 			},
 		
 			/*
@@ -187,14 +187,14 @@ define(function(){
 			The namespace method is used to put private component variables
 			in its own space. This prevents unwanted overrites.
 		
-			rage.c('draw')
+			engine.c('draw')
 			.namespace({
 				pos:0,
 				type:'none'
 			});
 		
 			//or
-			rage.c('draw')
+			engine.c('draw')
 			.namespace("pos", 0);
 		
 			//Will cast to 
