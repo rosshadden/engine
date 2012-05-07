@@ -1,4 +1,10 @@
-define(['./query', './component', './entity', './load', './system'], function(query, component, entity, load, system){
+define([
+	'./query',
+	'./component',
+	'./entity',
+	'./load',
+	'./system'
+], function(query, component, entity, load, system){
 	var engine = function(selector){
 		return new engine.query(selector);
 	};

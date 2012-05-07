@@ -1,4 +1,10 @@
-define(['./log', './scene', './sheet', './support', './polyfill'], function(log, scene, sheet, support, polyfill){
+define([
+	'./log',
+	'./scene',
+	'./sheet',
+	'./support',
+	'./polyfill'
+], function(log, scene, sheet, support, polyfill){
 	return function(engine){
 		//	These just need to be run.
 		polyfill(engine);
