@@ -255,34 +255,11 @@ define(function(){
 			});
 		*/
 		methods.min = function(method, context){
-			var val,
-				lowest = Infinity;
-			this.each(function(e, i, l){
-				var next = method.call(context || this, e, i, l);
-				
-				if(next < lowest){
-					lowest = next;
-					val = e;
-				}
-				
-			});
-			
-			return val;
+			return _.min(this, method, context || this);
 		};
 		
 		methods.max = function(method, context){
-			var val,
-				lowest = -Infinity;
-			this.each(function(e, i, l){
-				var next = method.call(context || this, e, i, l);
-				
-				if(next > lowest){
-					lowest = next;
-					val = e;
-				}
-			});
-			
-			return val;
+			return _.max(this, method, context || this);
 		};
 		
 		//	Without this, filter would return a normal array.
