@@ -137,10 +137,10 @@ define(function(){
 					e.preventDefault();
 				}
 			
-				for(var k=0; k<that.l.length; k++){
+				for(var k = 0; k < that.l.length; k++){
 					that.l[k]
 					.trigger(e.type, key, e)
-					.trigger(e.type+':	'+key, key, e);
+					.trigger(e.type + ':' + key, key, e);
 				}
 			},
 
