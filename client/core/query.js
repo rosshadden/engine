@@ -88,12 +88,21 @@ define(function(){
 		methods.invoke = function(m){
 			var args = Array.prototype.slice.call(arguments, 1);
 			
-			return this.each(function(entity){
-				entity[m].apply(entity, args);
-			});
+			if(typeof m === 'string'){
+				return this.each(function(entity){
+					entity[m].apply(entity, args);
+				});
+			}else{
+				_.invoke(this, m, args);
+				return this;
+			}
 		};
 		
-		methods.each = Array.prototype.forEach;
+		methods.each = function(m, context){
+			_.each(this, m, context || this);
+			
+			return this;
+		};
 		
 		/*
 			The map method allows multidimensional loops.
@@ -214,22 +223,7 @@ define(function(){
 			]
 		*/
 		methods.pluck = function(value){
-			var t = [],
-				k = value.split(' ');
-			
-			this.each(function(e){
-				var o = {};
-				
-				for(var p in k){
-				  var name = k[p];
-				  o[name] = e[name];
-				}
-				
-				t.push(o);
-				
-			});
-			
-			return t;
+			return _.pluck(this, value);
 		};
 		
 		methods.isEmpty = function(){

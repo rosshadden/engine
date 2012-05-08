@@ -4,8 +4,8 @@ define([
 	'./class'
 ], function(require, underscore, Base){
 	return {
-		_:			_,
 		require:	require,
+		_:			_,
 		Base:		Base
 	};
 });

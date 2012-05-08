@@ -1,4 +1,5 @@
 define([
+	'./lib/index',
 	'./core/engine',
 	'./cycle/index',
 	'./display/index',
@@ -7,9 +8,8 @@ define([
 	'./media/index',
 	'./pattern/index',
 	'./save/index',
-	'./utilities/index',
-	'./lib/index'
-], function(engine, cycle, display, input, math, media, pattern, save, utilities, lib){
+	'./utilities/index'
+], function(lib, engine, cycle, display, input, math, media, pattern, save, utilities){
 	cycle(engine);
 	display(engine);
 	input(engine);
