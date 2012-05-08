@@ -91,18 +91,9 @@ define(function(){
 			return this.each(function(entity){
 				entity[m].apply(entity, args);
 			});
-			
 		};
 		
-		methods.each = function(m, context){
-			var entity,
-				i = -1,
-				length = this.length;
-			
-			while(++i < length && (entity = this[i]) != null && m.call(context || this, entity, i, this));
-			
-			return this;
-		};
+		methods.each = Array.prototype.forEach;
 		
 		/*
 			The map method allows multidimensional loops.
@@ -386,8 +377,8 @@ define(function(){
 		};
 		
 		methods.dispose = function(){
-			return this.each(function(e){
-				e.dispose();
+			return this.each(function(entity){
+				entity.dispose();
 			});
 		};
 		
