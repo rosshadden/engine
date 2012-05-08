@@ -23,7 +23,7 @@ define(function(){
 			sizeY:		10
 		})
 		.defines({
-			clear:function(color){
+			clear:	function(color){
 				if(color){
 					this.context.fillStyle = color;
 					this.context.fillRect(0, 0, this.sizeX, this.sizeY);
@@ -34,7 +34,7 @@ define(function(){
 				return this;
 			},
 		
-			start:function(){
+			start:	function(){
 				if(!this.running){
 					this.running = true;
 					
@@ -51,19 +51,20 @@ define(function(){
 				return this;
 			},
 		
-			loop:function(m){
+			loop:	function(m){
 				this.system_loop = m;
 		
 				return this;
 			},
 		
-			stop:function(){
+			stop:	function(){
 				this.running = false;
+				
 				return this;
 			},
 		
 			//	scale is currently not implemented!
-			init:function(canvasId, contextType){
+			init:	function(canvasId, contextType){
 				//	add comps here because system is defined earlier than other comps
 				this.comp('polyfill tick timestep');
 				
@@ -85,12 +86,15 @@ define(function(){
 				if(engine._c.keyboard){
 					engine._c.keyboard.i();
 				}
+				
 				if(engine._c.mouse){
 					engine._c.mouse.i();
 				}
+				
 				if(engine._c.touch){
 					engine._c.touch.i();
 				}
+				
 				this.system_loop = this.defaultLoop;
 				this.second = this.stepSize * 30;
 				
@@ -98,7 +102,7 @@ define(function(){
 			},
 		
 			//	Default main loop
-			defaultLoop:function(){
+			defaultLoop:	function(){
 				this.timestep(Math.min(this.tick() / 1000, this.maxTick), function(){
 					//update
 					this.update();
@@ -109,11 +113,11 @@ define(function(){
 				this.draw();
 			},
 		
-			update:function(){
+			update:	function(){
 				engine._c.update.update(this.stepSize);
 			},
 		
-			draw:function(){
+			draw:	function(){
 				//	renders default drawlist
 				engine.drawlist().drawlist(this.context);
 			}

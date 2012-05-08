@@ -12,12 +12,13 @@ define(function(){
 			In a case of an isometric game, certain tiles should appear behind or in
 		*/
 		engine.drawlist = function(name){
-			var d = engine.c('drawlist'), name = name || '';
+			var d = engine.c('drawlist'),
+				name = name || '';
 
 			//	name default to '' and returns default drawlist
 			if(!d._lists[name]){
 				//	add new list
-				engine.e('drawlist:'+name);
+				engine.e('drawlist:' + name);
 			}
 
 			return d._lists[name];
@@ -51,7 +52,7 @@ define(function(){
 			drawlist:	function(c){
 				var lis = this.list;
 
-				for(var i=0, b; i<lis.length; i++){
+				for(var i = 0, b; i < lis.length; i++){
 					b = lis[i];
 					b.visible() && b.render(c);
 				}
