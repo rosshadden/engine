@@ -18,6 +18,18 @@ define([
 		engine.listener('load', handler);
 	};
 	
+	//	For selecting IDs and tags.
+	engine.$ = function(selector){
+		return engine.$._[selector] = engine.$._[selector] || ((selector.charAt(0) === '#') ? document.getElementById(selector.substr(1)) : document.getElementsByTagName(selector)[0]);
+	};
+	
+	//	Cache of DOM queries.
+	engine.$._ = {};
+	
+	engine.$new = function(element){
+		return document.createElement(element);
+	};
+	
 	engine.listener = function(event, handler, context){
 		(context || window).addEventListener(event, handler, true);
 	};
