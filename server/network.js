@@ -1,5 +1,7 @@
 var network = function(engine){
-	engine.app.io = engine.app.io || require('socket.io').listen(engine.app);
+	engine.app.io = engine.app.io || require('socket.io').listen(engine.app.server);
+	
+	engine.app.io.set('log level', 1);
 	
 	var self = this,
 		parseCookie = require('connect').utils.parseCookie,
