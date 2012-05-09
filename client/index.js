@@ -6,17 +6,17 @@ define([
 	'./input/index',
 	'./math/index',
 	'./media/index',
-	'./net/index',
+	'./network/index',
 	'./pattern/index',
 	'./save/index',
 	'./utilities/index'
-], function(lib, engine, cycle, display, input, math, media, net, pattern, save, utilities){
+], function(lib, engine, cycle, display, input, math, media, network, pattern, save, utilities){
 	cycle(engine);
 	display(engine);
 	input(engine);
 	math(engine);
 	media(engine);
-	net(engine);
+	network(engine);
 	pattern(engine);
 	save(engine);
 	engine.utilities = utilities(engine);
