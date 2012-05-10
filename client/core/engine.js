@@ -38,7 +38,8 @@ define([
 		var args = Array.prototype.slice.call(arguments);
 		
 		if(args.length === 1){
-			return !!object;
+			//return typeof object !== 'undefined';
+			return object != null;
 		}
 		
 		return typeof object === type || type === Object.prototype.toString.call(object).slice(8, -1).toLowerCase();
