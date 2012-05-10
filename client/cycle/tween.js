@@ -67,42 +67,41 @@ define(function(){
 		})
 		.defines({
 			tween:function(time, props){
-			
-			//accepts ms or seconds
-			if(time >= 100){
-				time /= 1000;
-			}
-			
-			var maxTime = (time || 1) / engine.sys.second;
-			this.tween_time = 0;
-			//steps are substracted until it reaches zero
-			
-			var deltas = {};
-			var starts = {};
-			for(var i in props){
-				var value = this[i];
-				if(engine.is(value, 'function')){
-					value = value();
+				//accepts ms or seconds
+				if(time >= 100){
+					time /= 1000;
 				}
+				
+				var maxTime = (time || 1) / engine.sys.second;
+				this.tween_time = 0;
+				//steps are substracted until it reaches zero
+				
+				var deltas = {},
+					starts = {};
+				for(var i in props){
+					var value = this[i];
+					if(engine.is(value, 'function')){
+						value = value();
+					}
 
-				deltas[i] = props[i] - value;
-				starts[i] = value;
-			}
-			
-			//tween initial values
-			this.tween_s = starts;
-			//tween deltas
-			this.tween_d = deltas;
-			//tween maximum time
-			this.tween_t = maxTime;
-			
-			if(!this.tweening){
-				this.on('update', this.tween_update);
-			}
-			
-			this.tweening = true;
-			
-			return this.trigger('tween:start', starts);
+					deltas[i] = props[i] - value;
+					starts[i] = value;
+				}
+				
+				//tween initial values
+				this.tween_s = starts;
+				//tween deltas
+				this.tween_d = deltas;
+				//tween maximum time
+				this.tween_t = maxTime;
+				
+				if(!this.tweening){
+					this.on('update', this.tween_update);
+				}
+				
+				this.tweening = true;
+				
+				return this.trigger('tween:start', starts);
 			}
 		  
 		});
