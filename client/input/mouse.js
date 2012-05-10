@@ -1,11 +1,13 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The mouse component allows an entity to listen to mouse triggers.
 
 			@usage
 			engine.e('mouse')
-			.on('mousedown:	middle', function(m){
+			.on('mousedown:middle', function(m){
 				//m.x - x position
 				//m.y - y position
 				//m.screenX - screen x position
@@ -77,7 +79,7 @@ define(function(){
 				*/
 				
 				var c, t, obj;
-				for(var i=0; i<listeners.length; i++){
+				for(var i = 0; i < listeners.length; i++){
 					t = listeners[i];
 					if(t.screenable){
 						x = engine.screen.toScreenX(x);

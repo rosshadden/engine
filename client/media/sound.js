@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The sound component utilizes the new HTML5 to play sound effects in the web browser.

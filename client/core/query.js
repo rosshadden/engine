@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		var query = function(selector){
 			this.query(selector);

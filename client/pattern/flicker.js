@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The flicker component calls the implemented flick method with the given array data over a period of time.
@@ -99,7 +101,6 @@ define(function(){
 				-allow entry of an array of frames. So each counter will go to the next frame in the array
 			*/
 			flicker:	function(duration, frames, loops, id){
-				console.log(this.id, duration, frames, loops, id);
 				//stop
 				if(!engine.is(loops) && this.flickering()){
 					//stop flickering

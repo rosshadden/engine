@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			Main function for engine.e

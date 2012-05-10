@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	The PreventDefault method prevents defaults for input events.
 		engine.preventDefault = function(pres){

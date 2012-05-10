@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The bisect component cuts an object into equal sections. It supplies helper functions 

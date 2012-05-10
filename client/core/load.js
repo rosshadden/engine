@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		var b = function(assets){
 			return new engine.load.init(assets);	

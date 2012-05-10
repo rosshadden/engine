@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			engine.random() // 0 - 1 floats

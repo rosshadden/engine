@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The tick component is a stop watch cyclier. It will return the milliseconds in time

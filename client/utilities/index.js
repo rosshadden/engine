@@ -5,6 +5,8 @@ define([
 	'./support',
 	'./polyfill'
 ], function(log, scene, sheet, support, polyfill){
+	'use strict';
+	
 	return function(engine){
 		//	These just need to be run.
 		polyfill(engine);

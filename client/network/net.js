@@ -1,4 +1,6 @@
 define(['/socket.io/socket.io.js'], function(IO){
+	'use strict';
+	
 	return function(engine){
 		engine.c('net')
 		.defines({

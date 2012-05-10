@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The Force component adds velocity, acceleration and other physical properties to an entity.

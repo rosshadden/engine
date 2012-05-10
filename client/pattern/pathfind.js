@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The pathfind comp finds a path towards a target position. The .search() method will return

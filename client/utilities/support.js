@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	/*
 		The support component contains information about supported 
 		functionality of the browser.

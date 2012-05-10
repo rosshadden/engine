@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	The rect component draws a rectangle on screen.
 		engine.c('rect')

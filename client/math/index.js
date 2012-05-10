@@ -13,6 +13,8 @@ define([
 	'./range',
 	'./tile'
 ], function(bisect, body, distance, drag, force, hit, hitmap, iso, limit, point, random, range, tile){
+	'use strict';
+	
 	return function(engine){
 		bisect(engine);
 		body(engine);

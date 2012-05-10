@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			Goes to an other scene in the game. This calls the scene method with a possible object argument.

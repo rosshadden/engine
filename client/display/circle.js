@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	The circle component draws a rectangle on screen.
 		engine.c('circle')

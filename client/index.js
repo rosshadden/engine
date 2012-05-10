@@ -11,6 +11,8 @@ define([
 	'./save/index',
 	'./utilities/index'
 ], function(lib, engine, cycle, display, input, math, media, network, pattern, save, utilities){
+	'use strict';
+	
 	cycle(engine);
 	display(engine);
 	input(engine);

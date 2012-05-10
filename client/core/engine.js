@@ -5,6 +5,8 @@ define([
 	'./load',
 	'./system'
 ], function(query, component, entity, load, system){
+	'use strict';
+	
 	var engine = function(selector){
 		return new engine.query(selector);
 	};

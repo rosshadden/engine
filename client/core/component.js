@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	Quick way to convert sentences to arrays.
 		var __toArray = function(n, r){

@@ -5,6 +5,8 @@ define([
 	'./update',
 	'./wait'
 ], function(drawlist, tick, tween, update, wait){
+	'use strict';
+	
 	return function(engine){
 		drawlist(engine);
 		tick(engine);

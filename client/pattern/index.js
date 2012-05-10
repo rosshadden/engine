@@ -4,6 +4,8 @@ define([
 	'./pathfind',
 	'./timestep'
 ], function(automap, flicker, pathfind, timestep){
+	'use strict';
+	
 	return function(engine){
 		automap(engine);
 		flicker(engine);

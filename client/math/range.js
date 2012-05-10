@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	/*
 		Returns an array of integers within the given range.
 

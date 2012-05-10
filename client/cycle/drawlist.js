@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The drawlist is an array of draw entities. Which can all be drawn at once using the .draw() method.

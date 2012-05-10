@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		/*
 			The tile component adds tile positioning functions and helper functions for tile based games.

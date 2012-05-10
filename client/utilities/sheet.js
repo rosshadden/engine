@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	The sheet component converts a each frame of a sprite sheet into their own components.
 		return function(map, components, sizeX, sizeY){

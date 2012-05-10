@@ -4,6 +4,8 @@ define([
 	'./pressed',
 	'./preventdefault'
 ], function(keyboard, mouse, pressed, preventdefault){
+	'use strict';
+	
 	return function(engine){
 		keyboard(engine);
 		mouse(engine);

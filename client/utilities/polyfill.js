@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		//	The polyfill component polyfills unsupported HTML5 functions when possible.
 		engine.c('polyfill')

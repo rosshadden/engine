@@ -1,4 +1,6 @@
 define(function(){
+	'use strict';
+	
 	return function(engine){
 		engine.iso = engine.c('iso')
 		.statics({
