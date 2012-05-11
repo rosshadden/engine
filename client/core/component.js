@@ -121,10 +121,10 @@
 			Σ.c('draw').alias('dr bob');
 		
 			*/
-			alias:function(Σ){
+			alias:function(s){
 				this._checkFinal();
 				
-				var p = Σ.split(' ');
+				var p = s.split(' ');
 				
 				if(p.length > 1){
 				    for(var i in p){
@@ -134,13 +134,13 @@
 				    return this;    
 				}
 				
-				if(Σ.charAt(0) == '-'){
+				if(s.charAt(0) == '-'){
 				    //only remove if its a reference
-				    if(Σ._c[Σ.substr(1)] == this){
-				        delete Σ._c[Σ.substr(1)];
+				    if(Σ._c[s.substr(1)] == this){
+				        delete Σ._c[s.substr(1)];
 				    }
 				}else{
-				    Σ._c[Σ] = this;
+				    Σ._c[s] = this;
 				}
 				
 				return this;

@@ -35,8 +35,8 @@
 			},
 
 			//Accepts Tile positions not normal X,Y
-			tileToBi:	function(xt, yt, w, Σ){
-				return (xt + (yt * (w / Σ)));
+			tileToBi:	function(xt, yt, w, s){
+				return (xt + (yt * (w / s)));
 			}
 		})
 		.defines({

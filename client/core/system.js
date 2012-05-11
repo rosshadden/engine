@@ -79,10 +79,10 @@
 				
 				this.context = this.canvas.getContext(contextType || '2d');
 				
-				var Σ = Σ.screen = Σ.e('screen');
+				var s = Σ.screen = Σ.e('screen');
 				
-				this.sizeX = Σ.sizeX = this.canvas.width;
-				this.sizeY = Σ.sizeY = this.canvas.height;
+				this.sizeX = s.sizeX = this.canvas.width;
+				this.sizeY = s.sizeY = this.canvas.height;
 				
 				//	init listeners
 				if(Σ._c.keyboard){

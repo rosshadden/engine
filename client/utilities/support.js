@@ -34,7 +34,7 @@
 		worker
 		webgl
 	*/
-	var support = function(Σ){
+	var support = function(s){
 		var args = Array.prototype.slice.call(arguments);
 		
 		if(args.length > 1){
@@ -52,7 +52,7 @@
 		}
 
 		//	find if supported
-		var k = Σ.split(' '),
+		var k = s.split(' '),
 			stat = true;
 
 		//	check multiple supports

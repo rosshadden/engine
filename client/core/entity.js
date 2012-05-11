@@ -289,11 +289,11 @@
 				}
 			}
 			
-			var Σ;
+			var s;
 			//	check if entity contains signals
 			for(p = 0; p < comp.on.length; p++){
-				Σ = comp.on[p];
-				if(!this._re_signals[Σ] || !this._re_signals[Σ].length){
+				s = comp.on[p];
+				if(!this._re_signals[s] || !this._re_signals[s].length){
 					return false;
 				}
 			}

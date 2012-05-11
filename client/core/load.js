@@ -68,7 +68,7 @@
 			    a = this.assets[i];
 			    
 			    //	copy full source path
-			    var Σ = a;
+			    var s = a;
 			    
 			    //	remove directories
 			    var d = a.lastIndexOf('/');
@@ -84,7 +84,7 @@
 			    var n = a.substr(0, j);
 			    
 			    if(Σ.load.images.indexOf(ext) != -1){ //	make sure image is allowed
-					this._loadImg(Σ, a, n);
+					this._loadImg(s, a, n);
 				}else if(Σ.load.sounds.indexOf(ext) != -1){ //	make sure sound is allowed
 					//	soundmanager only supports mp3, so use it if the sound is mp3
 					if(window['soundManager'] && ext == 'mp3' || Σ.support(ext)){
@@ -94,7 +94,7 @@
 							this.total--;
 							continue;
 						}else{
-							this._loadSound(Σ, a, n);
+							this._loadSound(s, a, n);
 						}
 					}else{
 				 	 //	sound can't be loaded
@@ -170,12 +170,12 @@
 		n - filename without extension
 		*/
 		p._loadSound = function(src, a, n){
-			var that = this, Σ;
+			var that = this, s;
 			
 			if(window['soundManager']){
 				//	use soundmanager!
 				soundManager.onready(function(){
-					Σ = soundManager.createSound({
+					s = soundManager.createSound({
 						id:			a,
 						url:		Σ.load.path + src,
 						autoLoad:	true,
@@ -184,34 +184,34 @@
 						}
 					});
 
-					that._def_sfx(Σ, a, n);
+					that._def_sfx(s, a, n);
 				});
 			}else{
-				Σ = new Audio(Σ.load.path + src);
-				Σ.src = Σ.load.path + src;
-				Σ.preload = "auto";
-				Σ.load();
+				s = new Audio(Σ.load.path + src);
+				s.src = Σ.load.path + src;
+				s.preload = "auto";
+				s.load();
 
 				//	called multiple times in firefox
 				var f = function(){
 					that._loaded();
 					//	remove after first call
-					Σ.removeEventListener('canplaythrough', f);
+					s.removeEventListener('canplaythrough', f);
 				};
 
-				Σ.addEventListener('canplaythrough', f, false);
+				s.addEventListener('canplaythrough', f, false);
 
-				Σ.addEventListener('error', function(){
+				s.addEventListener('error', function(){
 					if(that._e){
 						that._e.call(that, a);
 					}
 				}, false);
 
-				this._def_sfx(Σ, a, n);
+				this._def_sfx(s, a, n);
 			}
 		};
 		
-		p._def_sfx = function(Σ, a, n){
+		p._def_sfx = function(s, a, n){
 			Σ.c(a)
 			//	create statics codec for easy use
 			.alias(n + Σ.load.soundExt)

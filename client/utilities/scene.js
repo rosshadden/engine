@@ -28,18 +28,18 @@
 			})
 		*/
 		var scene = function(title){
-			var Σ = Σ.c('scene');
+			var s = Σ.c('scene');
 
 			if(!Σ.is(title)){
-				return Σ._scenes[scene.current];
+				return s._scenes[scene.current];
 			}
 
-			if(!Σ._scenes[title]){
+			if(!s._scenes[title]){
 				//	add scene
 				Σ.e('scene:'+title);
 			}
 
-			return Σ._scenes[title];
+			return s._scenes[title];
 		};
 
 		Σ.c('scene')

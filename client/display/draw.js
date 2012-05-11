@@ -40,9 +40,9 @@
 					this.clearCache();
 					
 					var c = Σ.$new('canvas');
-					var Σ = Math.max(this.image.width, this.image.height);
-					c.width = Σ;
-					c.height = Σ;
+					var s = Math.max(this.image.width, this.image.height);
+					c.width = s;
+					c.height = s;
 					
 					this.draw_render(c.getContext(Σ.sys.contextType));
 					
