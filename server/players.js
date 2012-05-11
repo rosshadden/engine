@@ -4,6 +4,10 @@ module.exports = (function(engine){
 		Emitter = require('events').EventEmitter,
 
 	get = function(id){
+		if(typeof id === 'undefined'){
+			return players;
+		}
+		
 		return players[id];
 	},
 	

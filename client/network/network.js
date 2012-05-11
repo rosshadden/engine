@@ -19,11 +19,41 @@
 				socket.emit.apply(socket, args);
 
 				return self.methods;
+			},
+			
+			get = function(url, callback){
+				var xhr = new XMLHttpRequest;
+				
+				xhr.onreadystatechange = function(){
+					var response;
+					
+					callback = callback || function(){};
+					
+					if(xhr.readyState === 4){
+						if(xhr.status === 200){
+							try{
+								response = JSON.parse(xhr.responseText);
+							}catch(e){
+								response = xhr.responseText;
+							}
+							
+							callback.call(this, response);
+						}else{
+							callback.call(this, response);
+						}
+					}
+				};
+				
+				xhr.open('GET', (url || '/'), true);
+				xhr.send(null);
+				
+				return self.methods;
 			};
 
 			return self.methods = {
 				on:		on,
-				emit:	emit
+				emit:	emit,
+				get:	get
 			};
 		})();
 		
