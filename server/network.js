@@ -36,6 +36,10 @@ var network = function(engine){
 		var self = this,
 			id = socket.handshake.sessionID,
 			player = engine.players.get(id);
+		
+		var onScope = function(f){
+			f.call(self, socket);
+		};
 
 		if(!player){
 			engine.players.add(id, {
@@ -58,9 +62,7 @@ var network = function(engine){
 			
 		player.events.emit('load');
 		
-		emitter.on('scope', function(f){
-			f.call(self, socket);
-		});
+		emitter.on('scope', onScope);
 		
 		for(var event in handlers){
 			socket.on(event, handlers[event]);
@@ -68,6 +70,8 @@ var network = function(engine){
 		
 		socket.on('disconnect', function(){
 			player.events.emit('unload');
+			
+			emitter.removeListener('scope', onScope);
 		});
 	});
 	
