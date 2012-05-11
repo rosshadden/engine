@@ -45,7 +45,6 @@ var network = function(engine){
 			player = engine.players.get(id);
 
 			emitter.emit('created ' + id);
-			emitter.emit('connect', id);
 			
 			console.log('Player #%d connected:  %s.', ++engine.players.count, id);
 		}else{
@@ -54,6 +53,8 @@ var network = function(engine){
 				socket.join(room);
 			});
 		}
+		
+		emitter.emit('connect', id);
 			
 		player.events.emit('load');
 		
