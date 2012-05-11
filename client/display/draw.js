@@ -1,11 +1,11 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.c('draw')
+	return function(Σ){
+		Σ.c('draw')
 		.interfaces('draw')
 		.init(function(){
-			engine.drawlist().add(this);
+			Σ.drawlist().add(this);
 		})
 		.dispose(function(c){
 			this.drawlist.remove(this);
@@ -39,12 +39,12 @@ define(function(){
 					
 					this.clearCache();
 					
-					var c = engine.$new('canvas');
-					var s = Math.max(this.image.width, this.image.height);
-					c.width = s;
-					c.height = s;
+					var c = Σ.$new('canvas');
+					var Σ = Math.max(this.image.width, this.image.height);
+					c.width = Σ;
+					c.height = Σ;
 					
-					this.draw_render(c.getContext(engine.sys.contextType));
+					this.draw_render(c.getContext(Σ.sys.contextType));
 					
 					this.canvasCache = c;
 					
@@ -106,18 +106,18 @@ define(function(){
 			
 			screenX:	function(x){
 				if(x){
-					this.posX = x + engine.screen.posX;
+					this.posX = x + Σ.screen.posX;
 					return this;
 				}
-				return this.posX - engine.screen.posX;
+				return this.posX - Σ.screen.posX;
 			},
 			
 			screenY:	function(y){
 				if(y){
-					this.posY = y + engine.screen.posY;
+					this.posY = y + Σ.screen.posY;
 					return this;
 				}
-				return this.posY - engine.screen.posY;
+				return this.posY - Σ.screen.posY;
 			},
 			
 			/*
@@ -133,7 +133,7 @@ define(function(){
 			Returns true or false wether the object is visible on screen.
 			*/
 			visible:	function(){
-				return this.drawable && engine.screen.hit(this.posX - this.regX, this.posY - this.regY, this.sizeX, this.sizeY);
+				return this.drawable && Σ.screen.hit(this.posX - this.regX, this.posY - this.regY, this.sizeX, this.sizeY);
 			}
 			
 		})

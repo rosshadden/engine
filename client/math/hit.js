@@ -1,8 +1,8 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.c('hit')
+	return function(Σ){
+		Σ.c('hit')
 		.defaults({
 			posX:	0,
 			posY:	0,
@@ -17,7 +17,7 @@ define(function(){
 				k.hit(entity);
 			*/
 			hit:	function(x, y, w, h, rx, ry){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					w = x.sizeX || x.w;
 					h = x.sizeY || x.h;

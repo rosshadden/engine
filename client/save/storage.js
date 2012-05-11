@@ -1,18 +1,18 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The storage component contains methods for storing locally or session values.
 			This utilizes the new HTML5 localstorage and sessionstorage.
 
 			//create new local storage
-			engine.e('storage:	local');
+			Σ.e('storage:	local');
 
 			//create new session storage
-			engine.e('storage:	session');
+			Σ.e('storage:	session');
 		*/
-		engine.c('storage')
+		Σ.c('storage')
 		.init(function(c, type){
 			this.storage = window[type + 'Storage'];
 		})
@@ -26,7 +26,7 @@ define(function(){
 			},
 
 			item:	function(key, data){
-				if(!engine.is(data)){
+				if(!Σ.is(data)){
 					return JSON.parse(this.storage.getItem(key));
 				}
 			

@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./query',
 	'./component',
 	'./entity',
@@ -7,36 +7,36 @@ define([
 ], function(query, component, entity, load, system){
 	'use strict';
 	
-	var engine = function(selector){
-		return new engine.query(selector);
+	var Σ = function(selector){
+		return new Σ.query(selector);
 	};
 	
-	engine.version = '0.0.2';
+	Σ.version = '0.0.2';
 	
-	engine._e = [];
-	engine._c = {};
+	Σ._e = [];
+	Σ._c = {};
 	
-	engine.ready = function(handler){
-		engine.listener('load', handler);
+	Σ.ready = function(handler){
+		Σ.listener('load', handler);
 	};
 	
 	//	For selecting IDs and tags.
-	engine.$ = function(selector){
-		return engine.$._[selector] = engine.$._[selector] || ((selector.charAt(0) === '#') ? document.getElementById(selector.substr(1)) : document.getElementsByTagName(selector)[0]);
+	Σ.$ = function(selector){
+		return Σ.$._[selector] = Σ.$._[selector] || ((selector.charAt(0) === '#') ? document.getElementById(selector.substr(1)) : document.getElementsByTagName(selector)[0]);
 	};
 	
 	//	Cache of DOM queries.
-	engine.$._ = {};
+	Σ.$._ = {};
 	
-	engine.$new = function(element){
+	Σ.$new = function(element){
 		return document.createElement(element);
 	};
 	
-	engine.listener = function(event, handler, context){
+	Σ.listener = function(event, handler, context){
 		(context || window).addEventListener(event, handler, true);
 	};
 	
-	engine.is = function(object, type){
+	Σ.is = function(object, type){
 		var args = Array.prototype.slice.call(arguments);
 		
 		if(args.length === 1){
@@ -47,11 +47,11 @@ define([
 		return typeof object === type || type === Object.prototype.toString.call(object).slice(8, -1).toLowerCase();
 	};
 	
-	engine.query = query(engine);
-	component(engine);
-	engine.entity = engine.e = entity(engine);
-	system(engine);
-	engine.load = load(engine);
+	Σ.query = query(Σ);
+	component(Σ);
+	Σ.entity = Σ.e = entity(Σ);
+	system(Σ);
+	Σ.load = load(Σ);
 
-	return engine;
+	return Σ;
 });

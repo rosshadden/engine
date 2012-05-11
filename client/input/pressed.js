@@ -1,41 +1,41 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The pressed method is used to check if a key or keys are currently pressed.
 			This is most useful in mousemove, keydown or usually an update listener.
 
 			@usage
 			//move player
-			engine.e('update image player.png')
+			Σ.e('update image player.png')
 			.on('update', function(){
 			  
-			  if(engine.pressed(['w', 'up'])){
+			  if(Σ.pressed(['w', 'up'])){
 				this.posY -= 10;
 			  }
 
 			});
 
 			//click based on key
-			engine.e('mouse image button.png')
+			Σ.e('mouse image button.png')
 			.on('click', function(){
 			  
-			  if(engine.pressed('mouse: middle')){
+			  if(Σ.pressed('mouse: middle')){
 				//do something..
 			  }
 
 			});
 		*/
-		engine.pressed = function(key){
+		Σ.pressed = function(key){
 			var c = arguments;
 
-			if(engine.is(key, 'array')){
+			if(Σ.is(key, 'array')){
 				c = key;
 			}
 
 			for(var i = 0, l = c.length; i < l; i++){
-				if(engine.pressed.d[c[i]]){
+				if(Σ.pressed.d[c[i]]){
 					return true;
 				}
 			}
@@ -43,6 +43,6 @@ define(function(){
 			return false;
 		};
 		
-		engine.pressed.d = {};
+		Σ.pressed.d = {};
 	};
 });

@@ -1,9 +1,9 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	The polyfill component polyfills unsupported HTML5 functions when possible.
-		engine.c('polyfill')
+		Σ.c('polyfill')
 		.defines({
 			requestAnimationFrame:	function(callback, canvas){
 				return requestAnimFrame(callback, canvas);

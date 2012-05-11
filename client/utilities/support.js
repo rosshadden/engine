@@ -1,4 +1,4 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
 	/*
@@ -6,21 +6,21 @@ define(function(){
 		functionality of the browser.
 
 		//	returns true if canvas AND text is supported
-		if(engine.support('canvas text')){
+		if(Σ.support('canvas text')){
 			//	supports
 		}
 
 		//	checks all arguments and returns first thing thats supported
-		engine.support('ogg', 'aac', 'mp3', 'wav');
+		Σ.support('ogg', 'aac', 'mp3', 'wav');
 
 		//	find first supported storage storage
-		engine.support('database', 'localstorage');
+		Σ.support('database', 'localstorage');
 
 		this is helpful to find a supported codec or a storage component
 
 		or add to entity
 
-		engine.e('support').support('canvas');
+		Σ.e('support').support('canvas');
 
 		---- possible support checks
 		canvas
@@ -34,7 +34,7 @@ define(function(){
 		worker
 		webgl
 	*/
-	var support = function(s){
+	var support = function(Σ){
 		var args = Array.prototype.slice.call(arguments);
 		
 		if(args.length > 1){
@@ -52,7 +52,7 @@ define(function(){
 		}
 
 		//	find if supported
-		var k = s.split(' '),
+		var k = Σ.split(' '),
 			stat = true;
 
 		//	check multiple supports

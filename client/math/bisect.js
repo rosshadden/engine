@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The bisect component cuts an object into equal sections. It supplies helper functions 
 			for converting to a section and from a section. Useful for sprites and animation.
@@ -16,7 +16,7 @@ define(function(){
 			This works by increasing the bi value once the x position is past the width.
 			Note: width is called the bisect and the bi is the transformed x,y positions.
 		*/
-		engine.bisect = engine.c('bisect')
+		Σ.bisect = Σ.c('bisect')
 		.statics({
 			toX:	function(bi, width, size){
 				return this.toTileX(bi, width, size) * size;
@@ -35,30 +35,30 @@ define(function(){
 			},
 
 			//Accepts Tile positions not normal X,Y
-			tileToBi:	function(xt, yt, w, s){
-				return (xt + (yt * (w / s)));
+			tileToBi:	function(xt, yt, w, Σ){
+				return (xt + (yt * (w / Σ)));
 			}
 		})
 		.defines({
 			biToX:	function(bi){
-				return engine.bisect.toX(bi, this.bisect, this.sizeX);
+				return Σ.bisect.toX(bi, this.bisect, this.sizeX);
 			},
 
 			biToY:	function(bi){
-				return engine.bisect.toY(bi, this.bisect, this.sizeX);
+				return Σ.bisect.toY(bi, this.bisect, this.sizeX);
 			},
 
 			biToTileX:	function(bi){
-				return engine.bisect.toTileX(bi, this.bisect, this.sizeX);
+				return Σ.bisect.toTileX(bi, this.bisect, this.sizeX);
 			},
 
 			biToTileY:	function(bi){
 				//sizeY doesn't matter when dealing with bisects
-				return engine.bisect.toTileY(bi, this.bisect, this.sizeX);
+				return Σ.bisect.toTileY(bi, this.bisect, this.sizeX);
 			},
 
 			tileToBi:	function(xt, yt){
-				return engine.bisect.tileToBi(xt, yt, this.bisect, this.sizeX);
+				return Σ.bisect.tileToBi(xt, yt, this.bisect, this.sizeX);
 			}
 		})
 		.defaults({

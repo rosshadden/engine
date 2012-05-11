@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./keyboard',
 	'./mouse',
 	'./pressed',
@@ -6,10 +6,10 @@ define([
 ], function(keyboard, mouse, pressed, preventdefault){
 	'use strict';
 	
-	return function(engine){
-		keyboard(engine);
-		mouse(engine);
-		pressed(engine);
-		preventdefault(engine);
+	return function(Σ){
+		keyboard(Σ);
+		mouse(Σ);
+		pressed(Σ);
+		preventdefault(Σ);
 	};
 });

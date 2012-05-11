@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./bisect',
 	'./body',
 	'./distance',
@@ -15,19 +15,19 @@ define([
 ], function(bisect, body, distance, drag, force, hit, hitmap, iso, limit, point, random, range, tile){
 	'use strict';
 	
-	return function(engine){
-		bisect(engine);
-		body(engine);
-		engine.distance = distance;
-		drag(engine);
-		engine.force = force(engine);
-		hit(engine);
-		hitmap(engine);
-		iso(engine);
-		limit(engine);
-		point(engine);
-		engine.random = random(engine);
-		engine.range = range;
-		engine.tile = tile(engine);
+	return function(Σ){
+		bisect(Σ);
+		body(Σ);
+		Σ.distance = distance;
+		drag(Σ);
+		Σ.force = force(Σ);
+		hit(Σ);
+		hitmap(Σ);
+		iso(Σ);
+		limit(Σ);
+		point(Σ);
+		Σ.random = random(Σ);
+		Σ.range = range;
+		Σ.tile = tile(Σ);
 	};
 });

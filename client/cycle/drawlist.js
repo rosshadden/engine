@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The drawlist is an array of draw entities. Which can all be drawn at once using the .draw() method.
 
@@ -13,20 +13,20 @@ define(function(){
 
 			In a case of an isometric game, certain tiles should appear behind or in
 		*/
-		engine.drawlist = function(name){
-			var d = engine.c('drawlist'),
+		Σ.drawlist = function(name){
+			var d = Σ.c('drawlist'),
 				name = name || '';
 
 			//	name default to '' and returns default drawlist
 			if(!d._lists[name]){
 				//	add new list
-				engine.e('drawlist:' + name);
+				Σ.e('drawlist:' + name);
 			}
 
 			return d._lists[name];
 		};
 
-		engine.c('drawlist')
+		Σ.c('drawlist')
 		.statics({
 			_lists:	{}
 		})
@@ -72,7 +72,7 @@ define(function(){
 		.init(function(c, name){
 			c._lists[name] = this;
 			this.listName = name;
-			this.list = engine();
+			this.list = Σ();
 		})
 		.dispose(function(c){
 			delete c._lists[this.listName];

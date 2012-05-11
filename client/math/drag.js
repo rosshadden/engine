@@ -1,12 +1,12 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The drag component adds functions to move points
 			in relation to its starting postion.
 		*/
-		engine.c('drag')
+		Σ.c('drag')
 		.defaults({
 			posX:		0,
 			posY:		0,

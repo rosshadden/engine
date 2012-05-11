@@ -1,13 +1,13 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The limit component constraints a value inside a range.
 
 			This can be useful for maps, characters, enemies, boxes etc..
 
-			engine.e('limit bitmap char.png')
+			Σ.e('limit bitmap char.png')
 			.limit('posX', 0, 10) //limits to 0-10
 			.limit('health', 0) //minimum 0
 
@@ -16,15 +16,15 @@ define(function(){
 			//.limit('name', ['yep', 'beb'])
 			//.limit('type, [0, 10, 13])
 		*/
-		engine.c('limit')
+		Σ.c('limit')
 		.defines('limit', function(prop){
 			var c = arguments;
 			
-			//if(engine.is(min, 'array')) c = min;
-			//if(engine.is(c[1], 'number')){
+			//if(Σ.is(min, 'array')) c = min;
+			//if(Σ.is(c[1], 'number')){
 				if(this[prop] < c[1]){
 					this[prop] = c[1];
-				}else if(engine.is(c[2]) && this[prop] > c[2]){
+				}else if(Σ.is(c[2]) && this[prop] > c[2]){
 					this[prop] = c[2];
 				}
 			/*} else {

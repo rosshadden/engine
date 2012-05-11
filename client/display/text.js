@@ -1,12 +1,12 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The text component displays font on screen using the canvas font api.
 
 			//create font
-			engine.e('text')
+			Σ.e('text')
 			.defines({
 				text:	'Texting Message',
 				textColor:	'#ff0000'
@@ -14,7 +14,7 @@ define(function(){
 
 			TODO implement size
 		*/
-		engine.c('text')
+		Σ.c('text')
 		.requires('draw')
 		.defaults({
 			font:	"14px sans-serif",
@@ -29,7 +29,7 @@ define(function(){
 			},
 
 			text:	function(t){
-				if(engine.is(t)){
+				if(Σ.is(t)){
 					//convert to string
 					t = Array.prototype.join.call(arguments, ' ');
 
@@ -37,8 +37,8 @@ define(function(){
 					this._text = t;
 					
 					//set text width
-					if(engine.sys.context){
-						var c = engine.sys.context;
+					if(Σ.sys.context){
+						var c = Σ.sys.context;
 						
 						c.save();
 						c.font = this.font;

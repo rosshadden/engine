@@ -1,11 +1,11 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The update component calls update signals to all listening entities.
 		*/
-		engine.c('update')
+		Σ.c('update')
 		.statics({
 			l:		[],
 			update:	function(t){
@@ -24,7 +24,7 @@ define(function(){
 			updatable:true
 		})
 		.defines(function(){
-			var l = engine.c('update').l;
+			var l = Σ.c('update').l;
 
 			return {
 				updateFirst:function(){

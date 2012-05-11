@@ -1,7 +1,7 @@
-define(['/socket.io/socket.io.js'], function(IO){
+﻿define(['/socket.io/socket.io.js'], function(IO){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		var network = (function(){
 			var socket = io.connect().emit('connected'),
 

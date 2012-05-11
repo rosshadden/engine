@@ -1,51 +1,51 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The sound component utilizes the new HTML5 to play sound effects in the web browser.
 			It is reccommended to load two sound codecs OGG and AAC because not every browser supports
 			all sound codecs at this time.
 
 			//load a sound
-			engine.load('run.ogg run.aac');
+			Σ.load('run.ogg run.aac');
 			//BAD this will load both sounds. Even if the browser doesn't support one
 
 			//GOOD. load just one codec of the sound
 			var codec;
-			if(engine.support('ogg')){
+			if(Σ.support('ogg')){
 				codec = 'ogg';
-			} else if(engine.support('aac')){
+			} else if(Σ.support('aac')){
 				codec = 'aac';
 			}
 
-			engine.load('run.'+codec');
+			Σ.load('run.'+codec');
 
 			//create sound
-			engine.e('sound run.'+codec);
+			Σ.e('sound run.'+codec);
 
 			//that is a pain, so a helper method has been created
-			engine('sound run.'+engine.support('ogg', 'aac'));
+			Σ('sound run.'+Σ.support('ogg', 'aac'));
 
 			Its recomended to save the supported codec somewhere
 			//like so...
-			engine.codec = engine.support('ogg', 'aac');
+			Σ.codec = Σ.support('ogg', 'aac');
 
-			engine.load('run.'+engine.codec);
+			Σ.load('run.'+Σ.codec);
 
-			engine.e('run.'+engine.codec);
+			Σ.e('run.'+Σ.codec);
 
 			WARNING: Because the sound component has generic
 			method names stop, play, watchout for overwrites.
 
 			Sound Tip
 			//find all sounds in game and play them!
-			engine('sound').method('play');
+			Σ('sound').method('play');
 
 			*note: A sound only only has one channel and cannot be played multiple times at once.
 			This will be fixed with the channel component.
 		*/
-		engine.sound = engine.c('sound')
+		Σ.sound = Σ.c('sound')
 		.statics({
 			enabled:	true
 		})
@@ -61,7 +61,7 @@ define(function(){
 		})
 		.defines({
 			play:	function(){
-				if(!this._sound || !engine.sound.enabled){
+				if(!this._sound || !Σ.sound.enabled){
 					return this;
 				}
 				

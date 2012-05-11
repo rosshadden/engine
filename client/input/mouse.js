@@ -1,12 +1,12 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The mouse component allows an entity to listen to mouse triggers.
 
 			@usage
-			engine.e('mouse')
+			Σ.e('mouse')
 			.on('mousedown:middle', function(m){
 				//m.x - x position
 				//m.y - y position
@@ -17,7 +17,7 @@ define(function(){
 			FUTURE: rename triggers to the standard format
 			mousemove -> mouse:	move
 		*/
-		engine.c('mouse')
+		Σ.c('mouse')
 		.statics({
 			l:	[],
 			
@@ -47,15 +47,15 @@ define(function(){
 				c = 'mouse:	' + b;
 				
 				//register mouse action
-				if(engine.pressed.d){
-					engine.pressed.d[c] = (e.type == 'mousedown');
+				if(Σ.pressed.d){
+					Σ.pressed.d[c] = (e.type == 'mousedown');
 				}
 			
-				engine.c('mouse').event(e, c);
+				Σ.c('mouse').event(e, c);
 			},
 			
 			event:	function(e, extra){
-				var canvas = engine.sys.canvas;
+				var canvas = Σ.sys.canvas;
 				
 				//calculate mouse coordinate
 				var x = canvas.width / canvas.offsetWidth,
@@ -70,10 +70,10 @@ define(function(){
 					y *= e.layerY - canvas.offsetTop;
 				}
 				
-				var listeners = engine.c('mouse').l;
+				var listeners = Σ.c('mouse').l;
 				
 				/*
-					if(engine.preventDefault && engine.preventDefault.d[key]){
+					if(Σ.preventDefault && Σ.preventDefault.d[key]){
 					  e.preventDefault();
 					}
 				*/
@@ -82,8 +82,8 @@ define(function(){
 				for(var i = 0; i < listeners.length; i++){
 					t = listeners[i];
 					if(t.screenable){
-						x = engine.screen.toScreenX(x);
-						y = engine.screen.toScreenY(y);
+						x = Σ.screen.toScreenX(x);
+						y = Σ.screen.toScreenY(y);
 					}
 					
 					//offset mouse coordinates
@@ -99,14 +99,14 @@ define(function(){
 			},
 			
 			i:	function(){
-				var c = engine.sys.canvas;
+				var c = Σ.sys.canvas;
 				
-				engine.listener('mousedown', this.press, c);
-				engine.listener('mouseup', this.press, c);
-				engine.listener('mousemove', this.event, c);
-				engine.listener('click', this.event, c);
-				engine.listener('dblclick', this.event, c);
-				engine.listener('contextmenu', this.event, c);
+				Σ.listener('mousedown', this.press, c);
+				Σ.listener('mouseup', this.press, c);
+				Σ.listener('mousemove', this.event, c);
+				Σ.listener('click', this.event, c);
+				Σ.listener('dblclick', this.event, c);
+				Σ.listener('contextmenu', this.event, c);
 			}
 			
 		})

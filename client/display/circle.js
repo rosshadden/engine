@@ -1,9 +1,9 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	The circle component draws a rectangle on screen.
-		engine.c('circle')
+		Σ.c('circle')
 		.requires('draw')
 		.defaults({
 			color:	'#82d5f4'
@@ -25,7 +25,7 @@ define(function(){
 			},
 			
 			radius:	function(r){
-				if(engine.is(r)){
+				if(Σ.is(r)){
 					this.sizeX = this.sizeY = r * 2;
 					return this;
 				}

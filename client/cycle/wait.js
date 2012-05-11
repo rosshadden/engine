@@ -1,8 +1,8 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.c('wait')
+	return function(Σ){
+		Σ.c('wait')
 		.defines({
 			wait:	function(method, time){
 				time = time || 1000;

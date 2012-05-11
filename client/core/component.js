@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	Quick way to convert sentences to arrays.
 		var __toArray = function(n, r){
 			this._checkFinal();
@@ -10,7 +10,7 @@ define(function(){
 			    this[n] = [];
 			}
 			
-			if(engine.is(r, 'string')){
+			if(Σ.is(r, 'string')){
 			    this[n] = this[n].concat(r.split(' '));
 			}else{
 			    this[n] = this[n].concat(r);
@@ -19,15 +19,15 @@ define(function(){
 			return this;
 		};
 	
-		engine.comp = engine.c = function(title){
-			if(!engine._c[title]){
-			    engine._c[title] = new engine.c.init(title);
+		Σ.comp = Σ.c = function(title){
+			if(!Σ._c[title]){
+			    Σ._c[title] = new Σ.c.init(title);
 			}
 			
-			return engine._c[title];
+			return Σ._c[title];
 		};
 	
-		engine.c.init = function(name){
+		Σ.c.init = function(name){
 			this.name = name;
 			this._re_signals = {};
 			this._re_inherits = {};
@@ -36,7 +36,7 @@ define(function(){
 			this._re_final = false;
 		};
 	
-		engine.c.init.prototype = {
+		Σ.c.init.prototype = {
 			_checkFinal:function(){
 				if(this._re_final){
 				    throw this.name+' is final.';
@@ -46,7 +46,7 @@ define(function(){
 			statics:function(obj, value){
 				this._checkFinal();
 				
-				if(!engine.is(value)){
+				if(!Σ.is(value)){
 				    for(var type in obj){
 				        this[type] = obj[type];    
 				    }
@@ -60,7 +60,7 @@ define(function(){
 			events:function(obj, value){
 			  this._checkFinal();
 			  
-			  if(!engine.is(value)){
+			  if(!Σ.is(value)){
 				  for(var type in obj){
 				      this._re_events[type] = obj[type];    
 				  }
@@ -94,7 +94,7 @@ define(function(){
 			runtime errors and save time.
 		
 			//reccommended to put an i infront to represent an interface
-			engine.c('ienemy')
+			Σ.c('ienemy')
 			//create an enemy interface
 			.interface('moveTo spawn attack runAway');
 		
@@ -107,24 +107,24 @@ define(function(){
 			Creates new names for a component.
 		
 			//create a new alias of draw
-			engine.c('draw')
+			Σ.c('draw')
 			.alias('bob');
 		
 			//remove alias
-			engine.c('draw')
+			Σ.c('draw')
 			.alias('-bob');
 		
 			//aliases can even delete components itself
-			engine.c('draw').alias('-draw');
+			Σ.c('draw').alias('-draw');
 		
 			//add two aliases
-			engine.c('draw').alias('dr bob');
+			Σ.c('draw').alias('dr bob');
 		
 			*/
-			alias:function(s){
+			alias:function(Σ){
 				this._checkFinal();
 				
-				var p = s.split(' ');
+				var p = Σ.split(' ');
 				
 				if(p.length > 1){
 				    for(var i in p){
@@ -134,13 +134,13 @@ define(function(){
 				    return this;    
 				}
 				
-				if(s.charAt(0) == '-'){
+				if(Σ.charAt(0) == '-'){
 				    //only remove if its a reference
-				    if(engine._c[s.substr(1)] == this){
-				        delete engine._c[s.substr(1)];
+				    if(Σ._c[Σ.substr(1)] == this){
+				        delete Σ._c[Σ.substr(1)];
 				    }
 				}else{
-				    engine._c[s] = this;
+				    Σ._c[Σ] = this;
 				}
 				
 				return this;
@@ -157,15 +157,15 @@ define(function(){
 		
 			*/
 			on:function(){
-				return engine.e.init.prototype.on.apply(this, arguments);
+				return Σ.e.init.prototype.on.apply(this, arguments);
 			},
 		
 			off:function(){
-				return engine.e.init.prototype.off.apply(this, arguments);
+				return Σ.e.init.prototype.off.apply(this, arguments);
 			},
 		
 			trigger:function(){
-			  return engine.e.init.prototype.trigger.apply(this, arguments);
+			  return Σ.e.init.prototype.trigger.apply(this, arguments);
 			},
 		
 			/*
@@ -189,14 +189,14 @@ define(function(){
 			The namespace method is used to put private component variables
 			in its own space. This prevents unwanted overrites.
 		
-			engine.c('draw')
+			Σ.c('draw')
 			.namespace({
 				pos:0,
 				type:'none'
 			});
 		
 			//or
-			engine.c('draw')
+			Σ.c('draw')
 			.namespace("pos", 0);
 		
 			//Will cast to 

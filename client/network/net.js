@@ -1,13 +1,13 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.c('net')
+	return function(Σ){
+		Σ.c('net')
 		.namespaces({
 			on:		function(){
 				var args = [].slice.call(arguments);
 				
-				engine.network.on.apply(this, args);
+				Σ.network.on.apply(this, args);
 				
 				return this;
 			},
@@ -15,7 +15,7 @@ define(function(){
 			emit:	function(){
 				var args = [].slice.call(arguments);
 				
-				engine.network.emit.apply(this, args);
+				Σ.network.emit.apply(this, args);
 				
 				return this;
 			}

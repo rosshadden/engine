@@ -1,13 +1,13 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The automap component creates an auto expandable two-dimensional array.
 
 			@usage
 
-			var map = engine.e('automap');
+			var map = Σ.e('automap');
 
 			//set
 			//x = 0, y = 10, value = 10
@@ -36,7 +36,7 @@ define(function(){
 			map.lenX
 			map.lenY
 		*/
-		engine.c('automap')
+		Σ.c('automap')
 		.defaults({
 			lenX:			0,
 			lenY:			0,
@@ -44,7 +44,7 @@ define(function(){
 		})
 		.defines({
 			automap:	function(x, y, value){
-				if(engine.is(x, 'array')){
+				if(Σ.is(x, 'array')){
 					if(y){
 					//deep copy
 						for(var y = 0; y < x.length; y++){
@@ -68,7 +68,7 @@ define(function(){
 					return this;  
 				}
 				
-				if(!engine.is(value)){
+				if(!Σ.is(value)){
 					if(this.within(x,y)){
 						return this._automap[y][x];
 					}

@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The imgfont component writes text on the screen using a sprite image.
 			This is a faster approach than using the text component for now.
@@ -12,20 +12,20 @@ define(function(){
 			//imgtext is an array of all characters and defines the width
 			//of each.
 
-			engine.c('serif')
+			Σ.c('serif')
 			.requires('imgtext font serif.png')
 			.defines('imgtext', [4,4,2,4,3,5,6,7,8,3,4,5])
 
-			engine.e('serif')
+			Σ.e('serif')
 			.text('This displays on screen')
 
 			//find all fonts
-			engine('font')
+			Σ('font')
 
 			*could be turned in to a special sprite component but wouldn't
 			be very useful.
 		*/
-		engine.c('imgtext')
+		Σ.c('imgtext')
 		.requires('draw')
 		.interfaces('imgtext')
 		.defaults({
@@ -75,7 +75,7 @@ define(function(){
 			},
 		  
 			text:	function(t){
-				if(engine.is(t)){
+				if(Σ.is(t)){
 					this._text = t;
 
 					this.text_lines = this._text.split('\n');

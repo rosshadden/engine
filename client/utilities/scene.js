@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			Goes to an other scene in the game. This calls the scene method with a possible object argument.
 
@@ -11,7 +11,7 @@ define(function(){
 			scene('game')
 			.enter(function(data){
 				//	remove all 2d elements
-				engine('2d').dispose();
+				Σ('2d').dispose();
 				
 				loadLevel(data.level);
 			});
@@ -22,27 +22,27 @@ define(function(){
 			*warning- bad idea passing in functions as the first argument
 
 			//	create manually
-			engine.e('scene:game')
+			Σ.e('scene:game')
 			.enter(function(){
 			  
 			})
 		*/
 		var scene = function(title){
-			var s = engine.c('scene');
+			var Σ = Σ.c('scene');
 
-			if(!engine.is(title)){
-				return s._scenes[scene.current];
+			if(!Σ.is(title)){
+				return Σ._scenes[scene.current];
 			}
 
-			if(!s._scenes[title]){
+			if(!Σ._scenes[title]){
 				//	add scene
-				engine.e('scene:'+title);
+				Σ.e('scene:'+title);
 			}
 
-			return s._scenes[title];
+			return Σ._scenes[title];
 		};
 
-		engine.c('scene')
+		Σ.c('scene')
 		.statics({
 			_scenes:	{}
 		})
@@ -57,7 +57,7 @@ define(function(){
 			enter:	function(title){
 				var args = Array.prototype.slice.call(arguments);
 				
-				if(!engine.is(title, 'function')){
+				if(!Σ.is(title, 'function')){
 					if(scene.current){
 						scene().exit();
 					}
@@ -79,7 +79,7 @@ define(function(){
 			exit:	function(m){
 				var args = Array.prototype.slice.call(arguments);
 				
-				if(!engine.is(m, 'function')){
+				if(!Σ.is(m, 'function')){
 					scene.current = '';
 
 					if(this.scene_exit){

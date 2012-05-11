@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The pathfind comp finds a path towards a target position. The .search() method will return
 			an int array describing the movements to the target position.
@@ -18,9 +18,9 @@ define(function(){
 			]
 
 			//automap is helpful for two-dim arrays
-			var level = engine.e('automap').automap(map);
+			var level = Σ.e('automap').automap(map);
 
-			var path = engine.e('pathfind')
+			var path = Σ.e('pathfind')
 			.attr({
 			  //this is checked for every tile. Returning false will skip it, making the tile unwalkable.
 			  checkNode:	function(x, y, parentX, parentY){
@@ -56,10 +56,10 @@ define(function(){
 			  
 			}
 		*/
-		engine.pathfind = engine.c('pathfind')
+		Σ.pathfind = Σ.c('pathfind')
 		.statics({
 			search:	function(){
-				var p = engine.e('pathfind'),
+				var p = Σ.e('pathfind'),
 					path = p.pathfind.apply(p, arguments);
 				
 				p.dispose();
@@ -137,7 +137,7 @@ define(function(){
 				
 				var name = x + '_' + y;
 				
-				var cost = engine.distance(x, y, this.targetX, this.targetY);
+				var cost = Σ.distance(x, y, this.targetX, this.targetY);
 				
 				if(!this.nodes[name] || this.nodes[name].cost > cost){
 					var n = this.nodes[name] = {x:x, y:y, cost:cost, px:px, py:py};

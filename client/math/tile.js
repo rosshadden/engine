@@ -1,28 +1,28 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The tile component adds tile positioning functions and helper functions for tile based games.
 
 			@usage
 
 			//set tile size
-			engine.tile.sizeX = 40;
-			engine.tile.sizeY = 40;
+			Σ.tile.sizeX = 40;
+			Σ.tile.sizeY = 40;
 
 			//convert mouse coordinates to a tile position..
 			var mouse = {x:10, y:234};
 
-			engine.tile.toX(mouse.x) // 0
-			engine.tile.toY(mouse.y) 
+			Σ.tile.toX(mouse.x) // 0
+			Σ.tile.toY(mouse.y) 
 
 			//create tile
-			var tile = engine.e('tile sprite tiles.png')
+			var tile = Σ.e('tile sprite tiles.png')
 			.tile(2, 4);
 
-			tile.posX // 2 * engine.tile.sizeX == 80
-			tile.posY // 4 * engine.tile.sizeY == 160
+			tile.posX // 2 * Σ.tile.sizeX == 80
+			tile.posY // 4 * Σ.tile.sizeY == 160
 
 			//create a bunch of tiles from a map
 
@@ -34,7 +34,7 @@ define(function(){
 			[1,2,4,5,0,3,4,5,6,7]
 			];
 
-			engine.e('tile sprite tiles.png', map.length * map[0].length)
+			Σ.e('tile sprite tiles.png', map.length * map[0].length)
 			.tilemap(map.length[0].length,function(x, y){
 			  this.tile(x, y);
 			  this.frame(map[y][x]);
@@ -45,7 +45,7 @@ define(function(){
 
 			TODO: remove size vars from entity. Use global size instead
 		*/
-		return engine.c('tile')
+		return Σ.c('tile')
 		.statics({
 			sizeX:	40,
 			sizeY:	40,
@@ -59,7 +59,7 @@ define(function(){
 			},
 			
 			toPos:	function(x, y){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					x = x.posX || x.x;
 				}
@@ -80,7 +80,7 @@ define(function(){
 			},
 			
 			toTile:	function(x, y){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					x = x.posX || x.x;
 				}
@@ -99,10 +99,10 @@ define(function(){
 		})
 		.defines({
 			tile:	function(x, y){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					//will mess up if regX is not top right corner
-					y = x.y || engine.tile.toTileY(x.posY);
-					x = x.x || engine.tile.toTileX(x.posX);
+					y = x.y || Σ.tile.toTileY(x.posY);
+					x = x.x || Σ.tile.toTileX(x.posX);
 				}
 				
 				this.tileX(x);
@@ -112,7 +112,7 @@ define(function(){
 			},
 			
 			tileX:	function(v){
-				if(engine.is(v)){
+				if(Σ.is(v)){
 					this.posX = v * this.sizeX + 0.5 | 0;
 					return this;
 				}
@@ -121,7 +121,7 @@ define(function(){
 			},
 			
 			tileY:	function(v){
-				if(engine.is(v)){
+				if(Σ.is(v)){
 					this.posY = v * this.sizeY + 0.5 | 0;
 					return this;
 				}
@@ -130,8 +130,8 @@ define(function(){
 			}
 		})
 		.init(function(){
-			this.sizeX = engine.tile.sizeX;
-			this.sizeY = engine.tile.sizeY;
+			this.sizeX = Σ.tile.sizeX;
+			this.sizeY = Σ.tile.sizeY;
 		});
 	};
 });

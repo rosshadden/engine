@@ -1,9 +1,9 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		var b = function(assets){
-			return new engine.load.init(assets);	
+			return new Σ.load.init(assets);	
 		};
 		
 		b.path = "";
@@ -19,17 +19,17 @@ define(function(){
 			All loaded assets will be put into a component with a ref to the asset.
 		
 			//	example of loading assets
-			engine.load('tiles.png add.js attack.mp3')
+			Σ.load('tiles.png add.js attack.mp3')
 			.complete(function(arrayOfAssets){
 				//	create new bitmap of tiles.png
-				engine.e('bitmap tiles.png');
+				Σ.e('bitmap tiles.png');
 				
 				//	new sound
-				engine.e('sound attack.mp3');
+				Σ.e('sound attack.mp3');
 				
 				//	access image staticaly or localy
-				engine.comp('tiles.png').image;
-				engine.entity('tiles.png').image;
+				Σ.comp('tiles.png').image;
+				Σ.entity('tiles.png').image;
 			})
 			.error(function(assetThatCausedError){
 				//	error
@@ -42,18 +42,18 @@ define(function(){
 		
 			//	load sound
 		
-			//	engine.support will return the supported codec
-			engine.load('run.' + engine.support('ogg', 'aac'));
+			//	Σ.support will return the supported codec
+			Σ.load('run.' + Σ.support('ogg', 'aac'));
 		
 			FUTURE remove directories from calls
 		*/
 		var l = function(assets){
-			if(engine.is(assets,'string')){
+			if(Σ.is(assets,'string')){
 				this.assets = assets.split(' ');
-			}else if(engine.is(assets,'object')){
+			}else if(Σ.is(assets,'object')){
 				this.assets = [];
 				for(var i in assets){
-					if(engine.is(assets[i], 'array')){
+					if(Σ.is(assets[i], 'array')){
 						this.assets = this.assets.concat(assets[i]);
 					}
 				}
@@ -68,7 +68,7 @@ define(function(){
 			    a = this.assets[i];
 			    
 			    //	copy full source path
-			    var s = a;
+			    var Σ = a;
 			    
 			    //	remove directories
 			    var d = a.lastIndexOf('/');
@@ -83,18 +83,18 @@ define(function(){
 			    //	find name
 			    var n = a.substr(0, j);
 			    
-			    if(engine.load.images.indexOf(ext) != -1){ //	make sure image is allowed
-					this._loadImg(s, a, n);
-				}else if(engine.load.sounds.indexOf(ext) != -1){ //	make sure sound is allowed
+			    if(Σ.load.images.indexOf(ext) != -1){ //	make sure image is allowed
+					this._loadImg(Σ, a, n);
+				}else if(Σ.load.sounds.indexOf(ext) != -1){ //	make sure sound is allowed
 					//	soundmanager only supports mp3, so use it if the sound is mp3
-					if(window['soundManager'] && ext == 'mp3' || engine.support(ext)){
+					if(window['soundManager'] && ext == 'mp3' || Σ.support(ext)){
 						//	don't load the same sound twice
-						if(engine._c[n + engine.load.soundExt]){ 
+						if(Σ._c[n + Σ.load.soundExt]){ 
 						//	remove from array
 							this.total--;
 							continue;
 						}else{
-							this._loadSound(s, a, n);
+							this._loadSound(Σ, a, n);
 						}
 					}else{
 				 	 //	sound can't be loaded
@@ -117,8 +117,8 @@ define(function(){
 			var img = new Image();
 			
 			//	create new image component
-			engine.c(a)
-			.alias(n + engine.load.imageExt)
+			Σ.c(a)
+			.alias(n + Σ.load.imageExt)
 			.statics({
 			    image:img
 			})
@@ -128,7 +128,7 @@ define(function(){
 			});
 			
 			img.onload = function(){
-				engine.c(a).defines({
+				Σ.c(a).defines({
 					sizeX:img.width,
 					sizeY:img.height,
 					bisect:img.width
@@ -144,7 +144,7 @@ define(function(){
 			    }
 			};
 			
-			img.src = engine.load.path + src;
+			img.src = Σ.load.path + src;
 			
 			return this;
 		};
@@ -170,51 +170,51 @@ define(function(){
 		n - filename without extension
 		*/
 		p._loadSound = function(src, a, n){
-			var that = this, s;
+			var that = this, Σ;
 			
 			if(window['soundManager']){
 				//	use soundmanager!
 				soundManager.onready(function(){
-					s = soundManager.createSound({
+					Σ = soundManager.createSound({
 						id:			a,
-						url:		engine.load.path + src,
+						url:		Σ.load.path + src,
 						autoLoad:	true,
 						onload:		function(){
 							that._loaded();
 						}
 					});
 
-					that._def_sfx(s, a, n);
+					that._def_sfx(Σ, a, n);
 				});
 			}else{
-				s = new Audio(engine.load.path + src);
-				s.src = engine.load.path + src;
-				s.preload = "auto";
-				s.load();
+				Σ = new Audio(Σ.load.path + src);
+				Σ.src = Σ.load.path + src;
+				Σ.preload = "auto";
+				Σ.load();
 
 				//	called multiple times in firefox
 				var f = function(){
 					that._loaded();
 					//	remove after first call
-					s.removeEventListener('canplaythrough', f);
+					Σ.removeEventListener('canplaythrough', f);
 				};
 
-				s.addEventListener('canplaythrough', f, false);
+				Σ.addEventListener('canplaythrough', f, false);
 
-				s.addEventListener('error', function(){
+				Σ.addEventListener('error', function(){
 					if(that._e){
 						that._e.call(that, a);
 					}
 				}, false);
 
-				this._def_sfx(s, a, n);
+				this._def_sfx(Σ, a, n);
 			}
 		};
 		
-		p._def_sfx = function(s, a, n){
-			engine.c(a)
+		p._def_sfx = function(Σ, a, n){
+			Σ.c(a)
 			//	create statics codec for easy use
-			.alias(n + engine.load.soundExt)
+			.alias(n + Σ.load.soundExt)
 			.statics({
 				sound:	s
 			})

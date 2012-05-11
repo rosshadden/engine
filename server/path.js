@@ -16,7 +16,7 @@ astar = function(map, start, goal, heuristic, cutCorners){
 	addNodeToList(nodeStart, listOpen);
 	
 	var n;
-	while (!isListEmpty(listOpen)) {
+	while(!isListEmpty(listOpen)){
 		n = returnNodeWithLowestFScore(listOpen);
 		addNodeToList(n, listClosed);
 		removeNodeFromList(n, listOpen);

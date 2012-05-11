@@ -1,12 +1,12 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
-			Main function for engine.e
+			Main function for Σ.e
 			
 			//	create multiple entities
-			engine.e('spider', 10)
+			Σ.e('spider', 10)
 			//	returns a query with all entities
 			.each(function(index){
 				this.posX = index * 10;
@@ -14,15 +14,15 @@ define(function(){
 		*/
 		var q = function(c, count){
 			if(!count){
-				return new engine.entity.init(c);
+				return new Σ.entity.init(c);
 			}
 			
 			//	optimize for multiple calls
-			var q = engine();
+			var q = Σ();
 			
 			//	create entity by number of count
-			for(var i=0; i<count; i++){
-				q.push(engine.e(c));
+			for(var i = 0; i < count; i++){
+				q.push(Σ.e(c));
 			}
 			
 			return q;
@@ -38,7 +38,7 @@ define(function(){
 			
 			q.id++;
 			
-			engine._e.push(this);
+			Σ._e.push(this);
 			
 			this.comp(c);
 		};
@@ -76,7 +76,7 @@ define(function(){
 			var pieces;
 			
 			//	handle string or array?
-			if(engine.is(com,'array')){
+			if(Σ.is(com,'array')){
 				pieces = com;
 			}else{
 				pieces = com.split(' ');
@@ -94,7 +94,7 @@ define(function(){
 			}
 			
 			if(com && this.has(com)){
-				var c = engine._c[com];
+				var c = Σ._c[com];
 				
 				//	only remove if it exists
 				if(c){
@@ -130,7 +130,7 @@ define(function(){
 			var pieces;
 			
 			//	handle array or string?
-			if(engine.is(com, 'array')){
+			if(Σ.is(com, 'array')){
 				pieces = com;
 			}else{
 				pieces = com.split(' ');
@@ -155,7 +155,7 @@ define(function(){
 			com = vals[0];
 			
 			//	add component
-			c = engine._c[com];
+			c = Σ._c[com];
 			
 			//	swap values
 			vals[0] = c;
@@ -216,7 +216,7 @@ define(function(){
 		};
 		
 		p.clone = function(count){
-			return engine.e(this._re_comps, count);
+			return Σ.e(this._re_comps, count);
 		};
 		
 		/*
@@ -224,7 +224,7 @@ define(function(){
 			
 			Use '' to call super of entity
 			
-			engine.e('draw')
+			Σ.e('draw')
 			.parent('draw', 'screenX')()
 		*/
 		p.parent = function(comp, method){
@@ -232,10 +232,10 @@ define(function(){
 			
 			if(comp === ''){
 				//	call entity parent methods
-				return engine.e.init.prototype[method].apply(this, a);
+				return Σ.e.init.prototype[method].apply(this, a);
 			}
 			
-			var c = engine._c[comp];
+			var c = Σ._c[comp];
 			
 			if(c._re_defines[method]){
 				return c._re_defines[method].apply(this, a);
@@ -265,8 +265,8 @@ define(function(){
 		});
 		*/
 		p.has = function(comp){
-			if(engine.is(comp ,'string')){
-				comp = engine.query._toObj(comp);
+			if(Σ.is(comp ,'string')){
+				comp = Σ.query._toObj(comp);
 			}
 			
 			comp.comp = comp.comp || [];
@@ -289,11 +289,11 @@ define(function(){
 				}
 			}
 			
-			var s;
+			var Σ;
 			//	check if entity contains signals
 			for(p = 0; p < comp.on.length; p++){
-				s = comp.on[p];
-				if(!this._re_signals[s] || !this._re_signals[s].length){
+				Σ = comp.on[p];
+				if(!this._re_signals[Σ] || !this._re_signals[Σ].length){
 					return false;
 				}
 			}
@@ -320,7 +320,7 @@ define(function(){
 		});
 		*/
 		p.on = function(type, method, context){
-			if(engine.is(type, 'object')){
+			if(Σ.is(type, 'object')){
 				for(var k in type){
 					this.on(k, type[k], method);
 				}
@@ -328,7 +328,7 @@ define(function(){
 				if(!this._re_signals[type]){
 					this._re_signals[type] = [];
 				}
-				if(!engine.is(method)) throw 'Method is null'
+				if(!Σ.is(method)) throw 'Method is null'
 				//	save context
 				this._re_signals[type].push({c:context || this, f:method});
 			}
@@ -355,7 +355,7 @@ define(function(){
 			off()
 		*/
 		p.off = function(type, method){
-			if(engine.is(type, 'object')){
+			if(Σ.is(type, 'object')){
 				for(var k in type){
 					if(type.hasOwnProperty(k)){
 						this.off(k, type[k]);
@@ -413,15 +413,15 @@ define(function(){
 		};
 		
 		p.attr = function(obj, value){
-			if(engine.is(obj,  'object')){
+			if(Σ.is(obj,  'object')){
 				for(var key in obj){
 					this.attr(key, obj[key]);
 				}
 			}else {
 			  var k = 'function';
 				//	defines property
-				if(engine.is(this[obj], k) && !engine.is(value, k)){
-					if(engine.is(value, 'array')){
+				if(Σ.is(this[obj], k) && !Σ.is(value, k)){
+					if(Σ.is(value, 'array')){
 						this[obj].apply(this, value);
 					}else{
 						this[obj].call(this, value);
@@ -435,13 +435,13 @@ define(function(){
 		};
 		
 		p.def = function(obj, value){
-			if(engine.is(obj , 'object')){
+			if(Σ.is(obj , 'object')){
 				for(var key in obj){
 					this.def(key, obj[key]);
 				}
 			}else{
 				//	defines property
-				if(!engine.is(this[obj])){
+				if(!Σ.is(this[obj])){
 					this[obj] = value;
 				}
 			}
@@ -461,7 +461,7 @@ define(function(){
 			this.off();
 			
 			//	delete from statics array
-			engine._e.splice(engine._e.indexOf(this), 1);
+			Σ._e.splice(Σ._e.indexOf(this), 1);
 			
 			return this;
 		};

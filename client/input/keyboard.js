@@ -1,20 +1,20 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The keyboard component allows an entity to listen for keyboard events.
 
 			@usage
-			engine.e('keyboard')
+			Σ.e('keyboard')
 			.keydown(function(key, event){
-			  engine.log('keydown', key, event);
+			  Σ.log('keydown', key, event);
 			})
 			.keyup(function(key, event){
-			  engine.log('keyup', key, event);
+			  Σ.log('keyup', key, event);
 			});
 		*/
-		engine.c('keyboard')
+		Σ.c('keyboard')
 		.statics({
 			//list of listing entities
 			l:	[],
@@ -39,7 +39,7 @@ define(function(){
 				80:		'p',
 				81:		'q',
 				82:		'r',
-				83:		's',
+				83:		'Σ',
 				84:		't',
 				85:		'u',
 				86:		'v',
@@ -107,7 +107,7 @@ define(function(){
 				187:	'=',
 				219:	'[',
 				221:	']',
-				220:	'\\',	//it's actually a \ but there's two to escape
+				220:	'\\',	//it'Σ actually a \ but there'Σ two to escape
 				59:		';',
 				222:	"'",
 				188:	',',
@@ -120,7 +120,7 @@ define(function(){
 				.trigger('ctrl+k')
 			*/
 			event: function(e){
-				var that = engine._c.keyboard,
+				var that = Σ._c.keyboard,
 					tagName = (e.target || e.srcElement || {}).tagName;
 			
 				//disable keyboard keys if focus lost
@@ -131,11 +131,11 @@ define(function(){
 				var c = e.keyCode || e.which,
 					key = that.keyCodes[c];
 
-				if(engine.pressed && engine.pressed.d){
-					engine.pressed.d[key] = (e.type == 'keydown');
+				if(Σ.pressed && Σ.pressed.d){
+					Σ.pressed.d[key] = (e.type == 'keydown');
 				}
 			
-				if(engine.preventDefault && engine.preventDefault.d[key]){
+				if(Σ.preventDefault && Σ.preventDefault.d[key]){
 					e.preventDefault();
 				}
 			
@@ -148,12 +148,12 @@ define(function(){
 
 		  //initialize function
 			i:	function(){
-				engine.listener('keydown', this.event);
-				engine.listener('keyup', this.event);
+				Σ.listener('keydown', this.event);
+				Σ.listener('keyup', this.event);
 				
 				//reset all keys
-				engine.listener('focus', function(){
-					engine.pressed.d = {};
+				Σ.listener('focus', function(){
+					Σ.pressed.d = {};
 				});
 			}
 		})

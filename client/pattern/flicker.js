@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The flicker component calls the implemented flick method with the given array data over a period of time.
 
@@ -9,7 +9,7 @@ define(function(){
 
 			It can also be used for graduatly writing text or flashing a drawing object.
 
-			engine.c('health')
+			Σ.c('health')
 			.requires('flicker')
 			.defines({
 			  
@@ -29,12 +29,12 @@ define(function(){
 
 			});
 
-			var e = engine.e('health').attr('health', 40);
+			var e = Σ.e('health').attr('health', 40);
 
 			//low on health, regenerate
 			e.regen();
 		*/
-		engine.c('flicker')
+		Σ.c('flicker')
 		.requires('update timestep')
 		.interfaces('flick')
 		.namespaces({
@@ -102,7 +102,7 @@ define(function(){
 			*/
 			flicker:	function(duration, frames, loops, id){
 				//stop
-				if(!engine.is(loops) && this.flickering()){
+				if(!Σ.is(loops) && this.flickering()){
 					//stop flickering
 					return this.flicker_stop();
 				}
@@ -114,13 +114,13 @@ define(function(){
 
 				this.flicker_duration = duration || 1;
 
-				frames = (engine.is(frames, 'array')) ? frames : [frames];
+				frames = (Σ.is(frames, 'array')) ? frames : [frames];
 
 				//setup counter for loops
 				this.flicker_loops = loops || 1;
 
 				this.stepProgress = 0;
-				this.stepSize = (duration / frames.length) / engine.sys.second;
+				this.stepSize = (duration / frames.length) / Σ.sys.second;
 
 				this.flicker_frames = frames;
 				this.flicker_frame = 0;

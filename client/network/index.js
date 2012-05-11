@@ -1,11 +1,11 @@
-define([
+﻿define([
 	'./network',
 	'./net'
 ], function(network, net){
 	'use strict';
 	
-	return function(engine){
-		engine.network = network(engine);
-		net(engine);
+	return function(Σ){
+		Σ.network = network(Σ);
+		net(Σ);
 	};
 });

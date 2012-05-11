@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The body component replaces the hittest component for
 			a more precise hit test.
@@ -11,7 +11,7 @@ define(function(){
 
 			@usage
 
-			engine.e('body player.png')
+			Σ.e('body player.png')
 			.attr({
 			bodyX:	40,
 			bodyY:	40,
@@ -20,10 +20,10 @@ define(function(){
 			.touches(0, 0, 40, 40) //touches random thing?
 			.touchesBody(0, 0, 40, 40, 2, 2) //touches another body?
 		*/
-		engine.c('body')
+		Σ.c('body')
 		.defines({
 			hit:	function(x, y, w, h, rx, ry){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					w = x.sizeX || x.w;
 					h = x.sizeY || x.h;
@@ -47,7 +47,7 @@ define(function(){
 			},
 
 			hitBody:	function(x, y, bx, by, px, py, rx, ry){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					bx = x.bodyX;
 					by = x.bodyY;

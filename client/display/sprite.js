@@ -1,12 +1,12 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The sprite object definess a drawable image for an entity.
 
 			@usage
-			var sprite = engine.e('sprite player.png');
+			var sprite = Σ.e('sprite player.png');
 
 			//move to frame 3
 			sprite.frame(3)
@@ -24,7 +24,7 @@ define(function(){
 			//play
 			sprite.flicker('run')
 		*/
-		engine.c('sprite')
+		Σ.c('sprite')
 		.requires('image bisect')
 		.defaults({
 			frameX:	0,
@@ -32,7 +32,7 @@ define(function(){
 		})
 		.defines({
 			frame:	function(i){
-				if(engine.is(i)){
+				if(Σ.is(i)){
 					this.frameX = this.biToTileX(i);
 					this.frameY = this.biToTileY(i);
 					

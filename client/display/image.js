@@ -1,17 +1,17 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The image component draws an image on screen.
 
 			FUTURE - add imagedata component for image manipulation.
 		*/
-		engine.c('image')
+		Σ.c('image')
 		.requires('draw')
 		.defines({
 			image:	function(b){
-				if(engine.is(b)){
+				if(Σ.is(b)){
 					this.attr({
 						_image:	b,
 						sizeX:	b.width,

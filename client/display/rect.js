@@ -1,9 +1,9 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	The rect component draws a rectangle on screen.
-		engine.c('rect')
+		Σ.c('rect')
 		.requires('draw')
 		.defaults({
 			color:	'#82d5f4'

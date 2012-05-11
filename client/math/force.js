@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The Force component adds velocity, acceleration and other physical properties to an entity.
 
@@ -10,21 +10,21 @@ define(function(){
 
 			You can add hit collision check by defining a hitmap. Like so:
 
-			var mountainHits = engine.e('hitmap');
+			var mountainHits = Σ.e('hitmap');
 
-			engine.e('force')
+			Σ.e('force')
 			.attr(hitmap:mountainHits);
 
 			//or define a hitmap for all physics objects
-			engine.hitmap = engine.e('hitmap');
+			Σ.hitmap = Σ.e('hitmap');
 
-			var e = engine.e('force');
+			var e = Σ.e('force');
 
-			e.hitmap == engine.hitmap //true
+			e.hitmap == Σ.hitmap //true
 
 			Warning - this component is not delta time safe. It assumes a fixed timestep.
 		*/
-		return engine.c('force')
+		return Σ.c('force')
 		.requires('update')
 		.statics({
 			graX:	0,
@@ -63,7 +63,7 @@ define(function(){
 		})
 		.defines({
 			aftermath:	function(posx, posy, hitx, hity, tarx, tary){
-				if(engine.is(posx, 'object')){
+				if(Σ.is(posx, 'object')){
 					hitx = posx.hitX;
 					hity = posx.hitY;
 					
@@ -119,7 +119,7 @@ define(function(){
 		.init(function(c){
 			//setup defaults
 			this.def({
-				hitmap:	engine.hitmap,
+				hitmap:	Σ.hitmap,
 				graX:	c.graX,
 				graY:	c.graY
 			});

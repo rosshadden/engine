@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./log',
 	'./scene',
 	'./sheet',
@@ -7,19 +7,19 @@ define([
 ], function(log, scene, sheet, support, polyfill){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	These just need to be run.
-		polyfill(engine);
+		polyfill(Σ);
 		
-		//	These need to be mapped to engine.
+		//	These need to be mapped to Σ.
 		//	I like the responsibility being here,
 		//	rather than inside the individual modules.
-		engine.scene = scene(engine);
+		Σ.scene = scene(Σ);
 		
-		//	These will be accessible under engine.utilities.
+		//	These will be accessible under Σ.utilities.
 		return {
 			log:	log,
-			sheet:	sheet(engine),
+			sheet:	sheet(Σ),
 			support:support
 		};
 	};

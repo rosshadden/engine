@@ -1,9 +1,9 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
-			The system component contains all information and references to the entity js engine.
+			The system component contains all information and references to the entity js Σ.
 			Such as the canvas context, fps, start, stop, canvas.
 
 			You can add the component to entities for quick reference to variables.
@@ -12,7 +12,7 @@ define(function(){
 			-add entity definess to allow local usage.
 			-perhaps allow users to override the system class for their own custom usage. (new arrays of entities and components)
 		*/
-		engine.c('system')
+		Σ.c('system')
 		.defaults({
 			clearColor:	'#f9f9f9',
 		
@@ -71,30 +71,30 @@ define(function(){
 				this.comp('polyfill tick timestep');
 				
 				//	setup canvas
-				if(engine.is(canvasId, 'htmlcanvaselement')){
+				if(Σ.is(canvasId, 'htmlcanvaselement')){
 					this.canvas = canvasId;
 				}else{
-					this.canvas = engine.$(canvasId);
+					this.canvas = Σ.$(canvasId);
 				}
 				
 				this.context = this.canvas.getContext(contextType || '2d');
 				
-				var s = engine.screen = engine.e('screen');
+				var Σ = Σ.screen = Σ.e('screen');
 				
-				this.sizeX = s.sizeX = this.canvas.width;
-				this.sizeY = s.sizeY = this.canvas.height;
+				this.sizeX = Σ.sizeX = this.canvas.width;
+				this.sizeY = Σ.sizeY = this.canvas.height;
 				
 				//	init listeners
-				if(engine._c.keyboard){
-					engine._c.keyboard.i();
+				if(Σ._c.keyboard){
+					Σ._c.keyboard.i();
 				}
 				
-				if(engine._c.mouse){
-					engine._c.mouse.i();
+				if(Σ._c.mouse){
+					Σ._c.mouse.i();
 				}
 				
-				if(engine._c.touch){
-					engine._c.touch.i();
+				if(Σ._c.touch){
+					Σ._c.touch.i();
 				}
 				
 				this.system_loop = this.defaultLoop;
@@ -116,17 +116,17 @@ define(function(){
 			},
 		
 			update:	function(){
-				engine._c.update.update(this.stepSize);
+				Σ._c.update.update(this.stepSize);
 			},
 		
 			draw:	function(){
 				//	renders default drawlist
-				engine.drawlist().drawlist(this.context);
+				Σ.drawlist().drawlist(this.context);
 			}
 		})
 		.run(function(){
 			//	create default system
-			engine.system = engine.sys = engine.e('system');
+			Σ.system = Σ.sys = Σ.e('system');
 		});
 	};
 });

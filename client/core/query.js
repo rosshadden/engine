@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		var query = function(selector){
 			this.query(selector);
 		}
@@ -52,11 +52,11 @@ define(function(){
 			
 			var entity,
 				i = -1,
-				length = engine._e.length;
+				length = Σ._e.length;
 			
-			if(engine.is(select, 'string')){
+			if(Σ.is(select, 'string')){
 				if(select === '*'){
-			 		this.push.apply(this, engine._e.slice());
+			 		this.push.apply(this, Σ._e.slice());
 			 		
 			 		return this;
 				}
@@ -64,18 +64,18 @@ define(function(){
 				//optimize search and cache
 				var obj = query._toObj(select);
 				
-				while(++i < length && (entity = engine._e[i])){
+				while(++i < length && (entity = Σ._e[i])){
 			 		if(entity.has(obj)){
 						this.push(entity);
 					}
 				}
-			}else if(engine.is(select, 'function')){
-				while(++i < length && (entity = engine._e[i])){
+			}else if(Σ.is(select, 'function')){
+				while(++i < length && (entity = Σ._e[i])){
 					if(select.call(entity, i, length)){
 						this.push(entity);
 					}
 				}
-			}else if(engine.is(select, 'array')){
+			}else if(Σ.is(select, 'array')){
 				this.push.apply(this, select);
 			}
 			
@@ -85,7 +85,7 @@ define(function(){
 		/*
 			Calls the given method name on all entities.
 			
-			engine('enemies').invoke('rest');
+			Σ('enemies').invoke('rest');
 		*/
 		methods.invoke = function(m){
 			var args = Array.prototype.slice.call(arguments, 1);
@@ -111,7 +111,7 @@ define(function(){
 			
 			//map through and increase y every 3 entities.
 			
-			engine('draw').tilemap(3, function(e, x, y){
+			Σ('draw').tilemap(3, function(e, x, y){
 				e.x(x * width);
 				e.y(Y * height);
 			});
@@ -215,7 +215,7 @@ define(function(){
 			The pluck method returns all values from all entities in an array.
 			
 			//will return all pos objs from all entities.
-			engine('point').pluck('pos visible');
+			Σ('point').pluck('pos visible');
 			
 			//if we print...
 			
@@ -235,7 +235,7 @@ define(function(){
 		/*
 			Returns the first entity that passes the truth iterator method.
 			
-			engine('tile').find(function(e){
+			Σ('tile').find(function(e){
 			  return e.tileX() == 0 && e.tileY() == 1;
 			});
 		*/
@@ -252,7 +252,7 @@ define(function(){
 		/*
 			Returns the lowest entity from the given iterator.
 			
-			var weakestRat = engine('rat').min(function(e){
+			var weakestRat = Σ('rat').min(function(e){
 			  return e.health;
 			});
 		*/
@@ -267,13 +267,13 @@ define(function(){
 		//	Without this, filter would return a normal array.
 		methods.filter = function(){
 			var args = [].slice.call(arguments);
-			return engine(Array.prototype.filter.apply(this, args));
+			return Σ(Array.prototype.filter.apply(this, args));
 		};
 		
 		/*
 			Finds first entity with components
 			
-			engine('draw').findWith('circle !red');
+			Σ('draw').findWith('circle !red');
 		*/
 		methods.findWith = function(comps, c){
 			return this.find(function(e){
@@ -283,7 +283,7 @@ define(function(){
 		
 		//	Creates a new entity and pushes it into the collection.
 		methods.e = function(components, count){
-			var entity = engine.entity(components, count);
+			var entity = Σ.entity(components, count);
 			
 			if(count){
 				for(var i in entity){
@@ -303,9 +303,9 @@ define(function(){
 		/*
 			Removes first reference found from array.
 			
-			var blah = engine.e();
+			var blah = Σ.e();
 			
-			var q = engine()
+			var q = Σ()
 			q.push(blah);
 			
 			q.erase(blah);
@@ -314,7 +314,7 @@ define(function(){
 			
 			Can also add in other in its place.
 			
-			q.erase(blah, engine.e());
+			q.erase(blah, Σ.e());
 		*/
 		methods.erase = function(ref){
 			for(var i = this.length; i--;){
@@ -358,7 +358,7 @@ define(function(){
 		/*
 			returns first element or appends it to front
 			
-			engine().first(1).first(); //1
+			Σ().first(1).first(); //1
 		*/
 		methods.first = function(r){
 			var args = [].slice.call(arguments);

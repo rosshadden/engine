@@ -1,13 +1,13 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	The sheet component converts a each frame of a sprite sheet into their own components.
 		return function(map, components, sizeX, sizeY){
-			var frameWidth = sizeX || engine.tile.sizeX,
-				frameHeight = sizeY || engine.tile.sizeY;
+			var frameWidth = sizeX || Σ.tile.sizeX,
+				frameHeight = sizeY || Σ.tile.sizeY;
 			
-			if(engine.is(components,'array')){
+			if(Σ.is(components,'array')){
 				components = components.join(' ');
 			}
 				
@@ -21,7 +21,7 @@ define(function(){
 				y = map[p][1] || 0;
 				b.push(p);
 				
-				engine.c(p)
+				Σ.c(p)
 				.requires('sprite ' + components)
 				.defines({
 					frameX:	x,

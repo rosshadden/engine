@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./automap',
 	'./flicker',
 	'./pathfind',
@@ -6,10 +6,10 @@ define([
 ], function(automap, flicker, pathfind, timestep){
 	'use strict';
 	
-	return function(engine){
-		automap(engine);
-		flicker(engine);
-		pathfind(engine);
-		timestep(engine);
+	return function(Σ){
+		automap(Σ);
+		flicker(Σ);
+		pathfind(Σ);
+		timestep(Σ);
 	};
 });

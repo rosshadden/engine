@@ -1,4 +1,4 @@
-define([
+﻿define([
 	'./lib/index',
 	'./core/engine',
 	'./cycle/index',
@@ -10,18 +10,18 @@ define([
 	'./pattern/index',
 	'./save/index',
 	'./utilities/index'
-], function(lib, engine, cycle, display, input, math, media, network, pattern, save, utilities){
+], function(lib, Σ, cycle, display, input, math, media, network, pattern, save, utilities){
 	'use strict';
 	
-	cycle(engine);
-	display(engine);
-	input(engine);
-	math(engine);
-	media(engine);
-	network(engine);
-	pattern(engine);
-	save(engine);
-	engine.utilities = utilities(engine);
+	cycle(Σ);
+	display(Σ);
+	input(Σ);
+	math(Σ);
+	media(Σ);
+	network(Σ);
+	pattern(Σ);
+	save(Σ);
+	Σ.utilities = utilities(Σ);
 	
-	return engine;
+	return Σ;
 });

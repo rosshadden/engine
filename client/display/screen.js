@@ -1,14 +1,14 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The screen component is used for scrolling or shaking all visible objects. 
 			It simply offsets pos values upon rendering.
 
 			This is useful for setting up a tile-based game.
 		*/
-		engine.c('screen')
+		Σ.c('screen')
 		.requires('hit')
 		.defines({
 			pos:	function(x, y){
@@ -18,7 +18,7 @@ define(function(){
 					return this;
 				}
 				
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY;
 					x = x.posX;
 				}

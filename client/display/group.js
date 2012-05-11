@@ -1,8 +1,8 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.c('group')
+	return function(Σ){
+		Σ.c('group')
 		.defaults({
 			posX:	0,
 			posY:	0

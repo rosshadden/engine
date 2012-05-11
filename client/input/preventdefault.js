@@ -1,18 +1,18 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		//	The PreventDefault method prevents defaults for input events.
-		engine.preventDefault = function(pres){
-			if(engine.is(pres, 'string')){
+		Σ.preventDefault = function(pres){
+			if(Σ.is(pres, 'string')){
 				pres = pres.split(' ');
 			}
 
 			for(var i in pres){
-				engine.preventDefault.d[pres[i]] = 1;
+				Σ.preventDefault.d[pres[i]] = 1;
 			}
 		};
 		
-		engine.preventDefault.d = {};
+		Σ.preventDefault.d = {};
 	};
 });

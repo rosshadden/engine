@@ -1,4 +1,4 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
 	return function(x1, y1, x2, y2){

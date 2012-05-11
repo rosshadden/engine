@@ -1,7 +1,7 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The hitmap component is used for collision detection in a tile-based game.
 			This can be sent to a physics entity and it will recieve checks if it hits
@@ -10,7 +10,7 @@ define(function(){
 			Creating this bind system will allow other developers to easily implement
 			their own hit collision system.
 		*/
-		engine.c('hitmap')
+		Σ.c('hitmap')
 		.requires('automap')
 		.defines({
 			hitValue:	1,
@@ -24,7 +24,7 @@ define(function(){
 			},
 			
 			checkHit:	function(posX, posY, velX, velY, bodX, bodY, padX, padY){
-				if(engine.is(posX,'object')){
+				if(Σ.is(posX,'object')){
 					velX = posX.velX;
 					velY = posX.velY;
 					
@@ -48,7 +48,7 @@ define(function(){
 					posY:	posY
 				};
 				
-				var step = (Math.max(Math.abs(velX), Math.abs(velY)) / ((engine.tile.sizeX + engine.tile.sizeY) * 0.5) + 0.5) | 0;
+				var step = (Math.max(Math.abs(velX), Math.abs(velY)) / ((Σ.tile.sizeX + Σ.tile.sizeY) * 0.5) + 0.5) | 0;
 				
 				if(step > 1){
 					var sx = velX / step,
@@ -85,7 +85,7 @@ define(function(){
 				var t, ty, tx;
 				
 				if(vx){
-					t = engine.tile.sizeX;
+					t = Σ.tile.sizeX;
 					
 					var offsetx = (vx > 0 ? width - padx : padx);
 					
@@ -114,7 +114,7 @@ define(function(){
 				}
 				
 				if(vy){
-					t = engine.tile.sizeY;
+					t = Σ.tile.sizeY;
 					
 					var offsety = (vy > 0 ? height -pady : pady);
 					

@@ -1,13 +1,13 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
+	return function(Σ){
 		/*
 			The tween component tweens properties of entities to the given value over a period of time.
 
 			This is useful for animations.
 
-			engine.e('tween')
+			Σ.e('tween')
 			.tween(800, {x:10})
 			.wait(500)
 
@@ -16,7 +16,7 @@ define(function(){
 			tween:finish
 			tween:update
 		*/
-		engine.c('tween')
+		Σ.c('tween')
 		.requires('update')
 		.namespaces({
 			update:	function(t){
@@ -39,7 +39,7 @@ define(function(){
 				for(var i in this.tween_d){
 					//set deltas
 					var ease = this.tween_s[i] + this.tween_d[i] * value;
-					if(engine.is(this[i], 'function')){
+					if(Σ.is(this[i], 'function')){
 						this[i](ease);
 					}else{
 						this[i] = ease;
@@ -72,7 +72,7 @@ define(function(){
 					time /= 1000;
 				}
 				
-				var maxTime = (time || 1) / engine.sys.second;
+				var maxTime = (time || 1) / Σ.sys.second;
 				this.tween_time = 0;
 				//steps are substracted until it reaches zero
 				
@@ -80,7 +80,7 @@ define(function(){
 					starts = {};
 				for(var i in props){
 					var value = this[i];
-					if(engine.is(value, 'function')){
+					if(Σ.is(value, 'function')){
 						value = value();
 					}
 
@@ -106,7 +106,7 @@ define(function(){
 		  
 		});
 
-		engine.tween = function(obj, time, props){
+		Σ.tween = function(obj, time, props){
 			return obj.comp('tween').tween(time, props);
 		};
 	};

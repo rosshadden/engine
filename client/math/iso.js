@@ -1,8 +1,8 @@
-define(function(){
+﻿define(function(){
 	'use strict';
 	
-	return function(engine){
-		engine.iso = engine.c('iso')
+	return function(Σ){
+		Σ.iso = Σ.c('iso')
 		.statics({
 			sizeX:	30,
 			sizeY:	30,
@@ -26,7 +26,7 @@ define(function(){
 			},
 			
 			toPos:	function(x, y){
-				if(engine.is(x,'object')){
+				if(Σ.is(x,'object')){
 					y = x.posY || x.y;
 					x = x.posX || x.x;
 				}
@@ -51,7 +51,7 @@ define(function(){
 			},
 			
 			toIso:	function(x, y){
-				if(engine.is(x, 'object')){
+				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					x = x.posX || x.x;
 				}
@@ -83,17 +83,17 @@ define(function(){
 				});
 			*/
 			iso:	function(x, y, z){
-				if(engine.is(x,'object')){
+				if(Σ.is(x,'object')){
 					z = x.z;
 					
-					if(engine.is(x.posZ)){
-						z = x.posZ / engine.iso.sizeZ;
+					if(Σ.is(x.posZ)){
+						z = x.posZ / Σ.iso.sizeZ;
 					}
 					
 					y = x.y;
 					
 					//copy attributes
-					if(engine.is(x.posX) && engine.is(x.posY)){
+					if(Σ.is(x.posX) && Σ.is(x.posY)){
 						this.posX = x.posX;
 						this.posY = x.posY;
 						
@@ -108,15 +108,15 @@ define(function(){
 				}
 				
 				//convert to screen space
-				x = (engine.is(x)) ? x : this.isoX();
-				x *= engine.iso.sizeX;
+				x = (Σ.is(x)) ? x : this.isoX();
+				x *= Σ.iso.sizeX;
 				
 				//posY handles a lot of transformations, its safest to recalculate it
-				y = (engine.is(y)) ? y : this.isoY();
-				y *= engine.iso.sizeY;
+				y = (Σ.is(y)) ? y : this.isoY();
+				y *= Σ.iso.sizeY;
 				
-				z = (engine.is(z)) ? z : this.isoZ();
-				z *= engine.iso.sizeZ;
+				z = (Σ.is(z)) ? z : this.isoZ();
+				z *= Σ.iso.sizeZ;
 				
 				//all values should be in screen space from here
 				this.posX = x - y;
@@ -127,31 +127,31 @@ define(function(){
 			},
 			
 			isoX:	function(value){
-				if(engine.is(value)){
+				if(Σ.is(value)){
 					return this.iso(value);
 				}
 				
-				return (this.posX + (2*(this.posY+this.posZ) - this.posX) * 0.5) / engine.iso.sizeX;
+				return (this.posX + (2*(this.posY+this.posZ) - this.posX) * 0.5) / Σ.iso.sizeX;
 			},
 			
 			isoY:	function(value){
-				if(engine.is(value)){
+				if(Σ.is(value)){
 					return this.iso({
 						y:	value
 					});
 				}
 				
-				return ((2*(this.posY+this.posZ) - this.posX) * 0.5) / engine.iso.sizeY;
+				return ((2*(this.posY+this.posZ) - this.posX) * 0.5) / Σ.iso.sizeY;
 			},
 			
 			isoZ:	function(value){
-				if(engine.is(value)){
+				if(Σ.is(value)){
 					return this.iso({
 						z:	value
 					});
 				}
 				
-				return this.posZ / engine.iso.sizeZ;
+				return this.posZ / Σ.iso.sizeZ;
 			},
 			
 			//returns true if the current iso position is directly on top of a tile.
