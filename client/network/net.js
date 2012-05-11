@@ -1,4 +1,4 @@
-define(['/socket.io/socket.io.js'], function(IO){
+define(function(){
 	'use strict';
 	
 	return function(engine){
@@ -7,7 +7,7 @@ define(['/socket.io/socket.io.js'], function(IO){
 			on:		function(){
 				var args = [].slice.call(arguments);
 				
-				this.socket.on.apply(this.socket, args);
+				engine.network.on.apply(this, args);
 				
 				return this;
 			},
@@ -15,16 +15,12 @@ define(['/socket.io/socket.io.js'], function(IO){
 			emit:	function(){
 				var args = [].slice.call(arguments);
 				
-				this.socket.emit.apply(this.socket, args);
+				engine.network.emit.apply(this, args);
 				
 				return this;
 			}
 		})
 		.defines({
-			connect:function(path){
-				this.socket = io.connect(path || '');
-			},
-			
 			bind:		function(){
 				var args = [].slice.call(arguments);
 				
@@ -36,9 +32,6 @@ define(['/socket.io/socket.io.js'], function(IO){
 				
 				return this.net_emit.apply(this, args);
 			}
-		})
-		.init(function(){
-			this.connect();
 		});
 	};
 });
