@@ -18,7 +18,7 @@
 	};
 	
 	Promise.prototype = {
-		then:	function(success, failure){
+		done:	function(success, failure){
 			this.pending.push({
 				resolve:	success,
 				reject:		failure
