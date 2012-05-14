@@ -3,8 +3,9 @@
 	'./scene',
 	'./sheet',
 	'./support',
-	'./polyfill'
-], function(log, scene, sheet, support, polyfill){
+	'./polyfill',
+	'./promise'
+], function(log, scene, sheet, support, polyfill, Promise){
 	'use strict';
 	
 	return function(Σ){
@@ -20,7 +21,8 @@
 		return {
 			log:	log,
 			sheet:	sheet(Σ),
-			support:support
+			support:support,
+			Promise:Promise
 		};
 	};
 });

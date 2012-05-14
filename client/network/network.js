@@ -22,7 +22,8 @@
 			},
 			
 			get = function(url, callback){
-				var xhr = new XMLHttpRequest;
+				var xhr = new XMLHttpRequest,
+					def = new Σ.utilities.Promise();
 				
 				xhr.onreadystatechange = function(){
 					var response;
@@ -38,8 +39,12 @@
 							}
 							
 							callback.call(this, response);
+							
+							def.resolve(response);
 						}else{
 							callback.call(this, response);
+							
+							def.reject(response);
 						}
 					}
 				};
@@ -47,7 +52,7 @@
 				xhr.open('GET', (url || '/'), true);
 				xhr.send(null);
 				
-				return methods;
+				return def;
 			},
 				
 			methods = {
