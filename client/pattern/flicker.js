@@ -79,7 +79,7 @@
 				this.trigger('flicker:update', val, f, fs, l);
 				
 				//flick
-				if(!quit){
+				if(quit === false){
 					//stop
 					this.flicker();
 				}
