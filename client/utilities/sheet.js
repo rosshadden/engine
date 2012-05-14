@@ -17,8 +17,8 @@
 			var x, y,
 				b = [];
 			for(var p in map){
-				x = map[p][0] || 0;
-				y = map[p][1] || 0;
+				x = map[p].frameX || 0;
+				y = map[p].frameY || 0;
 				b.push(p);
 				
 				Σ.c(p)

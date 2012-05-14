@@ -10,7 +10,7 @@
 
 				socket.on.apply(socket, args);
 
-				return self.methods;
+				return methods;
 			},
 
 			emit = function(){
@@ -18,7 +18,7 @@
 
 				socket.emit.apply(socket, args);
 
-				return self.methods;
+				return methods;
 			},
 			
 			get = function(url, callback){
@@ -47,14 +47,16 @@
 				xhr.open('GET', (url || '/'), true);
 				xhr.send(null);
 				
-				return self.methods;
-			};
-
-			return self.methods = {
+				return methods;
+			},
+				
+			methods = {
 				on:		on,
 				emit:	emit,
 				get:	get
 			};
+
+			return methods;
 		})();
 		
 		return network;
