@@ -31,10 +31,15 @@
 			frameY:	0
 		})
 		.defines({
-			frame:	function(i){
-				if(Σ.is(i)){
-					this.frameX = this.biToTileX(i);
-					this.frameY = this.biToTileY(i);
+			frame:	function(frame){
+				if(Σ.is(frame)){
+					if(Σ.is(frame, 'object')){
+						this.frameX = frame.x;
+						this.frameY = frame.y;
+					}else{
+						this.frameX = this.biToTileX(frame);
+						this.frameY = this.biToTileY(frame);
+					}
 					
 					return this;
 				}
@@ -49,8 +54,8 @@
 			},
 			
 			//implement for flicker
-			flick:	function(c){
-				this.frame(c);
+			flick:	function(frame){
+				this.frame(frame);
 			}
 		});
 	};
