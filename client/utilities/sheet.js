@@ -7,7 +7,7 @@
 			var frameWidth = sizeX || Σ.tile.sizeX,
 				frameHeight = sizeY || Σ.tile.sizeY;
 			
-			if(Σ.is(components,'array')){
+			if(Σ.is(components, 'array')){
 				components = components.join(' ');
 			}
 				

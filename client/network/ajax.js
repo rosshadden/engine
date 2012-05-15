@@ -3,7 +3,7 @@
 	
 	return function(Σ){
 		var network = (function(){
-			var get = function(url, callback){
+			var ajax = function(type, url, callback){
 				var xhr = new XMLHttpRequest,
 					def = new Σ.utilities.Promise();
 				
@@ -31,14 +31,24 @@
 					}
 				};
 				
-				xhr.open('GET', (url || '/'), true);
+				xhr.open(type, (url || '/'), true);
 				xhr.send(null);
 				
 				return def;
 			},
+			
+			get = function(url, callback){
+				return ajax('GET', url, callback);
+			},
+			
+			post = function(url, callback){
+				return ajax('POST', url, callback);
+			},
 				
 			methods = {
-				get:	get
+				ajax:	ajax,
+				get:	get,
+				post:	post
 			};
 
 			return methods;
