@@ -1,11 +1,14 @@
 ﻿define([
-	'./network',
+	'./ajax',
+	'./sockets',
 	'./net'
-], function(network, net){
+], function(ajax, sockets, net){
 	'use strict';
 	
 	return function(Σ){
-		Σ.network = network(Σ);
 		net(Σ);
+		
+		Σ.network = ajax(Σ);
+		Σ.network.sockets = sockets(Σ);
 	};
 });

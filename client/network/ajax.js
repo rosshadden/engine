@@ -3,25 +3,7 @@
 	
 	return function(Σ){
 		var network = (function(){
-			var socket = io.connect().emit('connected'),
-
-			on = function(){
-				var args = Array.prototype.slice.call(arguments);
-
-				socket.on.apply(socket, args);
-
-				return methods;
-			},
-
-			emit = function(){
-				var args = Array.prototype.slice.call(arguments);
-
-				socket.emit.apply(socket, args);
-
-				return methods;
-			},
-			
-			get = function(url, callback){
+			var get = function(url, callback){
 				var xhr = new XMLHttpRequest,
 					def = new Σ.utilities.Promise();
 				
@@ -56,8 +38,6 @@
 			},
 				
 			methods = {
-				on:		on,
-				emit:	emit,
 				get:	get
 			};
 
