@@ -47,6 +47,8 @@
 		
 		p.id = '';
 		
+		p.class = '';
+		
 		p.comp = function(com){
 			this._re_comp(com);
 			
@@ -265,7 +267,7 @@
 		});
 		*/
 		p.has = function(comp){
-			if(Σ.is(comp ,'string')){
+			if(Σ.is(comp, 'string')){
 				comp = Σ.query._toObj(comp);
 			}
 			
@@ -298,11 +300,15 @@
 				}
 			}
 			
-			if(comp.id !== '' && this.id !== comp.id){
+			if(comp.id !== '' && this.id !== comp.id || comp.comp.length === 0){
 				return false;
 			}
 			
 			return true;
+		};
+		
+		p.hasClass = function(which){
+			return this.class && !!~this.class.split(' ').indexOf(which) || false;
 		};
 		
 		/*
@@ -430,6 +436,12 @@
 					this[obj] = value;
 				}
 			}
+			
+			return this;
+		};
+		
+		p.addClass = function(value){
+			this.class += value;
 			
 			return this;
 		};

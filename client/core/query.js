@@ -4,7 +4,7 @@
 	return function(Σ){
 		var query = function(selector){
 			this.query(selector);
-		}
+		};
 		
 		query._toObj = function(search){
 			if(query.c[search]){
@@ -15,8 +15,9 @@
 			var temp = search.split(' '),
 				id = '',
 				comps = [],
-				events = [],
-				minus = [];
+				classes = [],
+				minus = [],
+				events = [];
 			
 			//split string
 			var j, fl, value;
@@ -24,24 +25,32 @@
 				fl = temp[j].charAt(0);
 				value = temp[j].substr(1);
 				
-				if(fl === '^'){
-			 		events.push(value);
-				}else if(fl === '!'){
-			 		minus.push(value);
-				}else if(fl === '#'){
-			 		id = value;
-				}else{
-			 		comps.push(temp[j]);
+				switch(fl){
+					case '#':
+						id = value;
+						break;
+					case '.':
+						classes.push(value);
+						break;
+					case '!':
+						minus.push(value);
+						break;
+					case '^':
+						events.push(value);
+						break;
+					default:
+						comps.push(temp[j]);
 				}
 			}
 			
 			return query.c[search] = {
 				id:		id,
 				comp:	comps,
-				on:		events,
-				not:	minus
+				class:	classes,
+				not:	minus,
+				on:		events
 			};
-		}
+		};
 		
 		query.c = {};
 		
@@ -65,7 +74,12 @@
 				var obj = query._toObj(select);
 				
 				while(++i < length && (entity = Σ._e[i])){
-			 		if(entity.has(obj)){
+			 		if(
+						entity.has(obj)
+					||	obj.class.some(function(className, c){
+							return entity.hasClass(className);
+						})
+					){
 						this.push(entity);
 					}
 				}
@@ -161,6 +175,10 @@
 			});
 			
 			return list;
+		};
+		
+		methods.get = function(index){
+			return this[index || 0];
 		};
 		
 		//	Returns a random entity
