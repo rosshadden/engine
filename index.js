@@ -2,6 +2,7 @@ var engine = function(app){
 	var router = require('./server/router'),
 		events = require('./server/events'),
 		players = require('./server/players'),
+		collision = require('./server/collision'),
 		network = require('./server/network')({
 			app:	app,
 			events:	events,
@@ -17,7 +18,8 @@ var engine = function(app){
 		router:		router,
 		events:		events,
 		network:	network,
-		players:	players
+		players:	players,
+		collision:	collision
 	};
 };
 

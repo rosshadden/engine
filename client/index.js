@@ -1,6 +1,7 @@
 ﻿define([
 	'./lib/index',
 	'./core/engine',
+	'./collision/index',
 	'./cycle/index',
 	'./display/index',
 	'./input/index',
@@ -10,9 +11,10 @@
 	'./pattern/index',
 	'./save/index',
 	'./utilities/index'
-], function(lib, Σ, cycle, display, input, math, media, network, pattern, save, utilities){
+], function(lib, Σ, collision, cycle, display, input, math, media, network, pattern, save, utilities){
 	'use strict';
-	
+
+	Σ.collision = collision;
 	cycle(Σ);
 	display(Σ);
 	input(Σ);
