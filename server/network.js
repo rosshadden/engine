@@ -111,6 +111,16 @@ var network = function(engine){
 		}
 		
 		var methods = {
+			set:	function(key, value, callback){
+				user.socket.set(key, value, callback);
+				return methods;
+			},
+			 
+			get:	function(key, callback){
+				user.socket.get(key, callback);
+				return methods;
+			},
+			 
 			emit:	function(event, data){
 				user.socket.emit(event, data);
 				return methods;
