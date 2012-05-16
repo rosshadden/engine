@@ -1,5 +1,5 @@
 module.exports = {
-	Graph:	require('./graph'),
-	astar:	require('./astar'),
+	Graph:	require('./astar').Graph,
+	astar:	require('./astar').astar,
 	path:	require('./path')
 };
