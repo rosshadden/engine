@@ -13,6 +13,14 @@
 				return methods;
 			},
 
+			once = function(){
+				var args = Array.prototype.slice.call(arguments);
+
+				socket.once.apply(socket, args);
+
+				return methods;
+			},
+
 			emit = function(){
 				var args = Array.prototype.slice.call(arguments);
 
@@ -23,6 +31,7 @@
 				
 			methods = {
 				on:		on,
+				once:	once,
 				emit:	emit
 			};
 
