@@ -70,6 +70,8 @@ var network = function(engine){
 		
 		socket.on('disconnect', function(){
 			player.events.emit('unload');
+
+			console.log('exited');
 			
 			emitter.removeListener('scope', onScope);
 		});

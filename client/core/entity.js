@@ -423,10 +423,14 @@
 				for(var key in obj){
 					this.attr(key, obj[key]);
 				}
-			}else {
-			  var k = 'function';
-				//	defines property
-				if(Σ.is(this[obj], k) && !Σ.is(value, k)){
+			}else{
+				//	Get attribute.
+				if(typeof value === 'undefined'){
+					return this[obj];
+				}
+
+				//	Set attribute.
+				if(Σ.is(this[obj], 'function') && !Σ.is(value, 'function')){
 					if(Σ.is(value, 'array')){
 						this[obj].apply(this, value);
 					}else{
