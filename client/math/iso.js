@@ -32,8 +32,8 @@
 				}
 				
 				return {
-					posX:	this.toPosX(x, y),
-					posY:	this.toPosY(x, y)
+					posX:	this.roundPosX(x, y),
+					posY:	this.roundPosY(x, y)
 				};
 			},
 			

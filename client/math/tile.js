@@ -50,23 +50,23 @@
 			sizeX:	40,
 			sizeY:	40,
 			
-			toPosX:	function(x){
+			roundPosX:	function(x){
 				return this.toTileX(x) * this.sizeX;
 			},
 			
-			toPosY:	function(y){
+			roundPosY:	function(y){
 				return this.toTileY(y) * this.sizeY;
 			},
 			
-			toPos:	function(x, y){
+			roundPos:	function(x, y){
 				if(Σ.is(x, 'object')){
 					y = x.posY || x.y;
 					x = x.posX || x.x;
 				}
 				
 				return {
-					posX:	this.toPosX(x),
-					posY:	this.toPosY(y)
+					posX:	this.roundPosX(x),
+					posY:	this.roundPosY(y)
 				};
 			},
 			
@@ -88,6 +88,27 @@
 				return {
 					tileX:	this.toTileX(x),
 					tileY:	this.toTileY(y)
+				};
+			},
+			
+			//	Converts the given tile to a coordinate position.
+			toPosX:	function(x){
+				return x * this.sizeX;
+			},
+			
+			toPosY:	function(y){
+				return y * this.sizeY;
+			},
+			
+			toPos:	function(x, y){
+				if(Σ.is(x, 'object')){
+					y = x.posY || x.y;
+					x = x.posX || x.x;
+				}
+				
+				return {
+					posX:	this.toPosX(x),
+					posY:	this.toPosY(y)
 				};
 			}
 		})

@@ -28,7 +28,9 @@
 		.requires('image bisect')
 		.defaults({
 			frameX:	0,
-			frameY:	0
+			frameY:	0,
+
+			usePointsInsteadOfPixels: true
 		})
 		.defines({
 			frame:	function(frame){
