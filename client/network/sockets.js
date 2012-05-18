@@ -13,6 +13,16 @@
 				return methods;
 			},
 
+			off = function(name, fn){
+				if(Σ.is(fn)){
+					socket.removeListener(name, fn);
+				}else{
+					socket.removeAllListeners(name);
+				}
+
+				return methods;
+			},
+
 			once = function(){
 				var args = Array.prototype.slice.call(arguments);
 
@@ -31,6 +41,7 @@
 				
 			methods = {
 				on:		on,
+				off:	off,
 				once:	once,
 				emit:	emit
 			};

@@ -22,7 +22,23 @@
 			log:	log,
 			sheet:	sheet(Σ),
 			support:support,
-			Promise:Promise
+			Promise:Promise,
+        
+			extend:	function(source, target){
+				var object = {};
+
+				for(var key in source){
+					object[key] = source[key];
+				}
+
+				for(var key in target){
+					object[key] = target[key];
+				}
+
+				object.parent = source;
+
+				return object;
+			}
 		};
 	};
 });

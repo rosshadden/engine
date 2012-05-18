@@ -58,17 +58,17 @@
 			},
 		
 			events:	function(obj, value){
-			  this._checkFinal();
-			  
-			  if(!Σ.is(value)){
-				  for(var type in obj){
-					  this._re_events[type] = obj[type];    
-				  }
-			  }else{
-				  this._re_events[obj] = value;    
-			  }
-			  
-			  return this;
+				this._checkFinal();
+				
+				if(!Σ.is(value)){
+					for(var type in obj){
+						this._re_events[type] = obj[type];    
+					}
+				}else{
+					this._re_events[obj] = value;    
+				}
+					
+				return this;
 			},
 		
 			requires:	function(r){
@@ -203,13 +203,21 @@
 			namespaces:	function(obj, value){
 				this._checkFinal();
 				
-				var name = this.name + '_',
+				var self = this,
+					name = this.name + '_',
 					namespace = {};
 				
 				if(arguments.length === 1){
 					for(var k in obj){
 						this._re_defines[name + k] = obj[k];
-						namespace[k] = obj[k];
+
+						//	I was trying to get the scope here to be the entity,
+						//	but that is not possible (right?).
+						if(Σ.is(obj[k], 'function')){
+							namespace[k] = obj[k];
+						}else{
+							namespace[k] = obj[k];
+						}
 					}
 				}else{
 					this._re_defines[name + obj] = value;
@@ -231,7 +239,7 @@
 				
 				if(arguments.length == 1){
 					for(var k in d){
-						this._re_defines[k] = d[k];    
+						this._re_defines[k] = d[k];
 					}
 				}else{
 					this._re_defines[d] = value;
